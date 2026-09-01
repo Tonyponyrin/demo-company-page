@@ -233,7 +233,7 @@ const applyLanguage = (language) => {
 };
 
 collectTextNodes();
-applyLanguage(localStorage.getItem("tonypony-language") || "th");
+applyLanguage(localStorage.getItem("tonypony-language") || "en");
 
 const syncHeader = () => {
   header?.classList.toggle("scrolled", window.scrollY > 20);

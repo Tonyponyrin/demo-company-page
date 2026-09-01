@@ -156,11 +156,18 @@ textarea {
   transform: scaleX(1);
 }
 
-.nav-cta {
+.site-nav .nav-cta,
+.site-nav .nav-cta:hover,
+.site-nav .nav-cta.active {
   padding: 10px 14px;
   border-radius: 6px;
-  background: var(--white);
+  background: var(--brass);
   color: var(--ink);
+}
+
+.site-nav .nav-cta:hover,
+.site-nav .nav-cta.active {
+  background: #d6ad62;
 }
 
 .language-switch {
