@@ -48,11 +48,11 @@ locales and the page can read it from whichever locale is active.
 the default locale, which makes adding and reordering list items fragile, so each
 project carries explicit `title_th` / `title_en` / `title_zh` fields instead.
 
-## One-time setup
+## Setup — complete
 
 GitHub Pages serves static files only, so it cannot host the OAuth callback the
-editor needs to authenticate with GitHub. A small worker handles that. Do these
-five steps once.
+editor needs to authenticate with GitHub. A small worker handles that. All five
+steps below are done; they are kept as a record and for rebuilding from scratch.
 
 ### 1. Deploy the auth worker — DONE
 
@@ -73,7 +73,7 @@ own first and let the browser redirect complete — do not chain it with another
 command, and do not copy the callback URL out of the browser. The listener only
 lives while `wrangler login` is running.
 
-### 2. Create a GitHub OAuth app — TODO
+### 2. Create a GitHub OAuth app — DONE
 
 GitHub → Settings → Developer settings → OAuth Apps → **New OAuth App**
 
@@ -83,9 +83,11 @@ Homepage URL:               https://tonyponyrin.github.io/demo-company-page/
 Authorization callback URL: https://sveltia-cms-auth.infition.workers.dev/callback
 ```
 
-Generate a client secret and keep both values.
+Registered as `tony-demo`. "Expire user access tokens" is deliberately off: the
+worker reads only `access_token` and ignores `refresh_token`, so expiring tokens
+would break saving after 8 hours with no refresh path.
 
-### 3. Give the worker its secrets — TODO
+### 3. Give the worker its secrets — DONE
 
 From the `sveltia-cms-auth` directory:
 
@@ -107,7 +109,7 @@ backend:
   base_url: https://sveltia-cms-auth.infition.workers.dev
 ```
 
-### 5. Enable GitHub Pages — TODO
+### 5. Enable GitHub Pages — DONE
 
 Settings → Pages → Source `Deploy from a branch`, branch `main`, folder `/ (root)`.
 
