@@ -428,7 +428,7 @@ h3 {
   margin-top: 30px;
 }
 
-.intro-points span {
+.intro-points > span {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -439,6 +439,10 @@ h3 {
   background: rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.86);
   font-weight: 800;
+}
+
+.intro-points > span > span {
+  display: inline;
 }
 
 .intro-points svg {
