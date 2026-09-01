@@ -1,0 +1,55 @@
+{
+  "projects": [
+    {
+      "order": 1,
+      "category": "home",
+      "image": "./assets/images/residential-project.png",
+      "label_th": "บ้านพักอาศัย - สมมติ",
+      "label_en": "Private Residence - Made Up",
+      "label_zh": "私人住宅 - 虚构",
+      "title_th": "วิลโลว์ คอร์ต เฮาส์",
+      "title_en": "Willow Court House",
+      "title_zh": "柳庭住宅",
+      "description_th": "สถาปัตยกรรม อินทีเรีย และประสานงานภูมิทัศน์",
+      "description_en": "Architecture, interiors, landscape coordination",
+      "description_zh": "建筑、室内与景观协调",
+      "alt_th": "Courtyard residence with warm interior lighting",
+      "alt_en": "Courtyard residence with warm interior lighting",
+      "alt_zh": "Courtyard residence with warm interior lighting"
+    },
+    {
+      "order": 2,
+      "category": "commercial",
+      "image": "./assets/images/construction-site.png",
+      "label_th": "อาคารพาณิชย์ - สมมติ",
+      "label_en": "Commercial Build - Made Up",
+      "label_zh": "商业建筑 - 虚构",
+      "title_th": "นอร์ธไลน์ เวิร์กส์",
+      "title_en": "Northline Works",
+      "title_zh": "北线工坊",
+      "description_th": "บริหารงานออกแบบ ส่งมอบงานก่อสร้าง และคุณภาพไซต์",
+      "description_en": "Design management, build delivery, site quality",
+      "description_zh": "设计管理、施工交付与现场质量",
+      "alt_th": "Commercial construction site with architects reviewing drawings",
+      "alt_en": "Commercial construction site with architects reviewing drawings",
+      "alt_zh": "Commercial construction site with architects reviewing drawings"
+    },
+    {
+      "order": 3,
+      "category": "interior",
+      "image": "./assets/images/interior-design.png",
+      "label_th": "งานตกแต่งภายใน - สมมติ",
+      "label_en": "Interior Fit-Out - Made Up",
+      "label_zh": "室内精装 - 虚构",
+      "title_th": "เอเทรียม เฮาส์ ล็อบบี้",
+      "title_en": "Atrium House Lobby",
+      "title_zh": "中庭大堂",
+      "description_th": "สถาปัตยกรรมภายใน แสง และงานบิลต์อิน",
+      "description_en": "Interior architecture, lighting, custom joinery",
+      "description_zh": "室内建筑、照明与定制木作",
+      "alt_th": "Premium office lobby interior with stone and timber finishes",
+      "alt_en": "Premium office lobby interior with stone and timber finishes",
+      "alt_zh": "Premium office lobby interior with stone and timber finishes"
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "th": {
+    "meta": {
+      "pageTitle": "Tonypony's Company | ออกแบบ สถาปัตยกรรม และก่อสร้าง"
+    },
+    "brand": {
+      "suffix": "บริษัท"
+    },
+    "nav": {
+      "approach": "แนวทาง",
+      "services": "บริการ",
+      "projects": "ผลงาน",
+      "process": "กระบวนการ",
+      "studio": "สตูดิโอ",
+      "contactCta": "เริ่มโปรเจกต์"
+    },
+    "hero": {
+      "eyebrow": "ออกแบบ - สถาปัตยกรรม - ก่อสร้าง",
+      "headline": "Tonypony's Company สร้างพื้นที่ตั้งแต่สเก็ตช์แรกจนถึงส่งมอบงานจริง",
+      "copy": "สตูดิโอสมมติแบบครบวงจรสำหรับบ้าน ที่ทำงาน ร้านค้า และอาคารสาธารณะที่ใส่ใจรายละเอียด อบอุ่น และคงทน",
+      "primaryCta": "ดูผลงาน",
+      "secondaryCta": "ขอคำปรึกษา",
+      "stat1": {
+        "label": "ปีประสบการณ์รวมสมมติ"
+      },
+      "stat2": {
+        "label": "งานตั้งแต่แนวคิดถึงเสร็จจริง"
+      },
+      "stat3": {
+        "label": "คะแนนความพึงพอใจเฉลี่ย"
+      },
+      "image": "./assets/images/hero-building.png",
+      "imageAlt": "Modern mixed-use building with a design team reviewing plans"
+    },
+    "approach": {
+      "kicker": "สิ่งที่เราทำ",
+      "title": "ทีมเดียวที่ประสานงานครบ เพื่อความชัดเจนของงานออกแบบ การควบคุมเทคนิค และการส่งมอบงานก่อสร้าง",
+      "body": "Tonypony's Company เป็นบริษัทสมมติสำหรับเดโมนี้ แต่ขั้นตอนทำงานอิงจากงานจริง ตั้งแต่สำรวจพื้นที่ ออกแบบสถาปัตยกรรม วางทิศทางอินทีเรีย ขออนุญาต จัดซื้อ คุมงานก่อสร้าง ไปจนถึงเก็บรายละเอียดสุดท้ายโดยสตูดิโอเดียวที่รับผิดชอบครบ",
+      "point1": "กลยุทธ์พื้นที่",
+      "point2": "แบบประสานงาน",
+      "point3": "ควบคุมงานก่อสร้าง",
+      "cardTitle": "จากแนวคิดถึงส่งมอบ",
+      "cardBody": "สถาปัตยกรรม อินทีเรีย จัดซื้อ และตรวจไซต์ เชื่อมเป็นขั้นตอนเดียวกัน",
+      "image": "./assets/images/interior-design.png",
+      "imageAlt": "Refined interior architecture with stone, wood, and integrated lighting"
+    },
+    "services": {
+      "kicker": "บริการ",
+      "title": "บริการครอบคลุมทั้งวงจรของโปรเจกต์",
+      "architecture": {
+        "title": "สถาปัตยกรรม",
+        "body": "ออกแบบแนวคิด วางผัง ศึกษาฟาซาด จัดทำแบบก่อสร้าง และเอกสารพร้อมยื่นหน่วยงาน"
+      },
+      "interior": {
+        "title": "ออกแบบภายใน",
+        "body": "พาเลตวัสดุ กลยุทธ์แสง วางแผนเฟอร์นิเจอร์ งานบิลต์อิน และทิศทางบรรยากาศโดยรวม"
+      },
+      "delivery": {
+        "title": "ส่งมอบงานก่อสร้าง",
+        "body": "วางแผนงบประมาณ ประสานผู้รับเหมา คุมไซต์ ตรวจคุณภาพ และจัดการปิดงาน"
+      },
+      "sustainability": {
+        "title": "อัปเกรดอย่างยั่งยืน",
+        "body": "กันแดดแบบพาสซีฟ ปรับปรุงเปลือกอาคาร ระบบประหยัดพลังงาน วัสดุผลกระทบต่ำ และแผนการใช้งานระยะยาว"
+      }
+    },
+    "projects": {
+      "kicker": "ผลงานที่เลือก",
+      "title": "ตัวอย่างผลงานสมมติสำหรับพอร์ตเดโม"
+    },
+    "filters": {
+      "all": "ทั้งหมด",
+      "home": "บ้าน",
+      "commercial": "เชิงพาณิชย์",
+      "interior": "อินทีเรีย"
+    },
+    "process": {
+      "kicker": "กระบวนการ",
+      "title": "ขั้นตอนชัด ตัดสินใจได้จริง และลดเรื่องไม่คาดคิด",
+      "discover": {
+        "title": "สำรวจ",
+        "body": "เราวิเคราะห์พื้นที่ เป้าหมาย ช่วงงบประมาณ การอนุมัติ และผลลัพธ์สำคัญก่อนเริ่มออกแบบ"
+      },
+      "design": {
+        "title": "ออกแบบ",
+        "body": "แนวคิดถูกพัฒนาเป็นผัง รูปด้าน วัสดุ แสง และชุดแบบก่อสร้างที่ประสานกัน"
+      },
+      "build": {
+        "title": "ก่อสร้าง",
+        "body": "การจัดซื้อ การสื่อสารกับผู้รับเหมา การตรวจไซต์ และการติดตามเปลี่ยนแปลงมองเห็นได้ตลอดงาน"
+      },
+      "handover": {
+        "title": "ส่งมอบ",
+        "body": "ตรวจแก้ defect สุดท้าย คู่มือ การจัด styling และคำแนะนำดูแลปิดงานอย่างเรียบร้อย"
+      }
+    },
+    "studio": {
+      "kicker": "สตูดิโอ",
+      "title": "นำด้วยงานออกแบบ เข้าใจงานก่อสร้าง และโฟกัสลูกค้า",
+      "body": "ทีมสมมติของ Tonypony's รวมสถาปนิก นักออกแบบภายใน ผู้ประสานงานไซต์ และนักวางแผนต้นทุน เพื่อให้โปรเจกต์เดินอย่างนิ่งขึ้น โดยคิดเรื่องความสวยงามและการก่อสร้างไปพร้อมกัน",
+      "stat1": {
+        "label": "บทบาทหลักในสตูดิโอ"
+      },
+      "stat2": {
+        "label": "พาร์ตเนอร์วัสดุ"
+      },
+      "stat3": {
+        "label": "ระดับโปรเจกต์"
+      },
+      "point1": "เอกสารละเอียดก่อนเริ่มงานไซต์",
+      "point2": "จุดตรวจงบประมาณที่โปร่งใส",
+      "point3": "ตรวจคุณภาพในช่วงสำคัญ",
+      "point4": "วางรายละเอียดงานจบตั้งแต่ต้น"
+    },
+    "contact": {
+      "kicker": "ติดต่อ",
+      "title": "วางแผนโปรเจกต์สมมติกับ Tonypony's Company",
+      "body": "ส่งรายละเอียดโปรเจกต์ผ่าน Google Form ด้านล่างโดยไม่ต้องออกจากหน้านี้",
+      "location": "Demo Studio, Riverside District"
+    },
+    "footer": {
+      "copy": "เดโมสตูดิโอสถาปัตยกรรมและออกแบบก่อสร้างสมมติ",
+      "backTop": "กลับขึ้นด้านบน"
+    }
+  },
+  "en": {
+    "meta": {
+      "pageTitle": "Tonypony's Company | Design, Architecture & Build"
+    },
+    "brand": {
+      "suffix": "Company"
+    },
+    "nav": {
+      "approach": "Approach",
+      "services": "Services",
+      "projects": "Projects",
+      "process": "Process",
+      "studio": "Studio",
+      "contactCta": "Start a Project"
+    },
+    "hero": {
+      "eyebrow": "Design - Architecture - Build",
+      "headline": "Tonypony's Company shapes spaces from first sketch to final handover.",
+      "copy": "A fictional full-service studio for thoughtful homes, workplaces, retail interiors, and civic buildings that feel precise, warm, and built to last.",
+      "primaryCta": "View Projects",
+      "secondaryCta": "Request Consultation",
+      "stat1": {
+        "label": "Fictional years combined experience"
+      },
+      "stat2": {
+        "label": "Concept-to-completion builds"
+      },
+      "stat3": {
+        "label": "Average client satisfaction"
+      },
+      "image": "./assets/images/hero-building.png",
+      "imageAlt": "Modern mixed-use building with a design team reviewing plans"
+    },
+    "approach": {
+      "kicker": "What we do",
+      "title": "One coordinated team for design clarity, technical control, and construction delivery.",
+      "body": "Tonypony's Company is made up for this demo, but the workflow is realistic: site study, architecture, interior direction, permits, procurement, construction supervision, and final styling under one accountable studio.",
+      "point1": "Site strategy",
+      "point2": "Coordinated drawings",
+      "point3": "Build oversight",
+      "cardTitle": "Concept to keys",
+      "cardBody": "Architecture, interiors, procurement, and site review handled as one connected workflow.",
+      "image": "./assets/images/interior-design.png",
+      "imageAlt": "Refined interior architecture with stone, wood, and integrated lighting"
+    },
+    "services": {
+      "kicker": "Services",
+      "title": "Built around the full project lifecycle.",
+      "architecture": {
+        "title": "Architecture",
+        "body": "Concept design, planning layouts, facade studies, construction drawings, and authority-ready documentation."
+      },
+      "interior": {
+        "title": "Interior Design",
+        "body": "Material palettes, lighting strategy, furniture planning, custom joinery, and immersive mood direction."
+      },
+      "delivery": {
+        "title": "Building Delivery",
+        "body": "Cost planning, contractor coordination, site supervision, quality reviews, and closeout management."
+      },
+      "sustainability": {
+        "title": "Sustainable Upgrades",
+        "body": "Passive shading, envelope improvements, efficient systems, low-impact materials, and lifecycle planning."
+      }
+    },
+    "projects": {
+      "kicker": "Selected Projects",
+      "title": "Fictional work samples for the demo portfolio."
+    },
+    "filters": {
+      "all": "All",
+      "home": "Homes",
+      "commercial": "Commercial",
+      "interior": "Interiors"
+    },
+    "process": {
+      "kicker": "Process",
+      "title": "Clear steps, practical decisions, fewer surprises.",
+      "discover": {
+        "title": "Discover",
+        "body": "We map the site, goals, budget range, approvals, and must-have outcomes before design starts."
+      },
+      "design": {
+        "title": "Design",
+        "body": "Concepts become plans, elevations, materials, lighting, and a coordinated construction package."
+      },
+      "build": {
+        "title": "Build",
+        "body": "Procurement, contractor communication, site checks, and change tracking stay visible throughout."
+      },
+      "handover": {
+        "title": "Handover",
+        "body": "Final defects, manuals, styling, and maintenance guidance close the project cleanly."
+      }
+    },
+    "studio": {
+      "kicker": "Studio",
+      "title": "Design-led, construction-aware, client-focused.",
+      "body": "The fictional Tonypony's team combines architects, interior designers, site coordinators, and cost planners. The result is a calmer project experience where beauty and buildability are considered together.",
+      "stat1": {
+        "label": "Core studio roles"
+      },
+      "stat2": {
+        "label": "Material partners"
+      },
+      "stat3": {
+        "label": "Project scales"
+      },
+      "point1": "Detailed documentation before site work",
+      "point2": "Transparent budget checkpoints",
+      "point3": "Quality reviews at key milestones",
+      "point4": "Finishing details planned early"
+    },
+    "contact": {
+      "kicker": "Contact",
+      "title": "Plan a fictional project with Tonypony's Company.",
+      "body": "Send project details through the embedded Google Form below without leaving the page.",
+      "location": "Demo Studio, Riverside District"
+    },
+    "footer": {
+      "copy": "Fictional architecture and design-build studio demo.",
+      "backTop": "Back to top"
+    }
+  },
+  "zh": {
+    "meta": {
+      "pageTitle": "Tonypony's Company | 设计、建筑与施工"
+    },
+    "brand": {
+      "suffix": "公司"
+    },
+    "nav": {
+      "approach": "方法",
+      "services": "服务",
+      "projects": "项目",
+      "process": "流程",
+      "studio": "工作室",
+      "contactCta": "启动项目"
+    },
+    "hero": {
+      "eyebrow": "设计 - 建筑 - 施工",
+      "headline": "Tonypony's Company 从第一张草图到最终交付塑造空间",
+      "copy": "一个虚构的全服务工作室，服务于住宅、办公空间、零售室内和公共建筑，注重精准、温度与耐久性",
+      "primaryCta": "查看项目",
+      "secondaryCta": "预约咨询",
+      "stat1": {
+        "label": "虚构综合经验年限"
+      },
+      "stat2": {
+        "label": "从概念到完工的项目"
+      },
+      "stat3": {
+        "label": "平均客户满意度"
+      },
+      "image": "./assets/images/hero-building.png",
+      "imageAlt": "Modern mixed-use building with a design team reviewing plans"
+    },
+    "approach": {
+      "kicker": "我们做什么",
+      "title": "一个协同团队，负责清晰设计、技术控制与施工交付",
+      "body": "Tonypony's Company 是本演示中的虚构公司，但流程贴近真实项目：场地研究、建筑设计、室内方向、许可、采购、施工监督和最终陈设都由同一个负责团队统筹",
+      "point1": "场地策略",
+      "point2": "协同图纸",
+      "point3": "施工监督",
+      "cardTitle": "从概念到交钥匙",
+      "cardBody": "建筑、室内、采购和现场审查作为一个连贯流程处理",
+      "image": "./assets/images/interior-design.png",
+      "imageAlt": "Refined interior architecture with stone, wood, and integrated lighting"
+    },
+    "services": {
+      "kicker": "服务",
+      "title": "围绕完整项目生命周期构建",
+      "architecture": {
+        "title": "建筑设计",
+        "body": "概念设计、平面布局、立面研究、施工图以及可提交审批的文件"
+      },
+      "interior": {
+        "title": "室内设计",
+        "body": "材料搭配、照明策略、家具规划、定制木作与整体氛围方向"
+      },
+      "delivery": {
+        "title": "施工交付",
+        "body": "成本规划、承包商协调、现场监督、质量审查与收尾管理"
+      },
+      "sustainability": {
+        "title": "可持续升级",
+        "body": "被动遮阳、围护结构优化、高效系统、低影响材料和生命周期规划"
+      }
+    },
+    "projects": {
+      "kicker": "精选项目",
+      "title": "用于演示作品集的虚构项目样本"
+    },
+    "filters": {
+      "all": "全部",
+      "home": "住宅",
+      "commercial": "商业",
+      "interior": "室内"
+    },
+    "process": {
+      "kicker": "流程",
+      "title": "步骤清晰，决策务实，减少意外",
+      "discover": {
+        "title": "调研",
+        "body": "设计开始前，我们梳理场地、目标、预算范围、审批要求和关键成果"
+      },
+      "design": {
+        "title": "设计",
+        "body": "概念会转化为平面、立面、材料、照明和协同施工文件"
+      },
+      "build": {
+        "title": "施工",
+        "body": "采购、承包商沟通、现场检查和变更跟踪在全过程保持可见"
+      },
+      "handover": {
+        "title": "交付",
+        "body": "最终缺陷修复、手册、陈设和维护指导让项目顺利收尾"
+      }
+    },
+    "studio": {
+      "kicker": "工作室",
+      "title": "以设计为导向，理解施工，关注客户",
+      "body": "虚构的 Tonypony's 团队由建筑师、室内设计师、现场协调员和成本规划师组成，让项目体验更从容，同时兼顾美感与可建造性",
+      "stat1": {
+        "label": "核心工作室角色"
+      },
+      "stat2": {
+        "label": "材料合作伙伴"
+      },
+      "stat3": {
+        "label": "项目尺度"
+      },
+      "point1": "现场施工前完成详细文件",
+      "point2": "透明的预算检查点",
+      "point3": "关键节点质量审查",
+      "point4": "提前规划收口细节"
+    },
+    "contact": {
+      "kicker": "联系",
+      "title": "与 Tonypony's Company 规划一个虚构项目",
+      "body": "无需离开页面，即可通过下方嵌入的 Google 表单提交项目详情",
+      "location": "Demo Studio, Riverside District"
+    },
+    "footer": {
+      "copy": "虚构建筑与设计施工工作室演示",
+      "backTop": "返回顶部"
+    }
+  }
+}

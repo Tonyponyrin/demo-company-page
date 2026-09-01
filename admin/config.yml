@@ -1,0 +1,289 @@
+# Decap-format configuration, read by Sveltia CMS (drop-in compatible).
+backend:
+  name: github
+  repo: Tonyponyrin/demo-company-page
+  branch: main
+  # OAuth relay. GitHub Pages cannot host the callback, so authentication goes
+  # through this worker (source: github.com/sveltia/sveltia-cms-auth).
+  base_url: https://sveltia-cms-auth.infition.workers.dev
+
+# Commits land straight on main and GitHub Pages redeploys.
+# Switch to editorial_workflow if you want draft/review pull requests instead.
+publish_mode: simple
+
+media_folder: assets/images
+public_folder: ./assets/images
+
+locale: en
+
+i18n:
+  structure: single_file
+  locales: [th, en, zh]
+  default_locale: th
+
+collections:
+  - name: site
+    label: Site Text
+    editor: { preview: false }
+    i18n: true
+    files:
+      - name: content
+        label: All page copy
+        file: content/site.json
+        i18n: true
+        description: Every heading and paragraph on the page, in Thai, English, and Chinese.
+        fields:
+          - name: meta
+            label: Page metadata
+            widget: object
+            i18n: true
+            fields:
+              - { name: pageTitle, label: Browser tab title, widget: string, i18n: true }
+
+          - name: brand
+            label: Brand
+            widget: object
+            i18n: true
+            fields:
+              - { name: suffix, label: Word after the logo, widget: string, i18n: true }
+
+          - name: nav
+            label: Navigation
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: approach, label: Approach link, widget: string, i18n: true }
+              - { name: services, label: Services link, widget: string, i18n: true }
+              - { name: projects, label: Projects link, widget: string, i18n: true }
+              - { name: process, label: Process link, widget: string, i18n: true }
+              - { name: studio, label: Studio link, widget: string, i18n: true }
+              - { name: contactCta, label: Header button, widget: string, i18n: true }
+
+          - name: hero
+            label: Hero section
+            widget: object
+            i18n: true
+            fields:
+              - { name: eyebrow, label: Small line above headline, widget: string, i18n: true }
+              - { name: headline, label: Headline, widget: text, i18n: true }
+              - { name: copy, label: Intro paragraph, widget: text, i18n: true }
+              - { name: primaryCta, label: Primary button, widget: string, i18n: true }
+              - { name: secondaryCta, label: Secondary button, widget: string, i18n: true }
+              - name: stat1
+                label: First stat
+                widget: object
+                i18n: true
+                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
+              - name: stat2
+                label: Second stat
+                widget: object
+                i18n: true
+                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
+              - name: stat3
+                label: Third stat
+                widget: object
+                i18n: true
+                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
+              - { name: image, label: Background image, widget: image, i18n: duplicate }
+              - { name: imageAlt, label: Background image description, widget: string, i18n: true }
+
+          - name: approach
+            label: Approach section
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: kicker, label: Section kicker, widget: string, i18n: true }
+              - { name: title, label: Section heading, widget: text, i18n: true }
+              - { name: body, label: Body paragraph, widget: text, i18n: true }
+              - { name: point1, label: Highlight 1, widget: string, i18n: true }
+              - { name: point2, label: Highlight 2, widget: string, i18n: true }
+              - { name: point3, label: Highlight 3, widget: string, i18n: true }
+              - { name: cardTitle, label: Card title, widget: string, i18n: true }
+              - { name: cardBody, label: Card body, widget: text, i18n: true }
+              - { name: image, label: Section image, widget: image, i18n: duplicate }
+              - { name: imageAlt, label: Section image description, widget: string, i18n: true }
+
+          - name: services
+            label: Services section
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: kicker, label: Section kicker, widget: string, i18n: true }
+              - { name: title, label: Section heading, widget: text, i18n: true }
+              - name: architecture
+                label: Card 1
+                widget: object
+                i18n: true
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - { name: body, label: Body, widget: text, i18n: true }
+              - name: interior
+                label: Card 2
+                widget: object
+                i18n: true
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - { name: body, label: Body, widget: text, i18n: true }
+              - name: delivery
+                label: Card 3
+                widget: object
+                i18n: true
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - { name: body, label: Body, widget: text, i18n: true }
+              - name: sustainability
+                label: Card 4
+                widget: object
+                i18n: true
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - { name: body, label: Body, widget: text, i18n: true }
+
+          - name: projects
+            label: Projects section heading
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: kicker, label: Section kicker, widget: string, i18n: true }
+              - { name: title, label: Section heading, widget: text, i18n: true }
+
+          - name: filters
+            label: Project filter buttons
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: all, label: All, widget: string, i18n: true }
+              - { name: home, label: Homes, widget: string, i18n: true }
+              - { name: commercial, label: Commercial, widget: string, i18n: true }
+              - { name: interior, label: Interiors, widget: string, i18n: true }
+
+          - name: process
+            label: Process section
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: kicker, label: Section kicker, widget: string, i18n: true }
+              - { name: title, label: Section heading, widget: text, i18n: true }
+              - name: discover
+                label: Step 1
+                widget: object
+                i18n: true
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - { name: body, label: Body, widget: text, i18n: true }
+              - name: design
+                label: Step 2
+                widget: object
+                i18n: true
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - { name: body, label: Body, widget: text, i18n: true }
+              - name: build
+                label: Step 3
+                widget: object
+                i18n: true
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - { name: body, label: Body, widget: text, i18n: true }
+              - name: handover
+                label: Step 4
+                widget: object
+                i18n: true
+                fields:
+                  - { name: title, label: Title, widget: string, i18n: true }
+                  - { name: body, label: Body, widget: text, i18n: true }
+
+          - name: studio
+            label: Studio section
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: kicker, label: Section kicker, widget: string, i18n: true }
+              - { name: title, label: Section heading, widget: text, i18n: true }
+              - { name: body, label: Body paragraph, widget: text, i18n: true }
+              - name: stat1
+                label: First stat
+                widget: object
+                i18n: true
+                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
+              - name: stat2
+                label: Second stat
+                widget: object
+                i18n: true
+                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
+              - name: stat3
+                label: Third stat
+                widget: object
+                i18n: true
+                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
+              - { name: point1, label: Principle 1, widget: string, i18n: true }
+              - { name: point2, label: Principle 2, widget: string, i18n: true }
+              - { name: point3, label: Principle 3, widget: string, i18n: true }
+              - { name: point4, label: Principle 4, widget: string, i18n: true }
+
+          - name: contact
+            label: Contact section
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: kicker, label: Section kicker, widget: string, i18n: true }
+              - { name: title, label: Section heading, widget: text, i18n: true }
+              - { name: body, label: Body paragraph, widget: text, i18n: true }
+              - { name: location, label: Location line, widget: string, i18n: true }
+
+          - name: footer
+            label: Footer
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - { name: copy, label: Footer line, widget: string, i18n: true }
+              - { name: backTop, label: Back-to-top link, widget: string, i18n: true }
+
+  # Kept as one plain list with explicit _th/_en/_zh fields. Decap's i18n ties
+  # list length to the default locale, which makes adding or reordering
+  # projects fragile; explicit suffixed fields stay predictable.
+  - name: projects
+    label: Portfolio
+    editor: { preview: false }
+    files:
+      - name: list
+        label: Project cards
+        file: content/projects.json
+        description: Cards in the Selected Projects grid. Lower order numbers show first.
+        fields:
+          - name: projects
+            label: Projects
+            label_singular: Project
+            widget: list
+            summary: "{{fields.order}}. {{fields.title_en}} ({{fields.category}})"
+            fields:
+              - { name: order, label: Sort order, widget: number, value_type: int, default: 1 }
+              - name: category
+                label: Category
+                widget: select
+                options:
+                  - { label: Homes, value: home }
+                  - { label: Commercial, value: commercial }
+                  - { label: Interiors, value: interior }
+              - { name: image, label: Image, widget: image }
+              - { name: label_th, label: "Label (TH)", widget: string }
+              - { name: label_en, label: "Label (EN)", widget: string }
+              - { name: label_zh, label: "Label (ZH)", widget: string }
+              - { name: title_th, label: "Title (TH)", widget: string }
+              - { name: title_en, label: "Title (EN)", widget: string }
+              - { name: title_zh, label: "Title (ZH)", widget: string }
+              - { name: description_th, label: "Description (TH)", widget: string }
+              - { name: description_en, label: "Description (EN)", widget: string }
+              - { name: description_zh, label: "Description (ZH)", widget: string }
+              - { name: alt_th, label: "Image description (TH)", widget: string }
+              - { name: alt_en, label: "Image description (EN)", widget: string }
+              - { name: alt_zh, label: "Image description (ZH)", widget: string }

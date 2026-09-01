@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
         <span class="brand-mark">T</span>
         <span>
           <strong>Tonypony's</strong>
-          <small>Company</small>
+          <small data-cms="brand.suffix">Company</small>
         </span>
       </a>
 
@@ -27,46 +27,46 @@
       </button>
 
       <nav class="site-nav" data-nav>
-        <a href="#approach">Approach</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#process">Process</a>
-        <a href="#studio">Studio</a>
-        <a class="nav-cta" href="#contact">Start a Project</a>
+        <a href="#approach" data-cms="nav.approach">Approach</a>
+        <a href="#services" data-cms="nav.services">Services</a>
+        <a href="#projects" data-cms="nav.projects">Projects</a>
+        <a href="#process" data-cms="nav.process">Process</a>
+        <a href="#studio" data-cms="nav.studio">Studio</a>
+        <a class="nav-cta" href="#contact" data-cms="nav.contactCta">Start a Project</a>
       </nav>
 
       <div class="language-switch" aria-label="Switch language">
-        <button class="active" type="button" data-lang="en">EN</button>
-        <button type="button" data-lang="th">TH</button>
+        <button type="button" data-lang="en">EN</button>
+        <button class="active" type="button" data-lang="th">TH</button>
         <button type="button" data-lang="zh">CH</button>
       </div>
     </header>
 
     <main id="top">
       <section class="hero" aria-label="Tonypony's Company introduction" data-section>
-        <img src="./assets/images/hero-building.png" alt="Modern mixed-use building with a design team reviewing plans" class="hero-image" data-parallax="0.04">
+        <img src="./assets/images/hero-building.png" alt="Modern mixed-use building with a design team reviewing plans" class="hero-image" data-parallax="0.04" data-cms-src="hero.image" data-cms-alt="hero.imageAlt">
         <div class="hero-overlay"></div>
         <div class="hero-content reveal is-visible">
-          <p class="eyebrow">Design - Architecture - Build</p>
-          <h1>Tonypony's Company shapes spaces from first sketch to final handover.</h1>
-          <p class="hero-copy">A fictional full-service studio for thoughtful homes, workplaces, retail interiors, and civic buildings that feel precise, warm, and built to last.</p>
+          <p class="eyebrow" data-cms="hero.eyebrow">Design - Architecture - Build</p>
+          <h1 data-cms="hero.headline">Tonypony's Company shapes spaces from first sketch to final handover.</h1>
+          <p class="hero-copy" data-cms="hero.copy">A fictional full-service studio for thoughtful homes, workplaces, retail interiors, and civic buildings that feel precise, warm, and built to last.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#projects"><i data-lucide="building-2"></i> View Projects</a>
-            <a class="button button-secondary" href="#contact"><i data-lucide="send"></i> Request Consultation</a>
+            <a class="button button-primary" href="#projects"><i data-lucide="building-2"></i> <span data-cms="hero.primaryCta">View Projects</span></a>
+            <a class="button button-secondary" href="#contact"><i data-lucide="send"></i> <span data-cms="hero.secondaryCta">Request Consultation</span></a>
           </div>
         </div>
         <aside class="hero-panel reveal is-visible" aria-label="Company highlights">
           <div>
             <strong data-count="18" data-suffix="+">18+</strong>
-            <span>Fictional years combined experience</span>
+            <span data-cms="hero.stat1.label">Fictional years combined experience</span>
           </div>
           <div>
             <strong data-count="64">64</strong>
-            <span>Concept-to-completion builds</span>
+            <span data-cms="hero.stat2.label">Concept-to-completion builds</span>
           </div>
           <div>
             <strong data-count="4.9" data-decimals="1">4.9</strong>
-            <span>Average client satisfaction</span>
+            <span data-cms="hero.stat3.label">Average client satisfaction</span>
           </div>
         </aside>
       </section>
@@ -74,20 +74,20 @@
       <section class="section intro-band reveal" id="approach" aria-label="Company positioning" data-section>
         <div class="intro-grid">
           <div class="intro-copy">
-            <p class="section-kicker">What we do</p>
-            <h2>One coordinated team for design clarity, technical control, and construction delivery.</h2>
-            <p>Tonypony's Company is made up for this demo, but the workflow is realistic: site study, architecture, interior direction, permits, procurement, construction supervision, and final styling under one accountable studio.</p>
+            <p class="section-kicker" data-cms="approach.kicker">What we do</p>
+            <h2 data-cms="approach.title">One coordinated team for design clarity, technical control, and construction delivery.</h2>
+            <p data-cms="approach.body">Tonypony's Company is made up for this demo, but the workflow is realistic: site study, architecture, interior direction, permits, procurement, construction supervision, and final styling under one accountable studio.</p>
             <div class="intro-points" aria-label="Approach highlights">
-              <span><i data-lucide="map"></i> Site strategy</span>
-              <span><i data-lucide="layers-3"></i> Coordinated drawings</span>
-              <span><i data-lucide="clipboard-check"></i> Build oversight</span>
+              <span><i data-lucide="map"></i> <span data-cms="approach.point1">Site strategy</span></span>
+              <span><i data-lucide="layers-3"></i> <span data-cms="approach.point2">Coordinated drawings</span></span>
+              <span><i data-lucide="clipboard-check"></i> <span data-cms="approach.point3">Build oversight</span></span>
             </div>
           </div>
           <div class="intro-visual reveal-item">
-            <img src="./assets/images/interior-design.png" alt="Refined interior architecture with stone, wood, and integrated lighting">
+            <img src="./assets/images/interior-design.png" alt="Refined interior architecture with stone, wood, and integrated lighting" data-cms-src="approach.image" data-cms-alt="approach.imageAlt">
             <div class="intro-visual-card">
-              <strong>Concept to keys</strong>
-              <span>Architecture, interiors, procurement, and site review handled as one connected workflow.</span>
+              <strong data-cms="approach.cardTitle">Concept to keys</strong>
+              <span data-cms="approach.cardBody">Architecture, interiors, procurement, and site review handled as one connected workflow.</span>
             </div>
           </div>
         </div>
@@ -95,29 +95,29 @@
 
       <section class="section services reveal" id="services" data-section>
         <div class="section-heading">
-          <p class="section-kicker">Services</p>
-          <h2>Built around the full project lifecycle.</h2>
+          <p class="section-kicker" data-cms="services.kicker">Services</p>
+          <h2 data-cms="services.title">Built around the full project lifecycle.</h2>
         </div>
         <div class="service-grid">
           <article class="service-card reveal-item">
             <i data-lucide="drafting-compass"></i>
-            <h3>Architecture</h3>
-            <p>Concept design, planning layouts, facade studies, construction drawings, and authority-ready documentation.</p>
+            <h3 data-cms="services.architecture.title">Architecture</h3>
+            <p data-cms="services.architecture.body">Concept design, planning layouts, facade studies, construction drawings, and authority-ready documentation.</p>
           </article>
           <article class="service-card reveal-item">
             <i data-lucide="lamp-desk"></i>
-            <h3>Interior Design</h3>
-            <p>Material palettes, lighting strategy, furniture planning, custom joinery, and immersive mood direction.</p>
+            <h3 data-cms="services.interior.title">Interior Design</h3>
+            <p data-cms="services.interior.body">Material palettes, lighting strategy, furniture planning, custom joinery, and immersive mood direction.</p>
           </article>
           <article class="service-card reveal-item">
             <i data-lucide="hard-hat"></i>
-            <h3>Building Delivery</h3>
-            <p>Cost planning, contractor coordination, site supervision, quality reviews, and closeout management.</p>
+            <h3 data-cms="services.delivery.title">Building Delivery</h3>
+            <p data-cms="services.delivery.body">Cost planning, contractor coordination, site supervision, quality reviews, and closeout management.</p>
           </article>
           <article class="service-card reveal-item">
             <i data-lucide="leaf"></i>
-            <h3>Sustainable Upgrades</h3>
-            <p>Passive shading, envelope improvements, efficient systems, low-impact materials, and lifecycle planning.</p>
+            <h3 data-cms="services.sustainability.title">Sustainable Upgrades</h3>
+            <p data-cms="services.sustainability.body">Passive shading, envelope improvements, efficient systems, low-impact materials, and lifecycle planning.</p>
           </article>
         </div>
       </section>
@@ -125,18 +125,18 @@
       <section class="section projects reveal" id="projects" data-section>
         <div class="section-heading row-heading">
           <div>
-            <p class="section-kicker">Selected Projects</p>
-            <h2>Fictional work samples for the demo portfolio.</h2>
+            <p class="section-kicker" data-cms="projects.kicker">Selected Projects</p>
+            <h2 data-cms="projects.title">Fictional work samples for the demo portfolio.</h2>
           </div>
           <div class="filter-group" aria-label="Filter projects">
-            <button class="filter-button active" type="button" data-filter="all">All</button>
-            <button class="filter-button" type="button" data-filter="home">Homes</button>
-            <button class="filter-button" type="button" data-filter="commercial">Commercial</button>
-            <button class="filter-button" type="button" data-filter="interior">Interiors</button>
+            <button class="filter-button active" type="button" data-filter="all" data-cms="filters.all">All</button>
+            <button class="filter-button" type="button" data-filter="home" data-cms="filters.home">Homes</button>
+            <button class="filter-button" type="button" data-filter="commercial" data-cms="filters.commercial">Commercial</button>
+            <button class="filter-button" type="button" data-filter="interior" data-cms="filters.interior">Interiors</button>
           </div>
         </div>
 
-        <div class="project-grid">
+        <div class="project-grid" data-project-grid>
           <article class="project-card reveal-item" data-category="home">
             <img src="./assets/images/residential-project.png" alt="Courtyard residence with warm interior lighting">
             <div class="project-content">
@@ -166,72 +166,72 @@
 
       <section class="section process reveal" id="process" data-section>
         <div class="section-heading">
-          <p class="section-kicker">Process</p>
-          <h2>Clear steps, practical decisions, fewer surprises.</h2>
+          <p class="section-kicker" data-cms="process.kicker">Process</p>
+          <h2 data-cms="process.title">Clear steps, practical decisions, fewer surprises.</h2>
         </div>
         <div class="timeline">
           <article class="reveal-item">
             <span>01</span>
-            <h3>Discover</h3>
-            <p>We map the site, goals, budget range, approvals, and must-have outcomes before design starts.</p>
+            <h3 data-cms="process.discover.title">Discover</h3>
+            <p data-cms="process.discover.body">We map the site, goals, budget range, approvals, and must-have outcomes before design starts.</p>
           </article>
           <article class="reveal-item">
             <span>02</span>
-            <h3>Design</h3>
-            <p>Concepts become plans, elevations, materials, lighting, and a coordinated construction package.</p>
+            <h3 data-cms="process.design.title">Design</h3>
+            <p data-cms="process.design.body">Concepts become plans, elevations, materials, lighting, and a coordinated construction package.</p>
           </article>
           <article class="reveal-item">
             <span>03</span>
-            <h3>Build</h3>
-            <p>Procurement, contractor communication, site checks, and change tracking stay visible throughout.</p>
+            <h3 data-cms="process.build.title">Build</h3>
+            <p data-cms="process.build.body">Procurement, contractor communication, site checks, and change tracking stay visible throughout.</p>
           </article>
           <article class="reveal-item">
             <span>04</span>
-            <h3>Handover</h3>
-            <p>Final defects, manuals, styling, and maintenance guidance close the project cleanly.</p>
+            <h3 data-cms="process.handover.title">Handover</h3>
+            <p data-cms="process.handover.body">Final defects, manuals, styling, and maintenance guidance close the project cleanly.</p>
           </article>
         </div>
       </section>
 
       <section class="section studio reveal" id="studio" data-section>
         <div class="studio-copy">
-          <p class="section-kicker">Studio</p>
-          <h2>Design-led, construction-aware, client-focused.</h2>
-          <p>The fictional Tonypony's team combines architects, interior designers, site coordinators, and cost planners. The result is a calmer project experience where beauty and buildability are considered together.</p>
+          <p class="section-kicker" data-cms="studio.kicker">Studio</p>
+          <h2 data-cms="studio.title">Design-led, construction-aware, client-focused.</h2>
+          <p data-cms="studio.body">The fictional Tonypony's team combines architects, interior designers, site coordinators, and cost planners. The result is a calmer project experience where beauty and buildability are considered together.</p>
           <dl class="studio-stats">
-            <div><dt data-count="12">12</dt><dd>Core studio roles</dd></div>
-            <div><dt data-count="7">7</dt><dd>Material partners</dd></div>
-            <div><dt data-count="3">3</dt><dd>Project scales</dd></div>
+            <div><dt data-count="12">12</dt><dd data-cms="studio.stat1.label">Core studio roles</dd></div>
+            <div><dt data-count="7">7</dt><dd data-cms="studio.stat2.label">Material partners</dd></div>
+            <div><dt data-count="3">3</dt><dd data-cms="studio.stat3.label">Project scales</dd></div>
           </dl>
         </div>
         <div class="studio-list" aria-label="Studio principles">
           <article class="reveal-item">
             <i data-lucide="ruler"></i>
-            <span>Detailed documentation before site work</span>
+            <span data-cms="studio.point1">Detailed documentation before site work</span>
           </article>
           <article class="reveal-item">
             <i data-lucide="wallet-cards"></i>
-            <span>Transparent budget checkpoints</span>
+            <span data-cms="studio.point2">Transparent budget checkpoints</span>
           </article>
           <article class="reveal-item">
             <i data-lucide="shield-check"></i>
-            <span>Quality reviews at key milestones</span>
+            <span data-cms="studio.point3">Quality reviews at key milestones</span>
           </article>
           <article class="reveal-item">
             <i data-lucide="sparkles"></i>
-            <span>Finishing details planned early</span>
+            <span data-cms="studio.point4">Finishing details planned early</span>
           </article>
         </div>
       </section>
 
       <section class="section contact reveal" id="contact" data-section>
         <div class="contact-copy">
-          <p class="section-kicker">Contact</p>
-          <h2>Plan a fictional project with Tonypony's Company.</h2>
-          <p>Send project details through the embedded Google Form below without leaving the page.</p>
+          <p class="section-kicker" data-cms="contact.kicker">Contact</p>
+          <h2 data-cms="contact.title">Plan a fictional project with Tonypony's Company.</h2>
+          <p data-cms="contact.body">Send project details through the embedded Google Form below without leaving the page.</p>
           <div class="contact-detail">
             <i data-lucide="map-pin"></i>
-            <span>Demo Studio, Riverside District</span>
+            <span data-cms="contact.location">Demo Studio, Riverside District</span>
           </div>
           <div class="contact-detail">
             <i data-lucide="mail"></i>
@@ -247,12 +247,13 @@
     <footer class="site-footer">
       <div>
         <strong>Tonypony's Company</strong>
-        <span>Fictional architecture and design-build studio demo.</span>
+        <span data-cms="footer.copy">Fictional architecture and design-build studio demo.</span>
       </div>
-      <a href="#top">Back to top</a>
+      <a href="#top" data-cms="footer.backTop">Back to top</a>
     </footer>
 
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="./cms.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
