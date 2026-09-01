@@ -32,6 +32,18 @@
     return "";
   };
 
+  // The CMS must write absolute paths (Sveltia requires public_folder to start
+  // with "/"), but the page uses relative URLs so it works from any repository
+  // path. Map managed asset paths back to page-relative ones; leave external
+  // URLs and data URIs alone.
+  const toRelativeAsset = (value) => {
+    const path = normalize(value);
+    if (!path || /^(?:[a-z]+:)?\/\//i.test(path) || path.startsWith("data:")) return path;
+
+    const managed = path.match(/assets\/images\/.+$/);
+    return managed ? `./${managed[0]}` : path;
+  };
+
   const getLocalized = (entry, field, language) =>
     normalize(entry[`${field}_${language}`]) ||
     normalize(entry[`${field}_${config.defaultLanguage}`]) ||
@@ -59,7 +71,7 @@
     });
 
     document.querySelectorAll("[data-cms-src]").forEach((element) => {
-      const source = getText(element.dataset.cmsSrc, language);
+      const source = toRelativeAsset(getText(element.dataset.cmsSrc, language));
       if (source) element.setAttribute("src", source);
 
       const alt = element.dataset.cmsAlt && getText(element.dataset.cmsAlt, language);
@@ -77,7 +89,7 @@
     grid.innerHTML = state.projects
       .map((item) => {
         const category = escapeHtml(item.category || "home");
-        const image = escapeHtml(item.image || "./assets/images/residential-project.png");
+        const image = escapeHtml(toRelativeAsset(item.image) || "./assets/images/residential-project.png");
         const title = escapeHtml(getLocalized(item, "title", language) || "Untitled project");
         const label = escapeHtml(getLocalized(item, "label", language) || category);
         const description = escapeHtml(getLocalized(item, "description", language));

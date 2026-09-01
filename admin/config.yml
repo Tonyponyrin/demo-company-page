@@ -12,7 +12,9 @@ backend:
 publish_mode: simple
 
 media_folder: assets/images
-public_folder: ./assets/images
+# Must be an absolute path. The site is served from a repository subpath, so
+# this is the live URL prefix; cms.js maps it back to a relative path.
+public_folder: /demo-company-page/assets/images
 
 locale: en
 
