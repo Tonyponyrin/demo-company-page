@@ -1,4 +1,7 @@
 # Decap-format configuration, read by Sveltia CMS (drop-in compatible).
+#
+# Field names must match the nesting in content/site.json exactly, and the
+# data-cms attributes in index.html must match both. See CMS_SETUP.md.
 backend:
   name: github
   repo: Tonyponyrin/demo-company-page
@@ -10,6 +13,9 @@ backend:
 # Commits land straight on main and GitHub Pages redeploys.
 # Switch to editorial_workflow if you want draft/review pull requests instead.
 publish_mode: simple
+
+site_url: https://tonyponyrin.github.io/demo-company-page/
+display_url: https://tonyponyrin.github.io/demo-company-page/
 
 media_folder: assets/images
 # Must be an absolute path. The site is served from a repository subpath, so
@@ -24,225 +30,330 @@ i18n:
   default_locale: th
 
 collections:
+  # Sections are ordered the way they appear on the page, with the rarely
+  # touched menu and page settings last.
   - name: site
-    label: Site Text
+    label: Page Text
+    label_singular: Page Text
+    icon: article
     editor: { preview: false }
     i18n: true
     files:
       - name: content
-        label: All page copy
+        label: All page text
         file: content/site.json
         i18n: true
-        description: Every heading and paragraph on the page, in Thai, English, and Chinese.
+        description: >-
+          Every heading, paragraph, and button label on the page. Each field has
+          a tab per language: Thai, English, Chinese. Saving publishes the site.
         fields:
-          - name: meta
-            label: Page metadata
-            widget: object
-            i18n: true
-            fields:
-              - { name: pageTitle, label: Browser tab title, widget: string, i18n: true }
-
-          - name: brand
-            label: Brand
-            widget: object
-            i18n: true
-            fields:
-              - { name: suffix, label: Word after the logo, widget: string, i18n: true }
-
-          - name: nav
-            label: Navigation
-            widget: object
-            i18n: true
-            collapsed: true
-            fields:
-              - { name: approach, label: Approach link, widget: string, i18n: true }
-              - { name: services, label: Services link, widget: string, i18n: true }
-              - { name: projects, label: Projects link, widget: string, i18n: true }
-              - { name: process, label: Process link, widget: string, i18n: true }
-              - { name: studio, label: Studio link, widget: string, i18n: true }
-              - { name: contactCta, label: Header button, widget: string, i18n: true }
-
           - name: hero
-            label: Hero section
+            label: 1. Hero (top of page)
             widget: object
             i18n: true
             fields:
-              - { name: eyebrow, label: Small line above headline, widget: string, i18n: true }
-              - { name: headline, label: Headline, widget: text, i18n: true }
-              - { name: copy, label: Intro paragraph, widget: text, i18n: true }
-              - { name: primaryCta, label: Primary button, widget: string, i18n: true }
-              - { name: secondaryCta, label: Secondary button, widget: string, i18n: true }
-              - name: stat1
-                label: First stat
-                widget: object
+              - name: eyebrow
+                label: Small line above the headline
+                widget: string
                 i18n: true
-                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
-              - name: stat2
-                label: Second stat
-                widget: object
+                required: true
+                hint: Short and wide, e.g. "Design - Architecture - Build".
+              - name: headline
+                label: Main headline
+                widget: text
                 i18n: true
-                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
-              - name: stat3
-                label: Third stat
-                widget: object
+                required: true
+                hint: The largest text on the page. One sentence works best.
+              - name: copy
+                label: Intro paragraph
+                widget: text
                 i18n: true
-                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
-              - { name: image, label: Background image, widget: image, i18n: duplicate }
-              - { name: imageAlt, label: Background image description, widget: string, i18n: true }
+                required: true
+                hint: Two or three lines under the headline.
+              - name: primaryCta
+                label: Primary button
+                widget: string
+                i18n: true
+                required: true
+                hint: Jumps to the Projects section. Two or three words.
+              - name: secondaryCta
+                label: Secondary button
+                widget: string
+                i18n: true
+                required: true
+                hint: Jumps to the Contact section.
+              - name: stat1Label
+                label: Stat 1 caption (under "18+")
+                widget: string
+                i18n: true
+                hint: Only the caption is editable here; the number is in the page design.
+              - name: stat2Label
+                label: Stat 2 caption (under "64")
+                widget: string
+                i18n: true
+                hint: Only the caption is editable here; the number is in the page design.
+              - name: stat3Label
+                label: Stat 3 caption (under "4.9")
+                widget: string
+                i18n: true
+                hint: Only the caption is editable here; the number is in the page design.
+              - name: image
+                label: Background image
+                widget: image
+                i18n: duplicate
+                hint: Wide photo, about 1600px across. Keep under 500KB so the page loads fast.
+              - name: imageAlt
+                label: Background image description
+                widget: string
+                i18n: true
+                hint: Describes the photo for screen readers and when images fail to load.
 
           - name: approach
-            label: Approach section
+            label: 2. Approach
             widget: object
             i18n: true
             collapsed: true
             fields:
-              - { name: kicker, label: Section kicker, widget: string, i18n: true }
-              - { name: title, label: Section heading, widget: text, i18n: true }
-              - { name: body, label: Body paragraph, widget: text, i18n: true }
-              - { name: point1, label: Highlight 1, widget: string, i18n: true }
-              - { name: point2, label: Highlight 2, widget: string, i18n: true }
-              - { name: point3, label: Highlight 3, widget: string, i18n: true }
-              - { name: cardTitle, label: Card title, widget: string, i18n: true }
-              - { name: cardBody, label: Card body, widget: text, i18n: true }
-              - { name: image, label: Section image, widget: image, i18n: duplicate }
-              - { name: imageAlt, label: Section image description, widget: string, i18n: true }
+              - name: kicker
+                label: Small label above the heading
+                widget: string
+                i18n: true
+                hint: One or two words, e.g. "What we do".
+              - name: title
+                label: Section heading
+                widget: text
+                i18n: true
+                required: true
+              - name: body
+                label: Body paragraph
+                widget: text
+                i18n: true
+                required: true
+              - name: point1
+                label: Highlight 1
+                widget: string
+                i18n: true
+                hint: Appears next to an icon. Two or three words.
+              - name: point2
+                label: Highlight 2
+                widget: string
+                i18n: true
+              - name: point3
+                label: Highlight 3
+                widget: string
+                i18n: true
+              - name: cardTitle
+                label: Side card title
+                widget: string
+                i18n: true
+              - name: cardBody
+                label: Side card text
+                widget: text
+                i18n: true
+              - name: image
+                label: Section image
+                widget: image
+                i18n: duplicate
+                hint: About 1200px across. Keep under 500KB.
+              - name: imageAlt
+                label: Section image description
+                widget: string
+                i18n: true
+                hint: Describes the photo for screen readers.
 
           - name: services
-            label: Services section
+            label: 3. Services (4 cards)
             widget: object
             i18n: true
             collapsed: true
             fields:
-              - { name: kicker, label: Section kicker, widget: string, i18n: true }
-              - { name: title, label: Section heading, widget: text, i18n: true }
+              - name: kicker
+                label: Small label above the heading
+                widget: string
+                i18n: true
+              - name: title
+                label: Section heading
+                widget: text
+                i18n: true
+                required: true
               - name: architecture
-                label: Card 1
+                label: Card 1 - Architecture
                 widget: object
                 i18n: true
                 fields:
-                  - { name: title, label: Title, widget: string, i18n: true }
-                  - { name: body, label: Body, widget: text, i18n: true }
+                  - { name: title, label: Card title, widget: string, i18n: true, required: true }
+                  - { name: body, label: Card text, widget: text, i18n: true }
               - name: interior
-                label: Card 2
+                label: Card 2 - Interior Design
                 widget: object
                 i18n: true
                 fields:
-                  - { name: title, label: Title, widget: string, i18n: true }
-                  - { name: body, label: Body, widget: text, i18n: true }
+                  - { name: title, label: Card title, widget: string, i18n: true, required: true }
+                  - { name: body, label: Card text, widget: text, i18n: true }
               - name: delivery
-                label: Card 3
+                label: Card 3 - Building Delivery
                 widget: object
                 i18n: true
                 fields:
-                  - { name: title, label: Title, widget: string, i18n: true }
-                  - { name: body, label: Body, widget: text, i18n: true }
+                  - { name: title, label: Card title, widget: string, i18n: true, required: true }
+                  - { name: body, label: Card text, widget: text, i18n: true }
               - name: sustainability
-                label: Card 4
+                label: Card 4 - Sustainable Upgrades
                 widget: object
                 i18n: true
                 fields:
-                  - { name: title, label: Title, widget: string, i18n: true }
-                  - { name: body, label: Body, widget: text, i18n: true }
+                  - { name: title, label: Card title, widget: string, i18n: true, required: true }
+                  - { name: body, label: Card text, widget: text, i18n: true }
 
           - name: projects
-            label: Projects section heading
+            label: 4. Projects heading
             widget: object
             i18n: true
             collapsed: true
+            description: The project cards themselves are edited under Portfolio.
             fields:
-              - { name: kicker, label: Section kicker, widget: string, i18n: true }
-              - { name: title, label: Section heading, widget: text, i18n: true }
+              - name: kicker
+                label: Small label above the heading
+                widget: string
+                i18n: true
+              - name: title
+                label: Section heading
+                widget: text
+                i18n: true
+                required: true
 
           - name: filters
-            label: Project filter buttons
+            label: 5. Project filter buttons
             widget: object
             i18n: true
             collapsed: true
+            description: >-
+              Button text only. Which projects each button shows is set by the
+              Category field on each Portfolio entry.
             fields:
-              - { name: all, label: All, widget: string, i18n: true }
-              - { name: home, label: Homes, widget: string, i18n: true }
-              - { name: commercial, label: Commercial, widget: string, i18n: true }
-              - { name: interior, label: Interiors, widget: string, i18n: true }
+              - { name: all, label: "Button: show everything", widget: string, i18n: true, required: true }
+              - { name: home, label: "Button: homes", widget: string, i18n: true, required: true }
+              - { name: commercial, label: "Button: commercial", widget: string, i18n: true, required: true }
+              - { name: interior, label: "Button: interiors", widget: string, i18n: true, required: true }
 
           - name: process
-            label: Process section
+            label: 6. Process (4 steps)
             widget: object
             i18n: true
             collapsed: true
             fields:
-              - { name: kicker, label: Section kicker, widget: string, i18n: true }
-              - { name: title, label: Section heading, widget: text, i18n: true }
+              - name: kicker
+                label: Small label above the heading
+                widget: string
+                i18n: true
+              - name: title
+                label: Section heading
+                widget: text
+                i18n: true
+                required: true
               - name: discover
-                label: Step 1
+                label: Step 1 - Discover
                 widget: object
                 i18n: true
                 fields:
-                  - { name: title, label: Title, widget: string, i18n: true }
-                  - { name: body, label: Body, widget: text, i18n: true }
+                  - { name: title, label: Step title, widget: string, i18n: true, required: true }
+                  - { name: body, label: Step text, widget: text, i18n: true }
               - name: design
-                label: Step 2
+                label: Step 2 - Design
                 widget: object
                 i18n: true
                 fields:
-                  - { name: title, label: Title, widget: string, i18n: true }
-                  - { name: body, label: Body, widget: text, i18n: true }
+                  - { name: title, label: Step title, widget: string, i18n: true, required: true }
+                  - { name: body, label: Step text, widget: text, i18n: true }
               - name: build
-                label: Step 3
+                label: Step 3 - Build
                 widget: object
                 i18n: true
                 fields:
-                  - { name: title, label: Title, widget: string, i18n: true }
-                  - { name: body, label: Body, widget: text, i18n: true }
+                  - { name: title, label: Step title, widget: string, i18n: true, required: true }
+                  - { name: body, label: Step text, widget: text, i18n: true }
               - name: handover
-                label: Step 4
+                label: Step 4 - Handover
                 widget: object
                 i18n: true
                 fields:
-                  - { name: title, label: Title, widget: string, i18n: true }
-                  - { name: body, label: Body, widget: text, i18n: true }
+                  - { name: title, label: Step title, widget: string, i18n: true, required: true }
+                  - { name: body, label: Step text, widget: text, i18n: true }
 
           - name: studio
-            label: Studio section
+            label: 7. Studio
             widget: object
             i18n: true
             collapsed: true
             fields:
-              - { name: kicker, label: Section kicker, widget: string, i18n: true }
-              - { name: title, label: Section heading, widget: text, i18n: true }
-              - { name: body, label: Body paragraph, widget: text, i18n: true }
-              - name: stat1
-                label: First stat
-                widget: object
+              - name: kicker
+                label: Small label above the heading
+                widget: string
                 i18n: true
-                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
-              - name: stat2
-                label: Second stat
-                widget: object
+              - name: title
+                label: Section heading
+                widget: text
                 i18n: true
-                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
-              - name: stat3
-                label: Third stat
-                widget: object
+                required: true
+              - name: body
+                label: Body paragraph
+                widget: text
                 i18n: true
-                fields: [{ name: label, label: Caption, widget: string, i18n: true }]
-              - { name: point1, label: Principle 1, widget: string, i18n: true }
+                required: true
+              - name: stat1Label
+                label: Stat 1 caption (under "12")
+                widget: string
+                i18n: true
+                hint: Only the caption is editable here; the number is in the page design.
+              - name: stat2Label
+                label: Stat 2 caption (under "7")
+                widget: string
+                i18n: true
+                hint: Only the caption is editable here; the number is in the page design.
+              - name: stat3Label
+                label: Stat 3 caption (under "3")
+                widget: string
+                i18n: true
+                hint: Only the caption is editable here; the number is in the page design.
+              - name: point1
+                label: Principle 1
+                widget: string
+                i18n: true
+                hint: Appears in the checklist. One short line each.
               - { name: point2, label: Principle 2, widget: string, i18n: true }
               - { name: point3, label: Principle 3, widget: string, i18n: true }
               - { name: point4, label: Principle 4, widget: string, i18n: true }
 
           - name: contact
-            label: Contact section
+            label: 8. Contact
             widget: object
             i18n: true
             collapsed: true
+            description: >-
+              The form itself is a Google Form embedded in the page. Its
+              questions are edited in Google Forms, not here.
             fields:
-              - { name: kicker, label: Section kicker, widget: string, i18n: true }
-              - { name: title, label: Section heading, widget: text, i18n: true }
-              - { name: body, label: Body paragraph, widget: text, i18n: true }
-              - { name: location, label: Location line, widget: string, i18n: true }
+              - name: kicker
+                label: Small label above the heading
+                widget: string
+                i18n: true
+              - name: title
+                label: Section heading
+                widget: text
+                i18n: true
+                required: true
+              - name: body
+                label: Body paragraph
+                widget: text
+                i18n: true
+              - name: location
+                label: Location line
+                widget: string
+                i18n: true
+                hint: Shown next to a pin icon.
 
           - name: footer
-            label: Footer
+            label: 9. Footer
             widget: object
             i18n: true
             collapsed: true
@@ -250,42 +361,110 @@ collections:
               - { name: copy, label: Footer line, widget: string, i18n: true }
               - { name: backTop, label: Back-to-top link, widget: string, i18n: true }
 
+          - name: nav
+            label: Menu links
+            widget: object
+            i18n: true
+            collapsed: true
+            description: >-
+              Text of the top menu. These scroll to sections on the page;
+              renaming them here does not change where they go.
+            fields:
+              - { name: approach, label: Link to Approach, widget: string, i18n: true, required: true }
+              - { name: services, label: Link to Services, widget: string, i18n: true, required: true }
+              - { name: projects, label: Link to Projects, widget: string, i18n: true, required: true }
+              - { name: process, label: Link to Process, widget: string, i18n: true, required: true }
+              - { name: studio, label: Link to Studio, widget: string, i18n: true, required: true }
+              - name: contactCta
+                label: Header button
+                widget: string
+                i18n: true
+                required: true
+                hint: The highlighted button in the top-right corner.
+
+          - name: general
+            label: Page settings
+            widget: object
+            i18n: true
+            collapsed: true
+            fields:
+              - name: pageTitle
+                label: Browser tab title
+                widget: string
+                i18n: true
+                required: true
+                hint: Shown on the browser tab and in search results.
+              - name: brandSuffix
+                label: Word after the logo
+                widget: string
+                i18n: true
+                hint: The small word beside "Tonypony's" in the top-left corner.
+
   # Kept as one plain list with explicit _th/_en/_zh fields. Decap's i18n ties
-  # list length to the default locale, which makes adding or reordering
+  # list length to the default locale, which makes adding and reordering
   # projects fragile; explicit suffixed fields stay predictable.
   - name: projects
     label: Portfolio
+    label_singular: Project
+    icon: photo_library
     editor: { preview: false }
     files:
       - name: list
         label: Project cards
         file: content/projects.json
-        description: Cards in the Selected Projects grid. Lower order numbers show first.
+        description: >-
+          Cards in the Selected Projects grid. Drag to reorder, or set Sort
+          order. Each card needs all three languages filled in.
         fields:
           - name: projects
             label: Projects
             label_singular: Project
             widget: list
+            collapsed: true
             summary: "{{fields.order}}. {{fields.title_en}} ({{fields.category}})"
             fields:
-              - { name: order, label: Sort order, widget: number, value_type: int, default: 1 }
+              - name: order
+                label: Sort order
+                widget: number
+                value_type: int
+                default: 1
+                hint: Lower numbers appear first.
               - name: category
                 label: Category
                 widget: select
+                default: home
                 options:
                   - { label: Homes, value: home }
                   - { label: Commercial, value: commercial }
                   - { label: Interiors, value: interior }
-              - { name: image, label: Image, widget: image }
-              - { name: label_th, label: "Label (TH)", widget: string }
-              - { name: label_en, label: "Label (EN)", widget: string }
-              - { name: label_zh, label: "Label (ZH)", widget: string }
-              - { name: title_th, label: "Title (TH)", widget: string }
-              - { name: title_en, label: "Title (EN)", widget: string }
-              - { name: title_zh, label: "Title (ZH)", widget: string }
-              - { name: description_th, label: "Description (TH)", widget: string }
-              - { name: description_en, label: "Description (EN)", widget: string }
-              - { name: description_zh, label: "Description (ZH)", widget: string }
-              - { name: alt_th, label: "Image description (TH)", widget: string }
-              - { name: alt_en, label: "Image description (EN)", widget: string }
-              - { name: alt_zh, label: "Image description (ZH)", widget: string }
+                hint: Decides which filter button shows this card.
+              - name: image
+                label: Photo
+                widget: image
+                required: true
+                hint: About 1000px across. Keep under 500KB so the page loads fast.
+              - name: title_th
+                label: Title - Thai
+                widget: string
+                required: true
+                hint: The project name, shown large on the card.
+              - { name: title_en, label: Title - English, widget: string, required: true }
+              - { name: title_zh, label: Title - Chinese, widget: string, required: true }
+              - name: label_th
+                label: Small label - Thai
+                widget: string
+                hint: The line above the title, e.g. "Private Residence".
+              - { name: label_en, label: Small label - English, widget: string }
+              - { name: label_zh, label: Small label - Chinese, widget: string }
+              - name: description_th
+                label: Description - Thai
+                widget: string
+                hint: One line under the title listing what the work involved.
+              - { name: description_en, label: Description - English, widget: string }
+              - { name: description_zh, label: Description - Chinese, widget: string }
+              - name: alt_th
+                label: Photo description - Thai
+                widget: string
+                hint: Describes the photo for screen readers. Not shown on the page.
+              - { name: alt_en, label: Photo description - English, widget: string }
+              - { name: alt_zh, label: Photo description - Chinese, widget: string }

@@ -78,7 +78,7 @@
       if (alt) element.setAttribute("alt", alt);
     });
 
-    const pageTitle = getText("meta.pageTitle", language);
+    const pageTitle = getText("general.pageTitle", language);
     if (pageTitle) document.title = pageTitle;
   };
 

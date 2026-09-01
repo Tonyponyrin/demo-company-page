@@ -13,9 +13,9 @@
       "description_th": "สถาปัตยกรรม อินทีเรีย และประสานงานภูมิทัศน์",
       "description_en": "Architecture, interiors, landscape coordination",
       "description_zh": "建筑、室内与景观协调",
-      "alt_th": "Courtyard residence with warm interior lighting",
+      "alt_th": "บ้านพร้อมคอร์ตยาร์ดและแสงภายในโทนอบอุ่น",
       "alt_en": "Courtyard residence with warm interior lighting",
-      "alt_zh": "Courtyard residence with warm interior lighting"
+      "alt_zh": "带庭院的住宅，室内暖色照明"
     },
     {
       "order": 2,
@@ -30,9 +30,9 @@
       "description_th": "บริหารงานออกแบบ ส่งมอบงานก่อสร้าง และคุณภาพไซต์",
       "description_en": "Design management, build delivery, site quality",
       "description_zh": "设计管理、施工交付与现场质量",
-      "alt_th": "Commercial construction site with architects reviewing drawings",
+      "alt_th": "ไซต์ก่อสร้างอาคารพาณิชย์ พร้อมสถาปนิกกำลังตรวจแบบ",
       "alt_en": "Commercial construction site with architects reviewing drawings",
-      "alt_zh": "Commercial construction site with architects reviewing drawings"
+      "alt_zh": "商业建筑施工现场，建筑师正在审阅图纸"
     },
     {
       "order": 3,
@@ -47,9 +47,9 @@
       "description_th": "สถาปัตยกรรมภายใน แสง และงานบิลต์อิน",
       "description_en": "Interior architecture, lighting, custom joinery",
       "description_zh": "室内建筑、照明与定制木作",
-      "alt_th": "Premium office lobby interior with stone and timber finishes",
+      "alt_th": "ล็อบบี้สำนักงานระดับพรีเมียม ตกแต่งด้วยหินและไม้",
       "alt_en": "Premium office lobby interior with stone and timber finishes",
-      "alt_zh": "Premium office lobby interior with stone and timber finishes"
+      "alt_zh": "高端办公大堂室内，石材与木饰面"
     }
   ]
 }
