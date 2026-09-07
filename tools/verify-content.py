@@ -1,5 +1,6 @@
 """Checks from CLAUDE.md -> "Verifying changes". Run from the repository root."""
 import json
+import os
 import re
 import sys
 
@@ -21,9 +22,7 @@ def warn(msg):
     warns.append(msg)
 
 
-PAGES = ["index.html", "about.html", "products.html", "projects.html", "contact.html"]
-pages = {name: open(name, encoding="utf-8").read() for name in PAGES}
-html = "\n".join(pages.values())          # every check below spans all pages
+html = open("index.html", encoding="utf-8").read()
 site = json.load(open("content/site.json", encoding="utf-8"))
 products = json.load(open("content/products.json", encoding="utf-8"))["products"]
 projects = json.load(open("content/projects.json", encoding="utf-8"))["projects"]
@@ -38,17 +37,24 @@ def resolve(scope, path):
     return cur
 
 
+def leaves(node, prefix=""):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            yield from leaves(v, prefix + k + ".")
+    else:
+        yield prefix.rstrip("."), node
+
+
 # ---- 1. every data-cms* path resolves in all three locales -----------------
-attrs = ["data-cms", "data-cms-src", "data-cms-alt", "data-cms-content"]
 paths = set()
-for attr in attrs:
+for attr in ["data-cms", "data-cms-src", "data-cms-alt", "data-cms-content"]:
     paths |= set(re.findall(attr + r'="([^"]+)"', html))
 
 for path in sorted(paths):
     for loc in LOCALES:
         if resolve(site[loc], path) is None:
             fail(f"[html->json] {loc}.{path} missing in site.json")
-print(f"1. data-cms paths checked: {len(paths)} across {len(PAGES)} pages")
+print(f"1. data-cms paths checked: {len(paths)}")
 
 
 # ---- 2. locales have identical key shape ----------------------------------
@@ -78,19 +84,9 @@ DUPLICATE = re.compile(
     r"|^contact\.mapEmbed$|^about\.experienceValue$|^quoteForm\.)"
 )
 
-
-def leaves(node, prefix=""):
-    if isinstance(node, dict):
-        for k, v in node.items():
-            yield from leaves(v, prefix + k + "." if prefix or True else k)
-    else:
-        yield prefix.rstrip("."), node
-
-
 en_leaves = dict(leaves(site["en"]))
 for loc in ("th", "zh"):
-    loc_leaves = dict(leaves(site[loc]))
-    for key, value in loc_leaves.items():
+    for key, value in dict(leaves(site[loc])).items():
         if DUPLICATE.search(key):
             continue
         if key in en_leaves and value == en_leaves[key]:
@@ -127,16 +123,15 @@ else:
 
 
 # ---- 5. product anchors exist in the markup -------------------------------
-# The grid is on index.html and links across to the detail bands on products.html.
-anchors = set(re.findall(r'data-product-detail="([^"]+)"', pages["products.html"]))
-for href in set(re.findall(r'href="products\.html#product-([a-z]+)"', pages["index.html"])):
-    if href not in anchors:
-        fail(f"[anchor] index.html links to #product-{href}, which products.html lacks")
+anchors = set(re.findall(r'data-product-detail="([^"]+)"', html))
 for p in products:
     if p["anchor"] not in anchors:
         fail(f"[anchor] product '{p['anchor']}' has no #product-{p['anchor']} band")
     if not p.get("unit"):
         fail(f"[unit] product '{p['anchor']}' has no unit for the quote form")
+for href in set(re.findall(r'href="#product-([a-z]+)"', html)):
+    if href not in anchors:
+        fail(f"[anchor] a card links to #product-{href}, which has no detail band")
 print(f"5. product anchors: {len(anchors)} bands, {len(products)} products")
 
 
@@ -155,37 +150,33 @@ check_list("projects", projects, ["title", "label", "description", "alt"])
 print(f"6. list entries: {len(products)} products, {len(projects)} projects")
 
 
-# ---- 7. shared chrome is identical across the five pages ------------------
-import subprocess
+# ---- 7. the nav scrolls to sections that exist ----------------------------
+# The nav is in-page anchors, so a renamed section id silently breaks a link.
+nav = re.search(r'<nav class="site-nav".*?</nav>', html, re.S)
+nav_targets = re.findall(r'href="#([a-z-]+)"', nav.group(0)) if nav else []
+if len(nav_targets) != 4:
+    fail(f"[nav] expected 4 menu links, found {len(nav_targets)}")
+for target in nav_targets:
+    if f'id="{target}"' not in html:
+        fail(f"[nav] menu links to #{target}, which is not an element id")
+print(f"7. nav anchors: {len(nav_targets)} links, all resolving")
 
-result = subprocess.run(
-    [sys.executable, "tools/sync-chrome.py", "--check"],
-    capture_output=True, text=True,
-)
-if result.returncode != 0:
-    fail("[chrome] " + result.stdout.strip().replace("\n", " / "))
-print("7. " + (result.stdout.strip() or "chrome check ran"))
 
-
-# ---- 8. every page links to every other page ------------------------------
-for name, text in pages.items():
-    for target in PAGES:
-        if target == "index.html":
-            continue
-        if f'href="{target}"' not in text:
-            fail(f"[nav] {name} has no link to {target}")
-print(f"8. cross-page nav links checked on {len(PAGES)} pages")
+# ---- 8. no snap section carries a reveal transform ------------------------
+# [data-reveal] applies a translate, which shifts the box the scroll-snap
+# position is measured from, so the wheel lands off every section top.
+for tag in re.findall(r"<section[^>]*>", html):
+    if "data-reveal" in tag:
+        fail(f"[snap] a <section> carries data-reveal: {tag[:80]}")
+print("8. no section carries data-reveal itself")
 
 
 # ---- 9. referenced asset files exist --------------------------------------
-import os
-
 refs = set(re.findall(r'src="(\./assets/[^"]+)"', html))
 for node in (site, {"p": products}, {"j": projects}):
     refs |= set(re.findall(r'"(\./assets/[^"]+)"', json.dumps(node, ensure_ascii=False)))
-missing = [r for r in sorted(refs) if not os.path.exists(r)]
-for m in missing:
-    fail(f"[asset] referenced but not on disk: {m}")
+for missing in sorted(r for r in refs if not os.path.exists(r)):
+    fail(f"[asset] referenced but not on disk: {missing}")
 print(f"9. asset references: {len(refs)} checked")
 
 

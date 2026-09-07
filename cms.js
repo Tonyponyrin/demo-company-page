@@ -119,8 +119,7 @@
       ordered.forEach(function (product) {
         var card = document.createElement('a');
         card.className = 'product-card is-visible';
-        // The grid is on the home page; the detail bands are on products.html.
-        card.href = 'products.html#product-' + product.anchor;
+        card.href = '#product-' + product.anchor;
 
         var img = document.createElement('img');
         img.src = toRelativeAsset(product.image);
@@ -239,7 +238,7 @@
       ordered.forEach(function (project) {
         var item = document.createElement('a');
         item.className = 'reel-item';
-        item.href = 'projects.html#works';
+        item.href = '#works';
 
         var img = document.createElement('img');
         img.src = toRelativeAsset(project.image);

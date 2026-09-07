@@ -10,7 +10,11 @@ sketches win — but update both.
 
 Frame numbers below refer to the `_N` suffix on the original filenames.
 
-## The frames are five pages, not one scroll
+## The frames are drawn as five pages
+
+**Build note:** the client chose to deliver these as one scrolling page with the
+nav jumping to sections, rather than five separate pages. The grouping below is
+still how the sketch reads, and it fixes the order of the sections.
 
 The yellow highlights are page labels and the red arrows between columns are nav
 clicks. Frames stack vertically within a column, chained by "Scroll down".
@@ -206,6 +210,7 @@ cannot detect this — see the `no-cors` note in CLAUDE.md.
 | --- | --- |
 | Page structure, all five sections | built |
 | Full-page scrolling, one gesture per section | built (desktop; off below 760px) |
+| Five pages | delivered as one page, nav scrolls to sections (client's choice) |
 | Global chrome, sticky quote + social rail | built |
 | Scroll-in animations with per-element direction | built |
 | Product grid, 6 detail bands, anchor jumps | built |

@@ -33,6 +33,14 @@ html[lang="th"] {
 }
 html[lang="th"] body { line-height: 1.85; }
 
+/* Thai stacks tone marks above and vowel signs below the base glyph, so the
+   1.12 heading leading used for Latin clips them. */
+html[lang="th"] h1,
+html[lang="th"] h2,
+html[lang="th"] h3,
+html[lang="th"] .section-title { line-height: 1.42; }
+html[lang="th"] .eyebrow { line-height: 1.6; }
+
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 0; }
@@ -1075,15 +1083,8 @@ body.modal-open { overflow: hidden; }
 .quote-section .quote-doc { padding: clamp(22px, 3.5vw, 38px); }
 .quote-section .quote-title { font-size: 1.45rem; }
 
-/* ==================================== product lead (frame 10) & carousel */
+/* ================================= project detail carousel (frame 22) */
 
-.product-lead .pitch-inner { max-width: min(100% - var(--gutter) * 2, var(--shell)); }
-.product-lead h1 {
-  font-family: var(--display);
-  font-size: clamp(2rem, 1.3rem + 3vw, 3.6rem);
-  max-width: 16ch;
-}
-html[lang="th"] .product-lead h1 { font-size: clamp(1.5rem, 1.1rem + 2vw, 2.6rem); }
 
 .project-carousel { position: relative; margin-top: 30px; }
 
@@ -1117,6 +1118,58 @@ html[lang="th"] .product-lead h1 { font-size: clamp(1.5rem, 1.1rem + 2vw, 2.6rem
 
 .work-card[data-project-index] { cursor: pointer; }
 
-/* The works grid sits on a page with the carousel below it, so it does not get
-   the one-screen cap that the home page product grid has. */
-.projects-page .works-section { max-height: none; }
+/* The carousel, the quotation sheet and the contact block are the other
+   sections whose natural height beats a short screen. Same treatment as the
+   card grids: cap the section, then let one flexible child absorb what is
+   left. Every link in the chain needs min-height: 0, or the content's
+   min-content height keeps the section growing. */
+.project-detail-section,
+.quote-section,
+.contact-section { max-height: 100svh; }
+
+.project-detail-section > .shell,
+.quote-section > .shell,
+.contact-section > .shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.project-carousel { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.project-frames { flex: 1; min-height: 0; grid-template-rows: minmax(0, 1fr); }
+.project-frame { display: flex; flex-direction: column; min-height: 0; }
+.project-frame img { flex: 1; min-height: 0; aspect-ratio: auto; }
+.project-frame figcaption { flex: none; margin-top: 10px; }
+
+.quote-section .quote-sheet { flex: 1; min-height: 0; overflow: auto; margin-top: 22px; }
+
+.contact-grid { flex: 1; min-height: 0; }
+.contact-channels { min-height: 0; }
+.contact-office { display: flex; flex-direction: column; min-height: 0; }
+.contact-office .map-frame { flex: 1; min-height: 140px; aspect-ratio: auto; }
+
+/* Only the one flexible child of each capped section may absorb height.
+   Headings must not: flex-shrinking them below their text height makes the
+   text overflow, exactly as it did with the card captions. */
+:is(.products-section, .works-section, .project-detail-section,
+    .quote-section, .contact-section) > .shell
+  > :is(.eyebrow, .section-title, .section-lead, .filters) { flex: none; }
+
+/* Short laptop screens. Snapping is on above 760px wide, so every section
+   still has to fit; the contact block is the densest one and needs the
+   spacing pulled in to manage it. */
+@media (min-width: 761px) and (max-height: 800px) {
+  .section-title { font-size: clamp(1.5rem, 1rem + 1.5vw, 2.3rem); }
+  html[lang="th"] .section-title { font-size: clamp(1.3rem, .95rem + 1.2vw, 1.9rem); }
+
+  .channel { padding: 10px 14px; margin-bottom: 8px; }
+  .channel-icon { width: 36px; height: 36px; }
+  .channel-icon svg { width: 18px; height: 18px; }
+  .channel-value { font-size: 1.05rem; }
+  .btn-block { padding: .7em 1.6em; }
+
+  .contact-office .map-frame { min-height: 110px; }
+  .contact-office h3 { font-size: 1.35rem; }
+  .office-directions { font-size: .92rem; }
+}

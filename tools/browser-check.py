@@ -1,4 +1,4 @@
-"""Serve the site locally and drive all five pages in Chromium.
+"""Serve the site locally and drive the page in Chromium.
 
     python tools/browser-check.py
 
@@ -12,7 +12,7 @@ from playwright.sync_api import sync_playwright
 
 PORT = 8731
 BASE = f"http://127.0.0.1:{PORT}"
-PAGES = ["index.html", "about.html", "products.html", "projects.html", "contact.html"]
+PAGES = ["index.html"]
 
 srv = subprocess.Popen(
     [sys.executable, "-m", "http.server", str(PORT)],
@@ -64,11 +64,6 @@ try:
                 if pg.locator(sel).count() == 0:
                     note(f"{name}: missing chrome {sel}")
 
-            # the nav marks the page you are on
-            current = pg.locator(".site-nav a.is-current").count()
-            expected = 0 if name == "index.html" else 1
-            if current != expected:
-                note(f"{name}: {current} nav links marked current, expected {expected}")
 
             # the quote modal opens and its dropdown is populated from products.json
             pg.locator("#products, #main").first.scroll_into_view_if_needed()
@@ -83,6 +78,13 @@ try:
                 note(f"{name}: modal dropdown has {opts} options, expected 7")
             pg.keyboard.press("Escape")
             pg.wait_for_timeout(250)
+
+            # Settle the reveal animations first: an element still holding its
+            # pre-reveal translate measures 38px lower than where it comes to
+            # rest, which reads as an overflow that does not exist.
+            pg.evaluate("document.querySelectorAll('[data-reveal]')"
+                        ".forEach(e => e.classList.add('is-visible'))")
+            pg.wait_for_timeout(200)
 
             # no section may exceed one screen, or snapping breaks
             over = pg.evaluate(
@@ -111,6 +113,26 @@ try:
             )
             if spill:
                 note(f"{name}: content overflowing its card: {spill[:3]}")
+
+            # Nothing may be flex-shrunk below its own text. An element whose
+            # content is taller than its box, with no scrollbar to reach it, is
+            # text spilling out or being clipped.
+            clipped = pg.evaluate(
+                """() => {
+                    const out = [];
+                    document.querySelectorAll('main .eyebrow, main .section-title, '
+                        + 'main h3, main .work-body, main .section-lead').forEach(el => {
+                        const c = getComputedStyle(el);
+                        if (c.overflow !== 'visible') return;
+                        if (el.scrollHeight - el.offsetHeight > 2)
+                            out.push((el.className || el.tagName) + ' +'
+                                     + (el.scrollHeight - el.offsetHeight) + 'px');
+                    });
+                    return out;
+                }"""
+            )
+            if clipped:
+                note(f"{name}: text taller than its box: {clipped[:4]}")
 
             # A snap section must never carry a [data-reveal] transform: it
             # shifts the box the snap position is measured from, so the wheel
@@ -167,12 +189,12 @@ try:
         # the grid links across to the detail bands on the products page
         for i in range(cards):
             href = pg.locator(".product-card").nth(i).get_attribute("href")
-            if not href.startswith("products.html#product-"):
-                note(f"index: product card links to {href}")
+            if not href.startswith("#product-"):
+                note(f"product card links to {href}")
 
         # the quotation form is on the page as a section, not only in the modal
         if pg.locator("#quote [data-quote-form]").count() != 1:
-            note("index: quotation section form missing")
+            note("quotation section form missing")
 
         # the inline form's unit syncs independently of the modal's
         pg.locator("#quote").scroll_into_view_if_needed()
@@ -181,7 +203,7 @@ try:
         pg.wait_for_timeout(250)
         unit = pg.inner_text("#quote [data-quote-unit]")
         if unit != "m³":
-            note(f"index: inline form unit is {unit!r}, expected 'm³'")
+            note(f"inline form unit is {unit!r}, expected 'm³'")
 
         # the sticky button stays clear of the hero's own Get Quote
         instant_top(pg)
@@ -203,54 +225,96 @@ try:
         pg.screenshot(path="_quote-section.png")
         pg.close()
 
-        # ---------------------------------------------------- products page
+        # ------------------------------------------ product deep link
         pg = b.new_page(viewport={"width": 1440, "height": 950})
-        pg.goto(f"{BASE}/products.html#product-pipe", wait_until="networkidle")
+        pg.goto(f"{BASE}/index.html#product-pipe", wait_until="networkidle")
         pg.wait_for_timeout(1200)
         if pg.locator("[data-product-detail]").count() != 6:
-            note("products: expected 6 detail bands")
+            note("expected 6 product detail bands")
         # deep link from the home grid must land on the right band
         band = pg.evaluate(
             "Math.round(document.querySelector('#product-pipe').getBoundingClientRect().top)")
         if abs(band) > 60:
-            note(f"products: #product-pipe deep link landed {band}px off")
+            note(f"#product-pipe anchor landed {band}px off")
         pg.close()
 
-        # ---------------------------------------------------- projects page
+        # ----------------------------------------- works and carousel
         pg = b.new_page(viewport={"width": 1440, "height": 950})
-        pg.goto(f"{BASE}/projects.html", wait_until="networkidle")
+        pg.goto(f"{BASE}/index.html", wait_until="networkidle")
         pg.wait_for_timeout(1200)
 
         works = pg.locator(".work-card").count()
         if works != 6:
-            note(f"projects: works grid has {works} cards, expected 6")
+            note(f"works grid has {works} cards, expected 6")
 
         pg.click('[data-filter="road"]')
         pg.wait_for_timeout(300)
         if pg.locator(".work-card:not(.is-hidden)").count() != 2:
-            note("projects: road filter did not narrow to 2 cards")
+            note("road filter did not narrow to 2 cards")
         pg.click('[data-filter="all"]')
         pg.wait_for_timeout(250)
 
         # all three pitch panels point at the one shared gallery
         links = pg.eval_on_selector_all(".pitch-link", "els => els.map(e => e.getAttribute('href'))")
         if links != ["#works", "#works", "#works"]:
-            note(f"projects: pitch links are {links}, expected three #works")
+            note(f"pitch links are {links}, expected three #works")
 
         # clicking a card opens that project in the detail carousel
         frames = pg.locator(".project-frame").count()
         if frames != 6:
-            note(f"projects: carousel has {frames} frames, expected 6")
+            note(f"carousel has {frames} frames, expected 6")
         pg.locator('.work-card[data-project-index="2"]').click()
         pg.wait_for_timeout(900)
         active = pg.locator(".project-frame.is-active").get_attribute("data-title")
         shown = pg.inner_text("[data-project-name]")
         if active != shown:
-            note(f"projects: carousel shows {active!r} but heading says {shown!r}")
+            note(f"carousel shows {active!r} but heading says {shown!r}")
         pg.click("[data-project-next]")
         pg.wait_for_timeout(400)
         if pg.locator(".project-frame.is-active").get_attribute("data-title") == active:
-            note("projects: carousel next arrow did not advance")
+            note("carousel next arrow did not advance")
+        pg.close()
+
+        # --------------------------- short screen: nothing may overflow it
+        # Sections are sized in svh, so a laptop screen is the tight case; the
+        # first pass at 950px tall would not have caught it.
+        for height in (800, 700):
+            sp = b.new_page(viewport={"width": 1440, "height": height})
+            sp.goto(f"{BASE}/index.html", wait_until="networkidle")
+            sp.wait_for_timeout(1000)
+            sp.evaluate("document.querySelectorAll('[data-reveal]')"
+                        ".forEach(e => e.classList.add('is-visible'))")
+            sp.wait_for_timeout(200)
+            over = sp.evaluate(
+                """() => Array.from(document.querySelectorAll('main > section'))
+                    .map(s => ({id: s.id || s.className.split(' ')[0],
+                                over: Math.round(s.scrollHeight - innerHeight)}))
+                    .filter(x => x.over > 8)"""
+            )
+            if over:
+                note(f"at {height}px tall, sections overflow the screen: {over}")
+            sp.close()
+
+        # ------------------------------------------- nav scrolls to sections
+        pg = b.new_page(viewport={"width": 1440, "height": 950})
+        pg.goto(f"{BASE}/index.html", wait_until="networkidle")
+        pg.wait_for_timeout(900)
+
+        for label, anchor in [("nav.about", "#about"), ("nav.products", "#products"),
+                              ("nav.projects", "#projects"), ("nav.contact", "#contact")]:
+            pg.evaluate("window.scrollTo({top:0,behavior:'instant'})")
+            pg.wait_for_timeout(300)
+            pg.click(f'.site-nav a[data-cms="{label}"]')
+            pg.wait_for_timeout(1400)
+            top = pg.evaluate(
+                "sel => Math.round(document.querySelector(sel).getBoundingClientRect().top)",
+                anchor)
+            if abs(top) > 60:
+                note(f"nav {label} landed {top}px from {anchor}")
+            # and the menu marks where you are
+            cur = pg.locator(".site-nav a.is-current").count()
+            if cur != 1:
+                note(f"nav {label}: {cur} links marked current, expected 1")
         pg.close()
 
         # ------------------------------------ resilience: content unreachable
@@ -274,4 +338,4 @@ if problems:
         print("FAIL ", item)
     print(f"\n{len(problems)} problems")
     sys.exit(1)
-print(f"all browser checks passed across {len(PAGES)} pages")
+print("all browser checks passed")

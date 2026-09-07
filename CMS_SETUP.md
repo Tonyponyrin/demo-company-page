@@ -15,9 +15,8 @@ in [admin/index.html](admin/index.html) — the config file needs no changes.
 
 ## How content reaches the page
 
-The site is five HTML pages, each shipping English copy hardcoded. On load,
-`cms.js` fetches the three JSON files and replaces whatever hooks that page
-happens to contain:
+`index.html` ships with English copy hardcoded. On load, `cms.js` fetches the
+three JSON files and replaces:
 
 | Markup hook | Meaning |
 | --- | --- |
@@ -30,11 +29,6 @@ happens to contain:
 
 If a JSON file fails to load, the hardcoded English copy stays on screen and
 nothing breaks.
-
-Header, footer, the floating buttons and the quotation form are duplicated
-across the five pages. Editors never touch those — they are kept identical by
-`tools/sync-chrome.py`, and editing text through the CMS updates all five at
-once because they all read the same `site.json` keys.
 
 ## Language model
 

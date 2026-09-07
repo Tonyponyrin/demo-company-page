@@ -1,8 +1,8 @@
 /* ==========================================================================
    SC Singhawat Concrete — behaviour only.
 
-   Five pages share this file. Everything below no-ops cleanly when the element
-   it drives is absent, so each page gets only the behaviour it has markup for.
+   One page, with the nav scrolling to sections on it. Everything below no-ops
+   cleanly when the element it drives is absent.
 
    No translated strings live here. Copy comes from content/*.json via cms.js;
    this file tracks the active language and tells cms.js when it changes.
@@ -75,26 +75,41 @@
     });
   }
 
-  /* The nav markup is identical on all five pages (it is synced from
-     index.html), so the current page is marked here rather than in the HTML. */
-  (function markCurrentPage() {
-    var file = location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.site-nav a').forEach(function (a) {
-      var target = a.getAttribute('href');
-      if (target === file) {
-        a.classList.add('is-current');
-        a.setAttribute('aria-current', 'page');
-      }
-    });
+  /* The nav scrolls to sections on this one page, so the current link is
+     whichever section is on screen. */
+  (function markCurrentSection() {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.site-nav a[href^="#"]'));
+    var targets = links
+      .map(function (a) { return { link: a, el: document.querySelector(a.getAttribute('href')) }; })
+      .filter(function (t) { return t.el; });
+
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        targets.forEach(function (t) {
+          var on = t.el === entry.target;
+          t.link.classList.toggle('is-current', on);
+          if (on) {
+            t.link.setAttribute('aria-current', 'true');
+          } else {
+            t.link.removeAttribute('aria-current');
+          }
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+
+    targets.forEach(function (t) { spy.observe(t.el); });
   })();
 
   /* -------------------------------------------------- sticky quote button */
-  /* The home hero carries its own Get Quote in the bottom-left corner, so the
-     sticky one only appears once the hero is out of the way. On pages with no
-     hero it is shown from the start. */
+  /* The hero carries its own Get Quote in the bottom-left corner, so the sticky
+     one only fades in once the hero has scrolled away and the two cannot
+     collide. */
 
   var stickyQuote = document.querySelector('.sticky-quote');
-  var hero = document.querySelector('.hero:not(.product-lead)');
+  var hero = document.querySelector('.hero');
 
   if (stickyQuote) {
     if (!hero) {

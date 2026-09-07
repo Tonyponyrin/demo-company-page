@@ -362,20 +362,6 @@ collections:
               - { name: entrySite, label: Field id for Construction site, widget: string, i18n: duplicate }
               - { name: entryContact, label: Field id for Contact, widget: string, i18n: duplicate }
 
-          - name: productsHero
-            label: 14. Products page - opening panel
-            widget: object
-            i18n: true
-            collapsed: true
-            description: The full-screen image at the top of the Our Products page.
-            fields:
-              - { name: kicker, label: Small label above the heading, widget: string, i18n: true }
-              - { name: title, label: Heading, widget: text, i18n: true, required: true }
-              - { name: subtitle, label: Line under the heading, widget: text, i18n: true }
-              - { name: cta, label: Link text, widget: string, i18n: true }
-              - { name: image, label: Background photo, widget: image, i18n: duplicate }
-              - { name: imageAlt, label: Photo description, widget: string, i18n: true }
-
           - name: quoteSection
             label: 15. Home page - quotation section heading
             widget: object
@@ -437,26 +423,6 @@ collections:
                 i18n: true
                 required: true
                 hint: Shown on the browser tab and in search results.
-              - name: pageTitleAbout
-                label: Browser tab title - About Us page
-                widget: string
-                i18n: true
-                required: true
-              - name: pageTitleProducts
-                label: Browser tab title - Our Products page
-                widget: string
-                i18n: true
-                required: true
-              - name: pageTitleProjects
-                label: Browser tab title - Our Project page
-                widget: string
-                i18n: true
-                required: true
-              - name: pageTitleContact
-                label: Browser tab title - Contact Us page
-                widget: string
-                i18n: true
-                required: true
               - name: metaDescription
                 label: Search result description
                 widget: text
