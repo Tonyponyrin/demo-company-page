@@ -139,10 +139,15 @@
 
     /* An anchor jump (a product card, or landing on #contact) can skip straight
        past sections, which the observer never sees intersecting — they would
-       stay invisible. Sweep anything the viewport has already reached. */
+       stay invisible for good.
+
+       Only rescue elements that are now entirely ABOVE the viewport. Anything
+       still on screen, or arriving from below, belongs to the observer: sweeping
+       those would reveal them the moment their top edge crossed the bottom of
+       the screen, so the slide-in would play off-screen and never be seen. */
     var sweep = function () {
       document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach(function (el) {
-        if (el.getBoundingClientRect().top < window.innerHeight) {
+        if (el.getBoundingClientRect().bottom <= 0) {
           el.classList.add('is-visible');
           revealObserver.unobserve(el);
         }

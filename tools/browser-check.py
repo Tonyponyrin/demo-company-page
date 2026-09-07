@@ -159,6 +159,43 @@ try:
         if hidden:
             problems.append(f"elements in view but not revealed: {hidden}")
 
+        # --- reveals must still be pending while an element is entering view.
+        # Regression guard: an over-eager rescue sweep once revealed everything
+        # the instant its top edge crossed the bottom of the screen, so every
+        # slide-in played off-screen and the page looked unanimated.
+        pg.evaluate("window.scrollTo({top:0,behavior:'instant'})")
+        pg.wait_for_timeout(600)
+        pg.reload(wait_until="networkidle")
+        pg.wait_for_timeout(900)
+        entering = pg.evaluate(
+            """() => {
+                const el = document.querySelector('#products [data-reveal]');
+                const top = el.getBoundingClientRect().top + scrollY;
+                // put the element's top just inside the bottom edge of the screen
+                window.scrollTo({top: top - innerHeight + 30, behavior: 'instant'});
+                return new Promise(r => setTimeout(() =>
+                    r(el.classList.contains('is-visible')), 350));
+            }"""
+        )
+        if entering:
+            problems.append("element revealed the moment it touched the screen edge — "
+                            "slide-in animation plays off-screen")
+        arrived = pg.evaluate(
+            """() => {
+                const el = document.querySelector('#products [data-reveal]');
+                el.scrollIntoView({block: 'center', behavior: 'instant'});
+                return new Promise(r => setTimeout(() =>
+                    r(el.classList.contains('is-visible')), 500));
+            }"""
+        )
+        if not arrived:
+            problems.append("element never revealed after scrolling it into view")
+
+        # --- anchor navigation is smooth, not a jump
+        beh = pg.evaluate("getComputedStyle(document.documentElement).scrollBehavior")
+        if beh != "smooth":
+            problems.append(f"html scroll-behavior is {beh!r}, expected 'smooth'")
+
         # --- screenshots
         pg.evaluate("window.scrollTo({top:0,behavior:'instant'})")
         pg.wait_for_timeout(500)
