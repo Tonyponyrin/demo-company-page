@@ -10,6 +10,24 @@ sketches win — but update both.
 
 Frame numbers below refer to the `_N` suffix on the original filenames.
 
+## The frames are five pages, not one scroll
+
+The yellow highlights are page labels and the red arrows between columns are nav
+clicks. Frames stack vertically within a column, chained by "Scroll down".
+
+| Page | Frames | Yellow label |
+| --- | --- | --- |
+| Main | 1-5 | `Main Page` |
+| About Us | 6-9 | `Click : About US` |
+| Our Products | 10-16 | `Click Our Products` |
+| Our Project | 17-22 | `Click Our Construction site` |
+| Contact Us | 23 | `Click Contact US` |
+
+The Main page scroll order is hero (1), the six-card **Our Products grid** (2),
+the works gallery (3), the **quotation** (4), then contact and footer (5). Note
+that the product grid lives here, not on the products page, and that contact
+appears both here and as its own page.
+
 ---
 
 ## Global chrome — on every screen

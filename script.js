@@ -1,5 +1,9 @@
 /* ==========================================================================
    SC Singhawat Concrete — behaviour only.
+
+   Five pages share this file. Everything below no-ops cleanly when the element
+   it drives is absent, so each page gets only the behaviour it has markup for.
+
    No translated strings live here. Copy comes from content/*.json via cms.js;
    this file tracks the active language and tells cms.js when it changes.
    ========================================================================== */
@@ -71,39 +75,33 @@
     });
   }
 
-  /* Highlight the nav link for the section currently on screen. */
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.site-nav a'));
-  var sections = navLinks
-    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
-    .filter(Boolean);
-
-  if (sections.length && 'IntersectionObserver' in window) {
-    var spy = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        navLinks.forEach(function (a) {
-          a.classList.toggle('is-current', a.getAttribute('href') === '#' + entry.target.id);
-        });
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach(function (s) { spy.observe(s); });
-  }
+  /* The nav markup is identical on all five pages (it is synced from
+     index.html), so the current page is marked here rather than in the HTML. */
+  (function markCurrentPage() {
+    var file = location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.site-nav a').forEach(function (a) {
+      var target = a.getAttribute('href');
+      if (target === file) {
+        a.classList.add('is-current');
+        a.setAttribute('aria-current', 'page');
+      }
+    });
+  })();
 
   /* -------------------------------------------------- sticky quote button */
-  /* The hero has its own Get Quote in the bottom-left corner, so the sticky
-     one only appears once the hero is out of the way. It is present on every
-     other screen, which is what the sketches ask for. */
+  /* The home hero carries its own Get Quote in the bottom-left corner, so the
+     sticky one only appears once the hero is out of the way. On pages with no
+     hero it is shown from the start. */
 
   var stickyQuote = document.querySelector('.sticky-quote');
-  var hero = document.querySelector('.hero');
+  var hero = document.querySelector('.hero:not(.product-lead)');
 
   if (stickyQuote) {
     if (!hero) {
       stickyQuote.classList.add('is-shown');
     } else {
       var toggleSticky = function () {
-        var past = hero.getBoundingClientRect().bottom < 120;
-        stickyQuote.classList.toggle('is-shown', past);
+        stickyQuote.classList.toggle('is-shown', hero.getBoundingClientRect().bottom < 120);
       };
       window.addEventListener('scroll', toggleSticky, { passive: true });
       window.addEventListener('resize', toggleSticky);
@@ -116,14 +114,10 @@
      requirement (product text from the left, product image from the right),
      not decoration. See REQUIREMENTS.md. */
 
-  function revealAll() {
+  if (reduceMotion || !('IntersectionObserver' in window)) {
     document.querySelectorAll('[data-reveal]').forEach(function (el) {
       el.classList.add('is-visible');
     });
-  }
-
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    revealAll();
   } else {
     var revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -137,14 +131,14 @@
       revealObserver.observe(el);
     });
 
-    /* An anchor jump (a product card, or landing on #contact) can skip straight
+    /* An anchor jump (a product card, or landing on #works) can skip straight
        past sections, which the observer never sees intersecting — they would
        stay invisible for good.
 
        Only rescue elements that are now entirely ABOVE the viewport. Anything
-       still on screen, or arriving from below, belongs to the observer: sweeping
-       those would reveal them the moment their top edge crossed the bottom of
-       the screen, so the slide-in would play off-screen and never be seen. */
+       still on screen, or arriving from below, belongs to the observer:
+       sweeping those would reveal them the moment their top edge crossed the
+       bottom of the screen, so the slide-in would play off-screen. */
     var sweep = function () {
       document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach(function (el) {
         if (el.getBoundingClientRect().bottom <= 0) {
@@ -172,9 +166,12 @@
 
   function snapTargets() {
     var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    // offsetTop, not getBoundingClientRect: a section carrying an unfinished
+    // [data-reveal] transform reports a shifted rect, which would put every
+    // snap target a few pixels off its real position.
     var tops = Array.prototype.map.call(
       document.querySelectorAll('main > section'),
-      function (s) { return Math.round(s.getBoundingClientRect().top + window.scrollY); }
+      function (s) { return Math.round(s.offsetTop); }
     );
     tops.push(maxScroll); // the footer, which snaps to the bottom rather than its top
     return tops
@@ -298,8 +295,7 @@
       var items = track.children;
       if (items.length < 2) return;
 
-      var first = items[0];
-      var stride = first.getBoundingClientRect().width +
+      var stride = items[0].getBoundingClientRect().width +
         parseFloat(getComputedStyle(track).columnGap || '0');
 
       offset += 1;
@@ -327,29 +323,70 @@
 
   var filterButtons = document.querySelectorAll('[data-filter]');
 
-  function applyFilter(category) {
-    document.querySelectorAll('.work-card').forEach(function (card) {
-      var show = category === 'all' || card.dataset.category === category;
-      card.classList.toggle('is-hidden', !show);
-    });
-  }
-
   filterButtons.forEach(function (btn) {
     btn.addEventListener('click', function () {
       filterButtons.forEach(function (b) { b.classList.remove('is-active'); });
       btn.classList.add('is-active');
-      applyFilter(btn.dataset.filter);
+
+      var category = btn.dataset.filter;
+      document.querySelectorAll('.work-card').forEach(function (card) {
+        var show = category === 'all' || card.dataset.category === category;
+        card.classList.toggle('is-hidden', !show);
+      });
     });
   });
 
-  /* ----------------------------------------------------------- quote modal */
+  /* ----------------------------------------------- project detail carousel */
+  /* Frame 22: a project name plus prev/next arrows. cms.js fills the frames
+     from projects.json and tags each works card with its index, so "click to
+     see more" on a card opens that project here. */
+
+  (function projectCarousel() {
+    var root = document.querySelector('[data-project-carousel]');
+    var frames = document.querySelector('[data-project-frames]');
+    var nameEl = document.querySelector('[data-project-name]');
+    if (!root || !frames) return;
+
+    var index = 0;
+
+    function show(next) {
+      var items = frames.children;
+      if (!items.length) return;
+
+      index = (next + items.length) % items.length;
+      Array.prototype.forEach.call(items, function (el, i) {
+        el.classList.toggle('is-active', i === index);
+      });
+      if (nameEl && items[index].dataset.title) {
+        nameEl.textContent = items[index].dataset.title;
+      }
+    }
+
+    var prev = root.querySelector('[data-project-prev]');
+    var next = root.querySelector('[data-project-next]');
+    if (prev) prev.addEventListener('click', function () { show(index - 1); });
+    if (next) next.addEventListener('click', function () { show(index + 1); });
+
+    document.addEventListener('click', function (e) {
+      var card = e.target.closest('.work-card[data-project-index]');
+      if (!card) return;
+      show(parseInt(card.dataset.projectIndex, 10) || 0);
+      document.getElementById('project-detail').scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth'
+      });
+    });
+
+    // cms.js calls this once it has rendered the frames.
+    window.SCProjects = { show: show };
+    show(0);
+  })();
+
+  /* ----------------------------------------------------------- quote forms */
+  /* The same form appears twice on the home page — inline as a section and
+     inside the modal — and once inside the modal on every other page. All of
+     them are wired here, each scoped to its own fields. */
 
   var modal = document.getElementById('quote-modal');
-  var form = document.getElementById('quote-form');
-  var success = modal && modal.querySelector('[data-quote-success]');
-  var unitEl = modal && modal.querySelector('[data-quote-unit]');
-  var productSelect = modal && modal.querySelector('[data-quote-product-select]');
-  var refEl = modal && modal.querySelector('[data-quote-ref]');
   var lastFocus = null;
 
   function quoteRef() {
@@ -362,30 +399,111 @@
 
   /* The unit shown beside Quantity is whatever the chosen product sells in.
      cms.js stamps data-unit onto each option when it builds the dropdown. */
-  function syncUnit() {
-    if (!productSelect || !unitEl) return;
-    var opt = productSelect.options[productSelect.selectedIndex];
+  function syncUnit(form) {
+    var select = form.querySelector('[data-quote-product-select]');
+    var unitEl = form.querySelector('[data-quote-unit]');
+    if (!select || !unitEl) return;
+
+    var opt = select.options[select.selectedIndex];
     var unit = opt ? opt.dataset.unit : '';
     unitEl.textContent = unit || '—';
     unitEl.classList.toggle('is-set', Boolean(unit));
   }
 
-  if (productSelect) productSelect.addEventListener('change', syncUnit);
+  function quoteForms() {
+    return Array.prototype.slice.call(document.querySelectorAll('[data-quote-form]'));
+  }
+
+  function successPanelFor(form) {
+    return form.parentElement
+      ? form.parentElement.querySelector('[data-quote-success]')
+      : null;
+  }
+
+  /* Posts to a Google Form. The response is opaque (no-cors), so we cannot read
+     success or failure — the confirmation is shown optimistically. That
+     trade-off is deliberate and documented in CLAUDE.md. */
+  function submitQuote(e) {
+    e.preventDefault();
+    var form = e.currentTarget;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    var cfg = (window.SCContent && window.SCContent.quoteForm) || {};
+    var data = new FormData(form);
+    var body = new URLSearchParams();
+    var unitEl = form.querySelector('[data-quote-unit]');
+
+    var map = {
+      name: cfg.entryName,
+      product: cfg.entryProduct,
+      quantity: cfg.entryQuantity,
+      site: cfg.entrySite,
+      contact: cfg.entryContact
+    };
+
+    Object.keys(map).forEach(function (field) {
+      var entry = map[field];
+      if (!entry || entry.indexOf('PLACEHOLDER') === 0) return;
+      var value = data.get(field) || '';
+      if (field === 'quantity' && value && unitEl) value += ' ' + unitEl.textContent;
+      body.append(entry, value);
+    });
+
+    if (cfg.formId && cfg.formId.indexOf('PLACEHOLDER') !== 0 && Array.from(body).length) {
+      fetch('https://docs.google.com/forms/d/e/' + cfg.formId + '/formResponse', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      }).catch(function () { /* opaque either way; nothing to report */ });
+    } else {
+      console.warn(
+        '[quote] Google Form is not configured. Fill in quoteForm.formId and the ' +
+        'entry ids in content/site.json — see REQUIREMENTS.md.'
+      );
+    }
+
+    var panel = successPanelFor(form);
+    form.hidden = true;
+    if (panel) panel.hidden = false;
+    form.reset();
+  }
+
+  quoteForms().forEach(function (form) {
+    var select = form.querySelector('[data-quote-product-select]');
+    if (select) select.addEventListener('change', function () { syncUnit(form); });
+
+    var ref = form.querySelector('[data-quote-ref]');
+    if (ref) ref.textContent = quoteRef();
+
+    form.addEventListener('submit', submitQuote);
+  });
 
   function openModal(preselect) {
     if (!modal) return;
     lastFocus = document.activeElement;
 
-    if (form) form.hidden = false;
-    if (success) success.hidden = true;
-    if (refEl) refEl.textContent = quoteRef();
+    var form = modal.querySelector('[data-quote-form]');
+    var panel = form && successPanelFor(form);
 
-    if (preselect && productSelect) {
-      productSelect.value = preselect;
-      // If cms.js has not populated the options yet, the value will not stick;
-      // syncUnit falls back to the placeholder, which is the correct state.
+    if (form) {
+      form.hidden = false;
+      var ref = form.querySelector('[data-quote-ref]');
+      if (ref) ref.textContent = quoteRef();
+
+      if (preselect) {
+        var select = form.querySelector('[data-quote-product-select]');
+        // If cms.js has not populated the options yet the value will not stick,
+        // and syncUnit falls back to the placeholder — the correct state.
+        if (select) select.value = preselect;
+      }
+      syncUnit(form);
     }
-    syncUnit();
+    if (panel) panel.hidden = true;
 
     modal.hidden = false;
     document.body.classList.add('modal-open');
@@ -438,61 +556,8 @@
     }
   });
 
-  /* ---------------------------------------------------- quote submission */
-  /* Posts to a Google Form. The response is opaque (no-cors), so we cannot
-     read success or failure — we show the confirmation optimistically. That
-     trade-off is deliberate and documented in CLAUDE.md. */
-
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      var cfg = (window.SCContent && window.SCContent.quoteForm) || {};
-      var data = new FormData(form);
-      var body = new URLSearchParams();
-
-      var map = {
-        name: cfg.entryName,
-        product: cfg.entryProduct,
-        quantity: cfg.entryQuantity,
-        site: cfg.entrySite,
-        contact: cfg.entryContact
-      };
-
-      Object.keys(map).forEach(function (field) {
-        var entry = map[field];
-        if (!entry || entry.indexOf('PLACEHOLDER') === 0) return;
-        var value = data.get(field) || '';
-        if (field === 'quantity' && value && unitEl) value += ' ' + unitEl.textContent;
-        body.append(entry, value);
-      });
-
-      if (cfg.formId && cfg.formId.indexOf('PLACEHOLDER') !== 0 && Array.from(body).length) {
-        fetch('https://docs.google.com/forms/d/e/' + cfg.formId + '/formResponse', {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: body.toString()
-        }).catch(function () { /* opaque either way; nothing to report */ });
-      } else {
-        // Not wired up yet. Say so in the console rather than failing silently.
-        console.warn(
-          '[quote] Google Form is not configured. Fill in quoteForm.formId and the ' +
-          'entry ids in content/site.json — see REQUIREMENTS.md.'
-        );
-      }
-
-      form.hidden = true;
-      if (success) success.hidden = false;
-      form.reset();
-    });
-  }
-
-  /* Expose so cms.js can re-sync the unit after it rebuilds the dropdown. */
-  window.SCQuote = { syncUnit: syncUnit };
+  /* cms.js re-syncs the units after it rebuilds the product dropdowns. */
+  window.SCQuote = {
+    syncUnits: function () { quoteForms().forEach(syncUnit); }
+  };
 })();

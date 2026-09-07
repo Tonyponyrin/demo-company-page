@@ -35,7 +35,10 @@ Copy, images, products, and project entries are edited in the browser at
 
 ## Files
 
-- `index.html` — page structure, with English copy as built-in fallback
+- `index.html`, `about.html`, `products.html`, `projects.html`, `contact.html`
+  — the five pages, with English copy as built-in fallback. Shared header,
+  footer and modal are duplicated and kept in step by `tools/sync-chrome.py`;
+  edit them in `index.html` only
 - `styles.css` — responsive visual design
 - `script.js` — nav, language switch, slideshows, scroll reveals, quote modal
 - `cms.js` — applies `content/*.json` to the page
@@ -52,6 +55,7 @@ Copy, images, products, and project entries are edited in the browser at
 ## Checks
 
 ```bash
+python tools/sync-chrome.py       # push shared chrome from index.html to the other pages
 python tools/verify-content.py    # copy, config, and markup agree in all 3 languages
 python tools/browser-check.py     # drives the page in Chromium (needs Playwright)
 ```

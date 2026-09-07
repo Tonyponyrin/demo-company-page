@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-page static site for **SC Singhawat Concrete** — a concrete products
+A five-page static site for **SC Singhawat Concrete** — a concrete products
 manufacturer with a construction arm (Singhawat Builders) — in Thai, English,
 and Chinese. No build step, no package.json, no test framework, no dependencies
 to install. GitHub Pages serves the repository root of `main`, so **a push to
@@ -46,29 +46,55 @@ npx wrangler deploy
 
 ## Page structure
 
-One page, five anchors, in this order. The nav has exactly four links plus the
-three language flags; do not add a fifth link without checking REQUIREMENTS.md.
+**Five pages, not one.** The yellow highlights on the wireframes are page
+labels, and the red arrows between columns are nav clicks. Frames stack
+vertically inside a column, chained by "Scroll down". Getting this wrong once
+already cost a rebuild — the frames are a grid of pages, not one long scroll.
 
-| Anchor | Contents |
-| --- | --- |
-| `#top` | Hero slideshow (3 slides, prev/next) |
-| `#about` | Four bands: intro triple-slideshow, History, Vision & Mission, Policy |
-| `#products` | 6-card product grid, then one detail band per product |
-| `#projects` | Singhawat Builders intro, 3 pitch panels, then `#works` gallery |
-| `#contact` | Phone / LINE / Facebook, office map, footer |
+| Page | Frames | Sections, in order |
+| --- | --- | --- |
+| `index.html` | 1–5 | Hero slideshow, **product grid**, works reel, **quotation**, contact |
+| `about.html` | 6–9 | Intro triple-slideshow, History, Vision & Mission, Policy |
+| `products.html` | 10–16 | Full-screen product lead, then one band per product |
+| `projects.html` | 17–22 | Singhawat Builders, 3 pitch panels, works gallery, project carousel |
+| `contact.html` | 23 | Contact, office map |
 
-Two elements are **global chrome, present on every screen**: the sticky orange
-Get Quote button (bottom-left) and the sticky social rail (right edge, FB / LINE
-/ phone). Every Get Quote button on the page — the sticky one and the per-product
-ones — opens the same quotation modal.
+Things that are easy to get backwards:
 
-The six products are fixed and their detail-band ids are referenced from the grid
-cards: `#product-readymix`, `#product-slab`, `#product-pile`, `#product-pipe`,
-`#product-manhole`, `#product-beam`.
+- The **six-card product grid is on the home page**, not the products page. Its
+  cards link across to `products.html#product-<anchor>`.
+- The **products page opens with a full-screen lead image**, then scrolls
+  through the six detail bands.
+- The **three pitch panels all link to one shared gallery**, `#works` on the
+  projects page. There are not three galleries.
+- **Contact appears twice** — as the last section of the home page and as its
+  own page. It is the same markup, kept identical by the chrome sync below.
+- The nav is exactly four links. No page adds a fifth.
 
-The three project pitch panels are Build Your Dream House, Build Your Office, and
-Build Your Way (concrete road construction). All three "See Our Works" links go to
-the single `#works` gallery — they are not three separate galleries.
+## Shared chrome across five pages
+
+There is no build step, so the header, footer, floating buttons, quote modal
+and contact block are physically duplicated in five HTML files. `index.html` is
+the canonical copy; the duplicates are marked:
+
+```html
+<!-- #region chrome:header -->  ...  <!-- #endregion chrome:header -->
+```
+
+Edit those regions **in index.html only**, then:
+
+```bash
+python tools/sync-chrome.py          # rewrite the other four pages
+python tools/sync-chrome.py --check  # fail if they have drifted
+```
+
+`tools/verify-content.py` runs the check, so drift fails the build rather than
+shipping. The regions are `chrome:head`, `chrome:header`, `chrome:footer`,
+`chrome:overlay`, `chrome:contact` and `chrome:quoteform`. A page only needs the
+regions it uses — `chrome:contact` is on the home and contact pages only.
+
+The nav cannot hard-code which link is current, because the markup is identical
+everywhere. `script.js` marks it from `location.pathname` instead.
 
 ## Full-page scrolling
 
@@ -195,7 +221,11 @@ not be styled; this replaces it.
 
 How it works:
 
-1. The modal collects Name, Product, Quantity (+ unit), Construction site, Contact.
+1. The same form appears **twice on the home page** — inline as a section
+   (frame 4) and inside the modal — and once inside the modal on every other
+   page. All of them are wired form-scoped in `script.js`; there is no single
+   global form. It collects Name, Product, Quantity (+ unit), Construction
+   site, Contact.
 2. The Product dropdown is built from `products.json` at runtime.
 3. Choosing a product **sets the quantity unit automatically** from that product's
    `unit` field (e.g. Ready-Mixed Concrete → `m³`). This is a client requirement.
@@ -273,7 +303,11 @@ What the two scripts cover:
   declared-but-missing, no present-but-undeclared.
 - All three locales have identical key shape, and no `th`/`zh` value is
   byte-identical to its `en` counterpart (that means untranslated).
-- Every `#product-*` anchor referenced by a product card exists in the markup.
+- Every `products.html#product-*` link on the home page has a matching band.
+- The shared chrome regions are identical across all five pages.
+- Every page links to every other page.
+- No `main > section` carries `data-reveal` itself: the transform shifts the box
+  the snap position is measured from, so the wheel lands off every section top.
 - In a browser: content renders per locale, switching language and back does not
   lose CMS text, the quote modal opens from every Get Quote button, choosing a
   product updates the unit, and the page survives `content/*.json` being

@@ -5,7 +5,11 @@
       "metaDescription": "ผู้ผลิตคอนกรีตผสมเสร็จ แผ่นพื้น เสาเข็ม ท่อ บ่อพัก และคานสำเร็จรูป พร้อมบริการรับเหมาก่อสร้างครบวงจร",
       "brandName": "สิงหวัฒน์ คอนกรีต",
       "brandTagline": "คอนกรีตผสมเสร็จ · สำเร็จรูป",
-      "quoteCta": "ขอใบเสนอราคา"
+      "quoteCta": "ขอใบเสนอราคา",
+      "pageTitleAbout": "SC สิงหวัฒน์คอนกรีต — เกี่ยวกับเรา",
+      "pageTitleProducts": "SC สิงหวัฒน์คอนกรีต — สินค้าของเรา",
+      "pageTitleProjects": "SC สิงหวัฒน์คอนกรีต — ผลงานของเรา",
+      "pageTitleContact": "SC สิงหวัฒน์คอนกรีต — ติดต่อเรา"
     },
     "nav": {
       "about": "เกี่ยวกับเรา",
@@ -156,16 +160,34 @@
       "entryQuantity": "PLACEHOLDER_ENTRY_QUANTITY",
       "entrySite": "PLACEHOLDER_ENTRY_SITE",
       "entryContact": "PLACEHOLDER_ENTRY_CONTACT"
+    },
+    "productsHero": {
+      "kicker": "สินค้าของเรา",
+      "title": "ทุกชิ้นงานคอนกรีต ผลิตและผสมในโรงงานของเราเอง",
+      "subtitle": "หกกลุ่มผลิตภัณฑ์ ตั้งแต่คอนกรีตผสมเสร็จจนถึงคานสำเร็จรูป เลื่อนลงเพื่อดูสเปกของแต่ละรายการ",
+      "cta": "ดูสินค้าทั้งหมด",
+      "image": "./assets/images/placeholder/hero-pour.svg",
+      "imageAlt": "การเทคอนกรีตที่หน้างาน"
+    },
+    "quoteSection": {
+      "kicker": "ขอราคา",
+      "title": "บอกความต้องการของคุณ แล้วเราจะเสนอราคาให้"
+    },
+    "projectDetail": {
+      "kicker": "รายละเอียดโครงการ"
     }
   },
-
   "en": {
     "general": {
       "pageTitle": "SC Singhawat Concrete — Ready-Mixed and Precast Concrete",
       "metaDescription": "Ready-mixed concrete, precast slabs, piles, pipes, manholes and beams, plus full construction services.",
       "brandName": "Singhawat Concrete",
       "brandTagline": "Ready-mixed & precast",
-      "quoteCta": "Get Quote"
+      "quoteCta": "Get Quote",
+      "pageTitleAbout": "About Us — SC Singhawat Concrete",
+      "pageTitleProducts": "Our Products — SC Singhawat Concrete",
+      "pageTitleProjects": "Our Project — SC Singhawat Concrete",
+      "pageTitleContact": "Contact Us — SC Singhawat Concrete"
     },
     "nav": {
       "about": "About Us",
@@ -316,16 +338,34 @@
       "entryQuantity": "PLACEHOLDER_ENTRY_QUANTITY",
       "entrySite": "PLACEHOLDER_ENTRY_SITE",
       "entryContact": "PLACEHOLDER_ENTRY_CONTACT"
+    },
+    "productsHero": {
+      "kicker": "Our products",
+      "title": "Everything we cast, mixed and made on site.",
+      "subtitle": "Six lines, from ready-mixed concrete to precast beams. Scroll for the specification of each.",
+      "cta": "See the range",
+      "image": "./assets/images/placeholder/hero-pour.svg",
+      "imageAlt": "Concrete being placed on site"
+    },
+    "quoteSection": {
+      "kicker": "Get a price",
+      "title": "Tell us what you need and we will quote it."
+    },
+    "projectDetail": {
+      "kicker": "Project detail"
     }
   },
-
   "zh": {
     "general": {
       "pageTitle": "SC 辛哈瓦混凝土 — 预拌混凝土与预制构件",
       "metaDescription": "生产预拌混凝土、预制楼板、预制方桩、钢筋混凝土管、检查井与混凝土梁，并提供完整的施工承包服务。",
       "brandName": "辛哈瓦混凝土",
       "brandTagline": "预拌 · 预制",
-      "quoteCta": "获取报价"
+      "quoteCta": "获取报价",
+      "pageTitleAbout": "关于我们 — SC 辛哈瓦混凝土",
+      "pageTitleProducts": "产品中心 — SC 辛哈瓦混凝土",
+      "pageTitleProjects": "工程实绩 — SC 辛哈瓦混凝土",
+      "pageTitleContact": "联系我们 — SC 辛哈瓦混凝土"
     },
     "nav": {
       "about": "关于我们",
@@ -476,6 +516,21 @@
       "entryQuantity": "PLACEHOLDER_ENTRY_QUANTITY",
       "entrySite": "PLACEHOLDER_ENTRY_SITE",
       "entryContact": "PLACEHOLDER_ENTRY_CONTACT"
+    },
+    "productsHero": {
+      "kicker": "产品中心",
+      "title": "每一件混凝土制品，均由本厂配制浇筑",
+      "subtitle": "六大产品线，从预拌混凝土到预制梁。向下滚动查看各自的规格参数。",
+      "cta": "查看全部产品",
+      "image": "./assets/images/placeholder/hero-pour.svg",
+      "imageAlt": "施工现场浇筑混凝土"
+    },
+    "quoteSection": {
+      "kicker": "索取报价",
+      "title": "告诉我们您的需求，我们为您报价"
+    },
+    "projectDetail": {
+      "kicker": "项目详情"
     }
   }
 }

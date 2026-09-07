@@ -119,7 +119,8 @@
       ordered.forEach(function (product) {
         var card = document.createElement('a');
         card.className = 'product-card is-visible';
-        card.href = '#product-' + product.anchor;
+        // The grid is on the home page; the detail bands are on products.html.
+        card.href = 'products.html#product-' + product.anchor;
 
         var img = document.createElement('img');
         img.src = toRelativeAsset(product.image);
@@ -164,25 +165,26 @@
   /* The quote dropdown is built from the product list, and each option carries
      its unit so script.js can show it beside Quantity. */
   function applyProductOptions(ordered) {
-    var select = document.querySelector('[data-quote-product-select]');
-    if (!select) return;
+    // The home page carries the form twice, inline and in the modal.
+    document.querySelectorAll('[data-quote-product-select]').forEach(function (select) {
+      var placeholder = select.querySelector('option[value=""]');
+      var previous = select.value;
 
-    var placeholder = select.querySelector('option[value=""]');
-    var previous = select.value;
+      select.innerHTML = '';
+      if (placeholder) select.appendChild(placeholder);
 
-    select.innerHTML = '';
-    if (placeholder) select.appendChild(placeholder);
+      ordered.forEach(function (product) {
+        var option = document.createElement('option');
+        option.value = product.anchor;
+        option.textContent = pick(product, 'title');
+        if (product.unit) option.dataset.unit = product.unit;
+        select.appendChild(option);
+      });
 
-    ordered.forEach(function (product) {
-      var option = document.createElement('option');
-      option.value = product.anchor;
-      option.textContent = pick(product, 'title');
-      if (product.unit) option.dataset.unit = product.unit;
-      select.appendChild(option);
+      if (previous) select.value = previous;
     });
 
-    if (previous) select.value = previous;
-    if (window.SCQuote) window.SCQuote.syncUnit();
+    if (window.SCQuote) window.SCQuote.syncUnits();
   }
 
   /* -------------------------------------------------------------- projects */
@@ -194,10 +196,11 @@
     var grid = document.querySelector('[data-works-grid]');
     if (grid) {
       grid.innerHTML = '';
-      ordered.forEach(function (project) {
+      ordered.forEach(function (project, index) {
         var card = document.createElement('article');
         card.className = 'work-card is-visible';
         card.dataset.category = project.category || 'house';
+        card.dataset.projectIndex = String(index);
 
         var img = document.createElement('img');
         img.src = toRelativeAsset(project.image);
@@ -228,13 +231,15 @@
       if (active && active.dataset.filter !== 'all') active.click();
     }
 
+    applyProjectFrames(ordered);
+
     var reel = document.querySelector('[data-works-reel]');
     if (reel) {
       reel.innerHTML = '';
       ordered.forEach(function (project) {
         var item = document.createElement('a');
         item.className = 'reel-item';
-        item.href = '#works';
+        item.href = 'projects.html#works';
 
         var img = document.createElement('img');
         img.src = toRelativeAsset(project.image);
@@ -249,6 +254,33 @@
         reel.appendChild(item);
       });
     }
+  }
+
+  /* Frame 22: one frame per project, captioned with its name. script.js
+     drives the arrows and the "click a card to open it here" behaviour. */
+  function applyProjectFrames(ordered) {
+    var frames = document.querySelector('[data-project-frames]');
+    if (!frames) return;
+
+    frames.innerHTML = '';
+    ordered.forEach(function (project, index) {
+      var frame = document.createElement('figure');
+      frame.className = 'project-frame' + (index === 0 ? ' is-active' : '');
+      frame.dataset.title = pick(project, 'title');
+
+      var img = document.createElement('img');
+      img.src = toRelativeAsset(project.image);
+      img.alt = pick(project, 'alt') || pick(project, 'title');
+      img.loading = 'lazy';
+
+      var caption = document.createElement('figcaption');
+      caption.textContent = pick(project, 'description');
+
+      frame.append(img, caption);
+      frames.appendChild(frame);
+    });
+
+    if (window.SCProjects) window.SCProjects.show(0);
   }
 
   /* ------------------------------------------------------------------ load */

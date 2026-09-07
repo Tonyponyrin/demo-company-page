@@ -1058,3 +1058,65 @@ body.modal-open { overflow: hidden; }
   }
   [data-reveal] { opacity: 1; transform: none; }
 }
+
+/* ============================================ quotation as a page section */
+/* Frame 4 draws the quotation as a full screen in the Main page flow, and the
+   note beside it says it also pops up. It is both: this is the same markup as
+   the modal, synced by tools/sync-chrome.py. */
+
+.quote-sheet {
+  max-width: 720px;
+  margin: 34px auto 0;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 18px 44px rgba(28, 29, 31, .1);
+}
+.quote-section .quote-doc { padding: clamp(22px, 3.5vw, 38px); }
+.quote-section .quote-title { font-size: 1.45rem; }
+
+/* ==================================== product lead (frame 10) & carousel */
+
+.product-lead .pitch-inner { max-width: min(100% - var(--gutter) * 2, var(--shell)); }
+.product-lead h1 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 1.3rem + 3vw, 3.6rem);
+  max-width: 16ch;
+}
+html[lang="th"] .product-lead h1 { font-size: clamp(1.5rem, 1.1rem + 2vw, 2.6rem); }
+
+.project-carousel { position: relative; margin-top: 30px; }
+
+.project-frames { display: grid; }
+.project-frame {
+  grid-area: 1 / 1;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s var(--ease);
+}
+.project-frame.is-active { opacity: 1; pointer-events: auto; }
+.project-frame img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+.project-frame figcaption {
+  margin-top: 14px;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.project-carousel .slide-nav {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, .82);
+  color: var(--ink);
+}
+.project-carousel .slide-nav:hover { background: var(--ink); color: #fff; }
+
+.work-card[data-project-index] { cursor: pointer; }
+
+/* The works grid sits on a page with the carousel below it, so it does not get
+   the one-screen cap that the home page product grid has. */
+.projects-page .works-section { max-height: none; }

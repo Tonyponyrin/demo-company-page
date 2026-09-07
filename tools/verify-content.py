@@ -21,7 +21,9 @@ def warn(msg):
     warns.append(msg)
 
 
-html = open("index.html", encoding="utf-8").read()
+PAGES = ["index.html", "about.html", "products.html", "projects.html", "contact.html"]
+pages = {name: open(name, encoding="utf-8").read() for name in PAGES}
+html = "\n".join(pages.values())          # every check below spans all pages
 site = json.load(open("content/site.json", encoding="utf-8"))
 products = json.load(open("content/products.json", encoding="utf-8"))["products"]
 projects = json.load(open("content/projects.json", encoding="utf-8"))["projects"]
@@ -46,7 +48,7 @@ for path in sorted(paths):
     for loc in LOCALES:
         if resolve(site[loc], path) is None:
             fail(f"[html->json] {loc}.{path} missing in site.json")
-print(f"1. data-cms paths checked: {len(paths)}")
+print(f"1. data-cms paths checked: {len(paths)} across {len(PAGES)} pages")
 
 
 # ---- 2. locales have identical key shape ----------------------------------
@@ -125,7 +127,11 @@ else:
 
 
 # ---- 5. product anchors exist in the markup -------------------------------
-anchors = set(re.findall(r'data-product-detail="([^"]+)"', html))
+# The grid is on index.html and links across to the detail bands on products.html.
+anchors = set(re.findall(r'data-product-detail="([^"]+)"', pages["products.html"]))
+for href in set(re.findall(r'href="products\.html#product-([a-z]+)"', pages["index.html"])):
+    if href not in anchors:
+        fail(f"[anchor] index.html links to #product-{href}, which products.html lacks")
 for p in products:
     if p["anchor"] not in anchors:
         fail(f"[anchor] product '{p['anchor']}' has no #product-{p['anchor']} band")
@@ -149,7 +155,29 @@ check_list("projects", projects, ["title", "label", "description", "alt"])
 print(f"6. list entries: {len(products)} products, {len(projects)} projects")
 
 
-# ---- 7. referenced asset files exist --------------------------------------
+# ---- 7. shared chrome is identical across the five pages ------------------
+import subprocess
+
+result = subprocess.run(
+    [sys.executable, "tools/sync-chrome.py", "--check"],
+    capture_output=True, text=True,
+)
+if result.returncode != 0:
+    fail("[chrome] " + result.stdout.strip().replace("\n", " / "))
+print("7. " + (result.stdout.strip() or "chrome check ran"))
+
+
+# ---- 8. every page links to every other page ------------------------------
+for name, text in pages.items():
+    for target in PAGES:
+        if target == "index.html":
+            continue
+        if f'href="{target}"' not in text:
+            fail(f"[nav] {name} has no link to {target}")
+print(f"8. cross-page nav links checked on {len(PAGES)} pages")
+
+
+# ---- 9. referenced asset files exist --------------------------------------
 import os
 
 refs = set(re.findall(r'src="(\./assets/[^"]+)"', html))
@@ -158,7 +186,7 @@ for node in (site, {"p": products}, {"j": projects}):
 missing = [r for r in sorted(refs) if not os.path.exists(r)]
 for m in missing:
     fail(f"[asset] referenced but not on disk: {m}")
-print(f"7. asset references: {len(refs)} checked")
+print(f"9. asset references: {len(refs)} checked")
 
 
 # ---- report ---------------------------------------------------------------
