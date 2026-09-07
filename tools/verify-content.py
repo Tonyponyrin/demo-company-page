@@ -172,12 +172,51 @@ print("8. no section carries data-reveal itself")
 
 
 # ---- 9. referenced asset files exist --------------------------------------
-refs = set(re.findall(r'src="(\./assets/[^"]+)"', html))
+refs = set(re.findall(r'(?:src|href)="(\./assets/[^"]+)"', html))
 for node in (site, {"p": products}, {"j": projects}):
     refs |= set(re.findall(r'"(\./assets/[^"]+)"', json.dumps(node, ensure_ascii=False)))
 for missing in sorted(r for r in refs if not os.path.exists(r)):
     fail(f"[asset] referenced but not on disk: {missing}")
 print(f"9. asset references: {len(refs)} checked")
+
+
+# ---- 10. SEO/GEO basics: favicon, canonical, and structured data ----------
+for needle, label in [
+    ('rel="canonical"', "canonical link"),
+    ('rel="icon"', "favicon link"),
+    ('property="og:title"', "Open Graph title"),
+    ('name="twitter:card"', "Twitter card"),
+    ('application/ld+json', "JSON-LD block"),
+]:
+    if needle not in html:
+        fail(f"[seo] missing {label} in <head>")
+
+# The raw HTML source (what a non-JS crawler sees) is the inline English
+# fallback copy, so the static lang attribute must say "en", not "th" --
+# script.js overrides it to the visitor's language on load, but only for
+# clients that run JS at all.
+if '<html lang="en">' not in html:
+    fail('[seo] <html lang="..."> should be "en" to match the inline fallback '
+         'copy that a non-JS crawler actually sees')
+
+# JSON-LD is hand-authored, not CMS-driven (see CLAUDE.md), so it silently
+# drifts if content/site.json's contact details change underneath it. Catch
+# the facts we can compare mechanically.
+import re as _re
+ld_match = _re.search(r'<script type="application/ld\+json">(.*?)</script>', html, _re.S)
+if ld_match:
+    ld = json.loads(ld_match.group(1))
+    org = next((n for n in ld.get("@graph", []) if n.get("@type") == "Organization"), None)
+    en_contact = site["en"]["contact"]
+    if org:
+        want_phone = "+66" + en_contact["phone1"].replace("-", "").lstrip("0")
+        if org.get("telephone") != want_phone:
+            fail(f"[seo] JSON-LD phone {org.get('telephone')!r} does not match "
+                 f"site.json contact.phone1 ({en_contact['phone1']!r})")
+        want_line = en_contact.get("lineUrl")
+        if want_line and want_line not in org.get("sameAs", []):
+            fail("[seo] JSON-LD sameAs is missing the current LINE URL from site.json")
+print("10. SEO/GEO basics present, JSON-LD facts match site.json")
 
 
 # ---- report ---------------------------------------------------------------

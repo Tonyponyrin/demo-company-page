@@ -5,6 +5,7 @@ These are placeholders; real cut-out photography should replace them at the same
 paths (see REQUIREMENTS.md).
 """
 import os
+import pathlib
 
 OUT = os.path.join("assets", "images", "diecut")
 PLACE = os.path.join("assets", "images", "placeholder")
@@ -361,3 +362,77 @@ for name, (a, b, label) in SCENES.items():
     with open(os.path.join(PLACE, f"{name}.svg"), "w", encoding="utf-8") as f:
         f.write(placeholder(a, b, label))
     print("wrote", os.path.join(PLACE, f"{name}.svg"))
+
+
+# --------------------------------------------------- favicon & social card
+# Rasterised with Playwright (already a project dependency for
+# tools/browser-check.py) since there's no other SVG->PNG path here.
+
+def _render_svg_to_png(svg_text, out_path, width, height):
+    from playwright.sync_api import sync_playwright
+
+    html = (
+        "<!doctype html><meta charset=utf-8>"
+        f"<style>html,body{{margin:0;padding:0;background:transparent}}"
+        f"svg{{display:block;width:{width}px;height:{height}px}}</style>{svg_text}"
+    )
+    tmp = pathlib.Path("_render.html")
+    tmp.write_text(html, encoding="utf-8")
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            page = browser.new_page(viewport={"width": width, "height": height})
+            page.goto("file:///" + str(tmp.resolve()).replace("\\", "/"))
+            page.wait_for_timeout(150)
+            page.locator("svg").screenshot(path=str(out_path))
+            browser.close()
+    finally:
+        tmp.unlink(missing_ok=True)
+
+
+_FAVICON_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
+    '<rect width="64" height="64" rx="14" fill="#1c1d1f"/>'
+    '<text x="32" y="41" font-family="Barlow Condensed, Arial, sans-serif" '
+    'font-weight="700" font-size="30" fill="#e2611c" text-anchor="middle">SC</text>'
+    "</svg>"
+)
+
+pathlib.Path("assets").mkdir(exist_ok=True)
+pathlib.Path("assets/favicon.svg").write_text(_FAVICON_SVG, encoding="utf-8")
+print("wrote assets/favicon.svg")
+
+for _size, _name in [(32, "favicon-32.png"), (180, "apple-touch-icon.png"), (512, "icon-512.png")]:
+    _render_svg_to_png(_FAVICON_SVG, pathlib.Path("assets") / _name, _size, _size)
+    print("wrote", f"assets/{_name}")
+
+_CARD_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#232426"/><stop offset="100%" stop-color="#1c1d1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#e2611c" stroke-width="14"/>
+  <rect x="90" y="90" width="150" height="150" rx="28" fill="#1c1d1f" stroke="#e2611c" stroke-width="4"/>
+  <text x="165" y="196" font-family="Barlow Condensed, Arial, sans-serif" font-weight="700"
+        font-size="76" fill="#e2611c" text-anchor="middle">SC</text>
+  <text x="90" y="330" font-family="Barlow Condensed, Arial, sans-serif" font-weight="700"
+        font-size="66" fill="#f6f4f1">Singhawat Concrete</text>
+  <text x="90" y="392" font-family="Arial, sans-serif" font-size="30" fill="#c9c6c1">
+    Ready-mixed concrete &amp; precast components
+  </text>
+  <text x="90" y="432" font-family="Arial, sans-serif" font-size="30" fill="#c9c6c1">
+    Full construction services, one plant to your pour
+  </text>
+  <g font-family="Barlow Condensed, Arial, sans-serif" font-weight="600" font-size="26" fill="#e2611c">
+    <text x="90" y="540">READY-MIXED</text>
+    <text x="330" y="540">PRECAST SLAB</text>
+    <text x="560" y="540">PILE</text>
+    <text x="690" y="540">PIPE</text>
+    <text x="810" y="540">MANHOLE</text>
+    <text x="1000" y="540">BEAM</text>
+  </g>
+</svg>"""
+_render_svg_to_png(_CARD_SVG, pathlib.Path("assets") / "images" / "social-card.png", 1200, 630)
+print("wrote assets/images/social-card.png")
