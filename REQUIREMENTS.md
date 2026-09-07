@@ -29,8 +29,13 @@ The nav is exactly four links. Frames 1–23 never show a fifth.
 
 ## Scroll behaviour
 
-From the Vision & Mission band downward (frame 8), sections **animate in as you
-scroll**, in sequence. Direction is specified per element and is not decorative:
+**Full-page scrolling.** Every frame is drawn as one bordered full screen, with
+`Scroll down` between it and the next. One scroll gesture therefore advances one
+whole section, which lands before its contents animate in. This is the page's
+basic movement, not an effect layered on top.
+
+From the Vision & Mission band downward (frame 8), sections **animate in as they
+land**, in sequence. Direction is specified per element and is not decorative:
 
 - Product detail bands: heading and body **slide in left → right**, product photo
   **slides in right → left** (frames 12–16, annotated on every one).
@@ -182,6 +187,7 @@ cannot detect this — see the `no-cors` note in CLAUDE.md.
 | Requirement | State |
 | --- | --- |
 | Page structure, all five sections | built |
+| Full-page scrolling, one gesture per section | built (desktop; off below 760px) |
 | Global chrome, sticky quote + social rail | built |
 | Scroll-in animations with per-element direction | built |
 | Product grid, 6 detail bands, anchor jumps | built |

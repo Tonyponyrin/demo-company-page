@@ -70,6 +70,48 @@ The three project pitch panels are Build Your Dream House, Build Your Office, an
 Build Your Way (concrete road construction). All three "See Our Works" links go to
 the single `#works` gallery — they are not three separate galleries.
 
+## Full-page scrolling
+
+Every wireframe frame is one full screen with "Scroll down" between it and the
+next, so **one wheel gesture advances exactly one section**, and the section
+lands before its contents animate in. Three pieces make that work, and removing
+any one of them breaks it:
+
+1. **CSS snap points** — `scroll-snap-type: y mandatory` on `html`, with
+   `scroll-snap-align: start` and `scroll-snap-stop: always` on every
+   `main > section`. The footer uses `scroll-snap-align: end` because it is
+   shorter than a screen.
+2. **A wheel handler in `script.js`** — CSS snapping alone is not enough. One
+   wheel notch is a small delta, so the browser snaps *back* to the section you
+   are already on and the page feels stuck. `onWheel` moves to the next snap
+   position instead. It deliberately does nothing on touch, on keyboard, below
+   760px, while the quote modal is open, or inside a section taller than the
+   screen.
+3. **Sections that fit one screen** — `min-height: 100svh` on each section. The
+   products and works grids also carry `max-height: 100svh` plus a flex chain
+   (`section > .shell > .grid > .card > img`) so the card images absorb the
+   spare height and the section fits any screen height. `min-height` alone is a
+   floor, so without the cap the section just grows and the cards never shrink.
+
+Two traps that already caused bugs here:
+
+- A full-bleed background image left in normal flow sets its own height from its
+  aspect ratio, making the section taller than one screen and breaking the snap
+  point. `.hero .slides` and `.pitch-bg` are absolutely positioned for exactly
+  this reason.
+- Card captions must be `flex: none`. Otherwise they are shrunk below their text
+  height and the text spills out over the row beneath.
+
+Below 760px the grids collapse to one column and most sections become several
+screens tall, so snapping is switched off entirely and the page scrolls
+normally. The mobile overrides are scoped the same way as the desktop rules
+(`.products-section .product-card`, not `.product-card`) — at equal specificity
+the later rule in the file wins, and these rules are not in file order.
+
+`tools/browser-check.py` guards all of this: one wheel gesture must land on a
+section top, advance, and not skip; no section may exceed one screen; no card
+content may overflow its card.
+
 ## Content architecture
 
 Three layers that must stay in agreement:

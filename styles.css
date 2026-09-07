@@ -35,7 +35,79 @@ html[lang="th"] body { line-height: 1.85; }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
+html { scroll-behavior: smooth; scroll-padding-top: 0; }
+
+/* --------------------------------------------------- full-page scrolling */
+/* Every wireframe frame is one full screen with "Scroll down" between them,
+   so one gesture advances one whole section. scroll-snap-stop: always is what
+   stops a fast flick skipping several sections at once.
+
+   Sections snap to y=0 (scroll-padding-top is 0) so full-bleed backgrounds run
+   under the fixed header; content sections carry their own top padding to clear
+   it, set in the `main > section` rule below. */
+
+html { scroll-snap-type: y mandatory; }
+
+main > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* The footer is short, so snapping its top to the viewport top would leave a
+   gap beneath it. Aligning its end puts it flush against the bottom instead. */
+.site-footer { scroll-snap-align: end; }
+
+/* The hero and the pitch panels already centre their own content over a
+   full-bleed image; everything else is centred vertically here. */
+main > section:not(.hero):not(.pitch) {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: calc(var(--header-h) + clamp(18px, 3vh, 44px));
+  padding-bottom: clamp(18px, 3vh, 44px);
+}
+
+/* The two card grids are the only sections whose content will not fit a short
+   screen at a fixed card size. Rather than pick a size that works at one
+   height, let the grid take the height left over and let the card images
+   absorb it, so the section fits whatever screen it lands on. */
+/* min-height alone is a floor, so the section would simply grow to fit the
+   cards and never ask them to shrink. Capping it makes the flex chain below
+   do the work. */
+.products-section, .works-section { max-height: 100svh; }
+
+.products-section > .shell,
+.works-section > .shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.product-grid, .works-grid {
+  flex: 1;
+  min-height: 0;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+/* Scoped by section so these win regardless of source order — the .product-card
+   and .work-card rules further down the file set display and aspect-ratio, and
+   at equal specificity the later rule would override these. */
+.products-section .product-card,
+.works-section .work-card { min-height: 0; display: flex; flex-direction: column; }
+
+.products-section .product-card img,
+.works-section .work-card img {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+/* The image absorbs the spare height; the captions must not. Without flex:none
+   these get shrunk below their text, which then spills outside the card. */
+.products-section .product-card h3,
+.works-section .work-body { flex: none; }
 
 body {
   margin: 0;
@@ -115,7 +187,7 @@ html[lang="th"] .section-title { font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.3rem
 
 /* ----------------------------------------------------------------- layout */
 
-.section { padding: clamp(64px, 9vw, 118px) 0; }
+.section { padding: clamp(48px, 7vw, 96px) 0; }
 
 .band-alt { background: var(--paper-alt); }
 
@@ -253,11 +325,17 @@ html[lang="th"] .btn { text-transform: none; letter-spacing: .02em; }
 
 .hero {
   position: relative;
-  min-height: min(88vh, 780px);
+  min-height: 100svh;
   display: grid;
   isolation: isolate;
 }
 .hero > * { grid-area: 1 / 1; }
+
+/* Take the slideshow out of flow so it cannot set the hero's height. Left in
+   flow, `height: 100%` on the image is indefinite and falls back to the file's
+   own aspect ratio, making the hero taller than one screen and breaking the
+   snap point. */
+.hero .slides { position: absolute; inset: 0; }
 
 .hero-overlay {
   position: relative;
@@ -487,19 +565,20 @@ html[lang="th"] .duo-card h3 { text-transform: none; }
   font-weight: 600;
 }
 
-.product-detail { padding: clamp(56px, 8vw, 104px) 0; }
+.product-detail { padding: clamp(48px, 7vw, 96px) 0; }
 
 /* --------------------------------------------------------------- projects */
 
 .pitch {
   position: relative;
-  min-height: min(64vh, 560px);
+  min-height: 100svh;
   display: grid;
   isolation: isolate;
   color: #fff;
 }
 .pitch > * { grid-area: 1 / 1; }
-.pitch-bg { width: 100%; height: 100%; object-fit: cover; }
+/* Same reason as .hero .slides above: keep the backdrop from driving height. */
+.pitch-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .pitch-inner {
   position: relative;
   z-index: 2;
@@ -886,6 +965,20 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 760px) {
   :root { --header-h: 64px; }
 
+  /* Grids collapse to one column here, so most sections are several screens
+     tall. Forcing a snap point at each section start would fight the reader
+     on the way down, so full-page scrolling is desktop and tablet only. */
+  html { scroll-snap-type: none; }
+  main > section:not(.hero):not(.pitch) { min-height: 0; display: block; }
+  .products-section, .works-section { max-height: none; }
+  .product-grid, .works-grid { grid-template-rows: none; }
+  /* match the scoped desktop rules above, or these lose on specificity */
+  .products-section .product-card,
+  .works-section .work-card { display: block; }
+  .products-section .product-card img,
+  .works-section .work-card img { aspect-ratio: 4 / 3; flex: none; }
+  .hero, .pitch { min-height: 88svh; }
+
   .nav-toggle {
     display: grid;
     place-items: center;
@@ -951,6 +1044,10 @@ body.modal-open { overflow: hidden; }
   .sticky-quote { padding: .8em 1.5em; font-size: .95rem; }
 
   .slide-nav { width: 42px; height: 42px; }
+
+  /* At this width the arrows land on top of the hero copy. The dots, autoplay,
+     and swiping are enough here. */
+  .hero .slide-nav { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

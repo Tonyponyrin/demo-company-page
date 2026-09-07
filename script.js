@@ -157,6 +157,76 @@
     window.addEventListener('hashchange', function () { setTimeout(sweep, 60); });
   }
 
+  /* -------------------------------------------------- full-page scrolling */
+  /* CSS scroll-snap alone is not enough: one wheel notch is a small delta, so
+     the browser snaps back to the section you are already on and the page feels
+     stuck. This advances exactly one section per gesture, which is what the
+     "Scroll down" arrow between every wireframe frame asks for.
+
+     Deliberately narrow: desktop widths only, never while the quote modal is
+     open, and never inside a section that is taller than the screen (there the
+     reader needs ordinary scrolling to reach the rest of it). Touch and
+     keyboard are left entirely to the browser and the CSS snap points. */
+
+  var snapLock = false;
+
+  function snapTargets() {
+    var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    var tops = Array.prototype.map.call(
+      document.querySelectorAll('main > section'),
+      function (s) { return Math.round(s.getBoundingClientRect().top + window.scrollY); }
+    );
+    tops.push(maxScroll); // the footer, which snaps to the bottom rather than its top
+    return tops
+      .filter(function (t, i, a) { return t >= 0 && t <= maxScroll && a.indexOf(t) === i; })
+      .sort(function (a, b) { return a - b; });
+  }
+
+  function snapEnabled() {
+    return window.innerWidth > 760 &&
+      getComputedStyle(document.documentElement).scrollSnapType.indexOf('none') === -1;
+  }
+
+  function onWheel(e) {
+    if (!snapEnabled()) return;
+    if (document.body.classList.contains('modal-open')) return;
+    if (e.ctrlKey) return;                       // pinch-zoom
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+
+    // Let a section that overflows the screen scroll normally until its edge.
+    var section = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2);
+    section = section && section.closest('main > section');
+    if (section && section.scrollHeight > window.innerHeight + 8) {
+      var rect = section.getBoundingClientRect();
+      var atEnd = e.deltaY > 0 ? rect.bottom <= window.innerHeight + 8 : rect.top >= -8;
+      if (!atEnd) return;
+    }
+
+    if (snapLock) { e.preventDefault(); return; }
+
+    var tops = snapTargets();
+    var here = window.scrollY;
+    var next = e.deltaY > 0
+      ? tops.find(function (t) { return t > here + 8; })
+      : tops.slice().reverse().find(function (t) { return t < here - 8; });
+
+    if (next === undefined) return;              // already at the first or last
+
+    e.preventDefault();
+    snapLock = true;
+    window.scrollTo({ top: next, behavior: reduceMotion ? 'auto' : 'smooth' });
+
+    var release = function () { snapLock = false; };
+    if ('onscrollend' in window) {
+      window.addEventListener('scrollend', release, { once: true });
+      setTimeout(release, 1200);                 // belt and braces if it never fires
+    } else {
+      setTimeout(release, reduceMotion ? 60 : 700);
+    }
+  }
+
+  window.addEventListener('wheel', onWheel, { passive: false });
+
   /* ------------------------------------------------------------ slideshows */
 
   document.querySelectorAll('[data-slideshow]').forEach(function (root) {

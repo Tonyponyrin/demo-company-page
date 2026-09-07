@@ -191,6 +191,65 @@ try:
         if not arrived:
             problems.append("element never revealed after scrolling it into view")
 
+        # --- full-page scrolling: one wheel gesture advances one whole section
+        pg.evaluate("window.scrollTo({top:0,behavior:'instant'})")
+        pg.wait_for_timeout(600)
+        tops = pg.evaluate(
+            "Array.from(document.querySelectorAll('main > section'))"
+            ".map(s => Math.round(s.getBoundingClientRect().top + scrollY))"
+        )
+        for i in range(4):
+            before = pg.evaluate("scrollY")
+            pg.mouse.wheel(0, 400)
+            pg.wait_for_timeout(1100)
+            after = pg.evaluate("scrollY")
+            nearest = min(tops, key=lambda t: abs(t - after))
+            if abs(nearest - after) > 6:
+                problems.append(
+                    f"wheel step {i + 1} landed at {after}, not on a section top "
+                    f"(nearest {nearest})"
+                )
+                break
+            if after <= before:
+                problems.append(f"wheel step {i + 1} did not advance (stayed at {after})")
+                break
+            # one gesture must move exactly one section, not several
+            skipped = [t for t in tops if before < t < after]
+            if len(skipped) > 1:
+                problems.append(f"wheel step {i + 1} skipped {len(skipped)} sections at once")
+                break
+
+        # --- no section should overflow its own screen on desktop
+        overflow = pg.evaluate(
+            """() => Array.from(document.querySelectorAll('main > section'))
+                .map(s => ({id: s.id || s.className.split(' ')[0],
+                            over: Math.round(s.scrollHeight - innerHeight)}))
+                .filter(x => x.over > 8)"""
+        )
+        if overflow:
+            problems.append(f"sections taller than one screen: {overflow}")
+
+        # --- card contents must stay inside their card. Flex-shrinking a caption
+        # below its text height lets the text spill out over the row beneath.
+        spill = pg.evaluate(
+            """() => {
+                const out = [];
+                document.querySelectorAll('.product-card, .work-card').forEach(card => {
+                    const c = card.getBoundingClientRect();
+                    card.querySelectorAll('h3, .work-body, img').forEach(el => {
+                        const r = el.getBoundingClientRect();
+                        if (r.bottom > c.bottom + 2 || r.top < c.top - 2)
+                            out.push((card.className.split(' ')[0]) + ' > ' +
+                                     el.tagName.toLowerCase() + ' by ' +
+                                     Math.round(r.bottom - c.bottom) + 'px');
+                    });
+                });
+                return out;
+            }"""
+        )
+        if spill:
+            problems.append(f"content overflowing its card: {spill[:4]}")
+
         # --- anchor navigation is smooth, not a jump
         beh = pg.evaluate("getComputedStyle(document.documentElement).scrollBehavior")
         if beh != "smooth":
