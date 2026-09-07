@@ -382,13 +382,25 @@
     if (prev) prev.addEventListener('click', function () { show(index - 1); });
     if (next) next.addEventListener('click', function () { show(index + 1); });
 
-    document.addEventListener('click', function (e) {
-      var card = e.target.closest('.work-card[data-project-index]');
-      if (!card) return;
+    function openFromCard(card) {
       show(parseInt(card.dataset.projectIndex, 10) || 0);
       document.getElementById('project-detail').scrollIntoView({
         behavior: reduceMotion ? 'auto' : 'smooth'
       });
+    }
+
+    document.addEventListener('click', function (e) {
+      var card = e.target.closest('.work-card[data-project-index]');
+      if (!card) return;
+      openFromCard(card);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var card = e.target.closest('.work-card[data-project-index]');
+      if (!card) return;
+      e.preventDefault();
+      openFromCard(card);
     });
 
     // cms.js calls this once it has rendered the frames.

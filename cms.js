@@ -200,6 +200,9 @@
         card.className = 'work-card is-visible';
         card.dataset.category = project.category || 'house';
         card.dataset.projectIndex = String(index);
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', pick(project, 'title'));
 
         var img = document.createElement('img');
         img.src = toRelativeAsset(project.image);

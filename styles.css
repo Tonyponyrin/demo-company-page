@@ -14,6 +14,9 @@
   --white: #fff;
   --orange: #e2611c;
   --orange-dark: #c44f12;
+  --orange-tint: #ffb98a;
+  --error: #c0392b;
+  --error-bg: #fdf3f2;
 
   --shell: 1180px;
   --gutter: clamp(20px, 5vw, 56px);
@@ -165,7 +168,7 @@ a { color: inherit; }
   color: var(--orange);
   margin: 0 0 .6em;
 }
-.eyebrow.light { color: #ffb98a; }
+.eyebrow.light { color: var(--orange-tint); }
 
 .section-title {
   font-family: var(--display);
@@ -907,7 +910,7 @@ html[lang="th"] .quote-key { text-transform: none; letter-spacing: 0; }
 }
 .quote-val:hover { background: var(--paper-alt); }
 .quote-val:focus { background: #fff; border-color: var(--orange); outline: none; }
-.quote-val:user-invalid { border-color: #c0392b; background: #fdf3f2; }
+.quote-val:user-invalid { border-color: var(--error); background: var(--error-bg); }
 
 .quote-qty { display: flex; align-items: center; gap: 10px; }
 .quote-qty .quote-val { max-width: 170px; }
