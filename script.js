@@ -1,291 +1,423 @@
-const header = document.querySelector("[data-header]");
-const nav = document.querySelector("[data-nav]");
-const navToggle = document.querySelector("[data-nav-toggle]");
-const progressBar = document.querySelector("[data-scroll-progress]");
-const filterButtons = document.querySelectorAll("[data-filter]");
-const sections = document.querySelectorAll("[data-section]");
-const revealElements = document.querySelectorAll(".reveal, .reveal-item");
-const counters = document.querySelectorAll("[data-count]");
-const parallaxItems = document.querySelectorAll("[data-parallax]");
-const navLinks = document.querySelectorAll(".site-nav a[href^='#']");
-const languageButtons = document.querySelectorAll("[data-lang]");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const snapSections = Array.from(sections).filter((section) => section.id || section.classList.contains("hero"));
-const snapCooldown = 850;
-let isSnapping = false;
-let lastSnapAt = 0;
+/* ==========================================================================
+   SC Singhawat Concrete — behaviour only.
+   No translated strings live here. Copy comes from content/*.json via cms.js;
+   this file tracks the active language and tells cms.js when it changes.
+   ========================================================================== */
+(function () {
+  'use strict';
 
-const getProjectCards = () => document.querySelectorAll("[data-category]");
+  var SUPPORTED = ['th', 'en', 'zh'];
+  var STORAGE_KEY = 'sc-lang';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const LANGUAGES = ["th", "en", "zh"];
-const DEFAULT_LANGUAGE = "th";
+  /* ------------------------------------------------------------- language */
 
-if (window.lucide) {
-  window.lucide.createIcons();
-}
-
-// All copy for every language lives in content/site.json and content/projects.json
-// and is applied by cms.js. This only tracks which language is active.
-const applyLanguage = (language) => {
-  const nextLanguage = LANGUAGES.includes(language) ? language : DEFAULT_LANGUAGE;
-
-  document.documentElement.lang = nextLanguage === "zh" ? "zh-Hans" : nextLanguage;
-  window.tonyponyLanguage = nextLanguage;
-  languageButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.lang === nextLanguage);
-  });
-  localStorage.setItem("tonypony-language", nextLanguage);
-  window.dispatchEvent(new CustomEvent("tonypony:languagechange", { detail: { language: nextLanguage } }));
-};
-
-applyLanguage(localStorage.getItem("tonypony-language") || DEFAULT_LANGUAGE);
-
-const syncHeader = () => {
-  header?.classList.toggle("scrolled", window.scrollY > 20);
-};
-
-const syncProgress = () => {
-  if (!progressBar) return;
-
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
-  progressBar.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
-};
-
-const syncParallax = () => {
-  if (reduceMotion) return;
-
-  parallaxItems.forEach((item) => {
-    const strength = Number(item.dataset.parallax || 0);
-    const movement = Math.min(window.scrollY * strength, 80);
-    item.style.setProperty("--parallax-y", `${movement}px`);
-  });
-};
-
-const setActiveNav = (id) => {
-  navLinks.forEach((link) => {
-    link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-  });
-};
-
-const getSectionId = (section) => section.id || "top";
-
-const getHeaderOffset = () => {
-  if (!header) return 0;
-
-  return header.getBoundingClientRect().height + 28;
-};
-
-const getSnapTop = (section) => {
-  if (section.classList.contains("hero")) {
-    return 0;
+  function initialLanguage() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
+    } catch (e) { /* private mode: fall through to the default */ }
+    return 'th';
   }
 
-  return Math.max(section.offsetTop - getHeaderOffset(), 0);
-};
+  var currentLang = initialLanguage();
 
-const getCurrentSnapIndex = () => {
-  const anchor = window.scrollY + Math.min(window.innerHeight * 0.45, 380);
-  let index = 0;
+  function setLanguage(lang) {
+    if (SUPPORTED.indexOf(lang) === -1 || lang === currentLang) return;
+    currentLang = lang;
+    document.documentElement.lang = lang;
 
-  snapSections.forEach((section, sectionIndex) => {
-    if (section.offsetTop <= anchor) {
-      index = sectionIndex;
-    }
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* ignore */ }
+
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', String(btn.dataset.lang === lang));
+    });
+
+    document.dispatchEvent(new CustomEvent('sc:languagechange', { detail: { language: lang } }));
+  }
+
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.setAttribute('aria-pressed', String(btn.dataset.lang === currentLang));
+    btn.addEventListener('click', function () { setLanguage(btn.dataset.lang); });
   });
 
-  return index;
-};
+  window.SCLang = { get: function () { return currentLang; }, set: setLanguage };
 
-const snapToSection = (targetIndex) => {
-  const section = snapSections[targetIndex];
-  if (!section) return;
+  /* --------------------------------------------------------------- header */
 
-  isSnapping = true;
-  lastSnapAt = Date.now();
-  window.scrollTo({ top: getSnapTop(section), behavior: reduceMotion ? "auto" : "smooth" });
+  var header = document.getElementById('site-header');
+  var navToggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('site-nav');
 
-  window.setTimeout(() => {
-    isSnapping = false;
-    setActiveNav(getSectionId(section));
-  }, snapCooldown);
-};
-
-const shouldSkipSnap = (event) => {
-  if (reduceMotion || window.innerWidth < 900 || event.ctrlKey || event.metaKey || event.shiftKey) {
-    return true;
+  if (header) {
+    var onScroll = function () {
+      header.classList.toggle('is-stuck', window.scrollY > 8);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
-  const target = event.target;
-  if (!(target instanceof Element)) {
-    return false;
-  }
-
-  return Boolean(target.closest("iframe, input, textarea, select, button, [data-no-snap]"));
-};
-
-const syncActiveSection = () => {
-  const anchor = window.scrollY + Math.min(window.innerHeight * 0.42, 360);
-  let currentId = "";
-
-  sections.forEach((section) => {
-    if (!section.id) return;
-    if (section.offsetTop <= anchor) {
-      currentId = section.id;
-    }
-  });
-
-  if (currentId) {
-    setActiveNav(currentId);
-  }
-};
-
-const animateCounter = (element) => {
-  if (element.dataset.counted === "true") return;
-
-  element.dataset.counted = "true";
-  const target = Number(element.dataset.count);
-  const decimals = Number(element.dataset.decimals || 0);
-  const suffix = element.dataset.suffix || "";
-
-  if (reduceMotion || Number.isNaN(target)) {
-    element.textContent = `${target.toFixed(decimals)}${suffix}`;
-    return;
-  }
-
-  const duration = 1100;
-  const start = performance.now();
-
-  const tick = (now) => {
-    const progress = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    element.textContent = `${(target * eased).toFixed(decimals)}${suffix}`;
-
-    if (progress < 1) {
-      requestAnimationFrame(tick);
-    }
-  };
-
-  requestAnimationFrame(tick);
-};
-
-syncHeader();
-syncProgress();
-syncParallax();
-syncActiveSection();
-
-window.addEventListener(
-  "scroll",
-  () => {
-    syncHeader();
-    syncProgress();
-    syncParallax();
-    syncActiveSection();
-  },
-  { passive: true }
-);
-
-navToggle?.addEventListener("click", () => {
-  const isOpen = nav?.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
-});
-
-nav?.addEventListener("click", (event) => {
-  if (event.target instanceof HTMLAnchorElement) {
-    nav.classList.remove("open");
-    navToggle?.setAttribute("aria-expanded", "false");
-
-    const hash = event.target.getAttribute("href");
-    if (hash?.startsWith("#") && hash.length > 1) {
-      const section = document.querySelector(hash);
-      const targetIndex = snapSections.indexOf(section);
-
-      if (targetIndex >= 0) {
-        event.preventDefault();
-        snapToSection(targetIndex);
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) {
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
       }
+    });
+  }
+
+  /* Highlight the nav link for the section currently on screen. */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.site-nav a'));
+  var sections = navLinks
+    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(function (a) {
+          a.classList.toggle('is-current', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(function (s) { spy.observe(s); });
+  }
+
+  /* -------------------------------------------------- sticky quote button */
+  /* The hero has its own Get Quote in the bottom-left corner, so the sticky
+     one only appears once the hero is out of the way. It is present on every
+     other screen, which is what the sketches ask for. */
+
+  var stickyQuote = document.querySelector('.sticky-quote');
+  var hero = document.querySelector('.hero');
+
+  if (stickyQuote) {
+    if (!hero) {
+      stickyQuote.classList.add('is-shown');
+    } else {
+      var toggleSticky = function () {
+        var past = hero.getBoundingClientRect().bottom < 120;
+        stickyQuote.classList.toggle('is-shown', past);
+      };
+      window.addEventListener('scroll', toggleSticky, { passive: true });
+      window.addEventListener('resize', toggleSticky);
+      toggleSticky();
     }
   }
-});
 
-languageButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    applyLanguage(button.dataset.lang || "en");
+  /* -------------------------------------------------------- scroll reveal */
+  /* Direction comes from data-reveal in the markup — it is a client
+     requirement (product text from the left, product image from the right),
+     not decoration. See REQUIREMENTS.md. */
+
+  function revealAll() {
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealAll();
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      revealObserver.observe(el);
+    });
+
+    /* An anchor jump (a product card, or landing on #contact) can skip straight
+       past sections, which the observer never sees intersecting — they would
+       stay invisible. Sweep anything the viewport has already reached. */
+    var sweep = function () {
+      document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach(function (el) {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('is-visible');
+          revealObserver.unobserve(el);
+        }
+      });
+    };
+    window.addEventListener('scroll', sweep, { passive: true });
+    window.addEventListener('hashchange', function () { setTimeout(sweep, 60); });
+  }
+
+  /* ------------------------------------------------------------ slideshows */
+
+  document.querySelectorAll('[data-slideshow]').forEach(function (root) {
+    var slides = Array.prototype.slice.call(root.querySelectorAll('.slide'));
+    if (slides.length < 2) return;
+
+    var index = slides.findIndex(function (s) { return s.classList.contains('is-active'); });
+    if (index < 0) index = 0;
+
+    var dotsWrap = root.querySelector('[data-slide-dots]');
+    var dots = [];
+
+    if (dotsWrap) {
+      slides.forEach(function (_, i) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.addEventListener('click', function () { go(i, true); });
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+      });
+    }
+
+    function paint() {
+      slides.forEach(function (s, i) { s.classList.toggle('is-active', i === index); });
+      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === index); });
+    }
+
+    var timer = null;
+    var delay = parseInt(root.dataset.autoplay, 10) || 0;
+
+    function schedule() {
+      if (!delay || reduceMotion) return;
+      clearTimeout(timer);
+      timer = setTimeout(function () { go(index + 1); }, delay);
+    }
+
+    function go(next, fromUser) {
+      index = (next + slides.length) % slides.length;
+      paint();
+      if (fromUser) clearTimeout(timer);
+      schedule();
+    }
+
+    var prev = root.querySelector('[data-slide-prev]');
+    var next = root.querySelector('[data-slide-next]');
+    if (prev) prev.addEventListener('click', function () { go(index - 1, true); });
+    if (next) next.addEventListener('click', function () { go(index + 1, true); });
+
+    root.addEventListener('mouseenter', function () { clearTimeout(timer); });
+    root.addEventListener('mouseleave', schedule);
+
+    paint();
+    schedule();
   });
-});
 
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const filter = button.dataset.filter;
+  /* ------------------------------------------------------------- work reel */
+  /* Auto-advances right to left, as sketched on frame 3. Queries its items at
+     call time because cms.js rebuilds them from projects.json. */
 
-    filterButtons.forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
+  document.querySelectorAll('[data-reel]').forEach(function (root) {
+    var track = root.querySelector('[data-reel-track]');
+    if (!track) return;
 
-    getProjectCards().forEach((card) => {
-      const shouldShow = filter === "all" || card.dataset.category === filter;
-      card.classList.toggle("is-hidden", !shouldShow);
+    var offset = 0;
+    var timer = null;
+    var delay = parseInt(root.dataset.autoplay, 10) || 4000;
+
+    function step() {
+      var items = track.children;
+      if (items.length < 2) return;
+
+      var first = items[0];
+      var stride = first.getBoundingClientRect().width +
+        parseFloat(getComputedStyle(track).columnGap || '0');
+
+      offset += 1;
+      if (offset >= items.length) offset = 0;
+
+      track.style.transform = 'translateX(' + (-offset * stride) + 'px)';
+    }
+
+    function play() {
+      if (reduceMotion) return;
+      clearInterval(timer);
+      timer = setInterval(step, delay);
+    }
+
+    root.addEventListener('mouseenter', function () { clearInterval(timer); });
+    root.addEventListener('mouseleave', play);
+    window.addEventListener('resize', function () { offset = 0; track.style.transform = ''; });
+
+    play();
+  });
+
+  /* --------------------------------------------------------------- filters */
+  /* Cards are re-rendered by cms.js, so the grid is queried on every click
+     rather than captured once at load. */
+
+  var filterButtons = document.querySelectorAll('[data-filter]');
+
+  function applyFilter(category) {
+    document.querySelectorAll('.work-card').forEach(function (card) {
+      var show = category === 'all' || card.dataset.category === category;
+      card.classList.toggle('is-hidden', !show);
+    });
+  }
+
+  filterButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterButtons.forEach(function (b) { b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+      applyFilter(btn.dataset.filter);
     });
   });
-});
 
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
+  /* ----------------------------------------------------------- quote modal */
 
-      entry.target.classList.add("is-visible");
-      if (entry.target.matches("[data-count]")) {
-        animateCounter(entry.target);
-      }
-      entry.target.querySelectorAll?.("[data-count]").forEach(animateCounter);
-      revealObserver.unobserve(entry.target);
-    });
-  },
-  { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
-);
+  var modal = document.getElementById('quote-modal');
+  var form = document.getElementById('quote-form');
+  var success = modal && modal.querySelector('[data-quote-success]');
+  var unitEl = modal && modal.querySelector('[data-quote-unit]');
+  var productSelect = modal && modal.querySelector('[data-quote-product-select]');
+  var refEl = modal && modal.querySelector('[data-quote-ref]');
+  var lastFocus = null;
 
-revealElements.forEach((element) => revealObserver.observe(element));
-counters.forEach((counter) => revealObserver.observe(counter));
+  function quoteRef() {
+    var d = new Date();
+    var stamp = String(d.getFullYear()).slice(2) +
+      String(d.getMonth() + 1).padStart(2, '0') +
+      String(d.getDate()).padStart(2, '0');
+    return 'Q' + stamp + '-' + String(Math.floor(Math.random() * 900) + 100);
+  }
 
-window.addEventListener(
-  "wheel",
-  (event) => {
-    if (shouldSkipSnap(event)) return;
+  /* The unit shown beside Quantity is whatever the chosen product sells in.
+     cms.js stamps data-unit onto each option when it builds the dropdown. */
+  function syncUnit() {
+    if (!productSelect || !unitEl) return;
+    var opt = productSelect.options[productSelect.selectedIndex];
+    var unit = opt ? opt.dataset.unit : '';
+    unitEl.textContent = unit || '—';
+    unitEl.classList.toggle('is-set', Boolean(unit));
+  }
 
-    const now = Date.now();
-    if (isSnapping || now - lastSnapAt < snapCooldown) {
-      event.preventDefault();
+  if (productSelect) productSelect.addEventListener('change', syncUnit);
+
+  function openModal(preselect) {
+    if (!modal) return;
+    lastFocus = document.activeElement;
+
+    if (form) form.hidden = false;
+    if (success) success.hidden = true;
+    if (refEl) refEl.textContent = quoteRef();
+
+    if (preselect && productSelect) {
+      productSelect.value = preselect;
+      // If cms.js has not populated the options yet, the value will not stick;
+      // syncUnit falls back to the placeholder, which is the correct state.
+    }
+    syncUnit();
+
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+
+    var first = modal.querySelector('input, select, button');
+    if (first) first.focus();
+  }
+
+  function closeModal() {
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.addEventListener('click', function (e) {
+    var opener = e.target.closest('[data-quote-open]');
+    if (opener) {
+      e.preventDefault();
+      openModal(opener.dataset.quoteProduct || '');
       return;
     }
-
-    const direction = Math.sign(event.deltaY);
-    if (direction === 0) return;
-
-    const currentIndex = getCurrentSnapIndex();
-    const targetIndex = Math.min(Math.max(currentIndex + direction, 0), snapSections.length - 1);
-
-    if (targetIndex !== currentIndex) {
-      event.preventDefault();
-      snapToSection(targetIndex);
+    if (e.target.closest('[data-quote-close]')) {
+      e.preventDefault();
+      closeModal();
     }
-  },
-  { passive: false }
-);
+  });
 
-window.addEventListener("keydown", (event) => {
-  if (reduceMotion || event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
-    return;
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal();
+    if (e.key !== 'Tab' || !modal || modal.hidden) return;
+
+    // Keep focus inside the dialog while it is open.
+    var focusables = modal.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea'
+    );
+    var visible = Array.prototype.filter.call(focusables, function (el) {
+      return el.offsetParent !== null;
+    });
+    if (!visible.length) return;
+
+    var first = visible[0];
+    var last = visible[visible.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  /* ---------------------------------------------------- quote submission */
+  /* Posts to a Google Form. The response is opaque (no-cors), so we cannot
+     read success or failure — we show the confirmation optimistically. That
+     trade-off is deliberate and documented in CLAUDE.md. */
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      var cfg = (window.SCContent && window.SCContent.quoteForm) || {};
+      var data = new FormData(form);
+      var body = new URLSearchParams();
+
+      var map = {
+        name: cfg.entryName,
+        product: cfg.entryProduct,
+        quantity: cfg.entryQuantity,
+        site: cfg.entrySite,
+        contact: cfg.entryContact
+      };
+
+      Object.keys(map).forEach(function (field) {
+        var entry = map[field];
+        if (!entry || entry.indexOf('PLACEHOLDER') === 0) return;
+        var value = data.get(field) || '';
+        if (field === 'quantity' && value && unitEl) value += ' ' + unitEl.textContent;
+        body.append(entry, value);
+      });
+
+      if (cfg.formId && cfg.formId.indexOf('PLACEHOLDER') !== 0 && Array.from(body).length) {
+        fetch('https://docs.google.com/forms/d/e/' + cfg.formId + '/formResponse', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString()
+        }).catch(function () { /* opaque either way; nothing to report */ });
+      } else {
+        // Not wired up yet. Say so in the console rather than failing silently.
+        console.warn(
+          '[quote] Google Form is not configured. Fill in quoteForm.formId and the ' +
+          'entry ids in content/site.json — see REQUIREMENTS.md.'
+        );
+      }
+
+      form.hidden = true;
+      if (success) success.hidden = false;
+      form.reset();
+    });
   }
 
-  const nextKeys = ["PageDown", "ArrowDown", " "];
-  const prevKeys = ["PageUp", "ArrowUp"];
-
-  if (![...nextKeys, ...prevKeys].includes(event.key)) {
-    return;
-  }
-
-  event.preventDefault();
-  const direction = nextKeys.includes(event.key) ? 1 : -1;
-  const targetIndex = Math.min(Math.max(getCurrentSnapIndex() + direction, 0), snapSections.length - 1);
-  snapToSection(targetIndex);
-});
+  /* Expose so cms.js can re-sync the unit after it rebuilds the dropdown. */
+  window.SCQuote = { syncUnit: syncUnit };
+})();

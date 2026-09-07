@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="sh" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000" stop-opacity=".22"/>
+      <stop offset="70%" stop-color="#000" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gtop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6e3de"/><stop offset="100%" stop-color="#dcd9d3"/>
+    </linearGradient>
+    <linearGradient id="gleft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c6c2ba"/><stop offset="100%" stop-color="#bdb9b1"/>
+    </linearGradient>
+    <linearGradient id="gright" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5a199"/><stop offset="100%" stop-color="#98948c"/>
+    </linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <ellipse cx="400" cy="508" rx="290" ry="34" fill="url(#sh)"/>
+  <path d="M400.0,152.0 L550.0,78.0 A66,62 0 0 1 550.0,202.0 L400.0,276.0 A66,62 0 0 0 400.0,152.0 Z" fill="url(#gright)" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".95"/>
+  <path d="M400.0,152.0 A66,62 0 1 1 400.0,276.0 A66,62 0 1 1 400.0,152.0 Z M400.0,185.5 A30.4,28.5 0 1 0 400.0,242.5 A30.4,28.5 0 1 0 400.0,185.5 Z" fill="url(#gtop)" fill-rule="evenodd" stroke="#827e76" stroke-width="2" opacity=".95"/>
+  <ellipse cx="409.0" cy="209.6" rx="30.4" ry="28.5" fill="#827e76" opacity=".85"/>
+  <path d="M331.0,268.0 L481.0,194.0 A66,62 0 0 1 481.0,318.0 L331.0,392.0 A66,62 0 0 0 331.0,268.0 Z" fill="url(#gright)" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".95"/>
+  <path d="M331.0,268.0 A66,62 0 1 1 331.0,392.0 A66,62 0 1 1 331.0,268.0 Z M331.0,301.5 A30.4,28.5 0 1 0 331.0,358.5 A30.4,28.5 0 1 0 331.0,301.5 Z" fill="url(#gtop)" fill-rule="evenodd" stroke="#827e76" stroke-width="2" opacity=".95"/>
+  <ellipse cx="340.0" cy="325.6" rx="30.4" ry="28.5" fill="#827e76" opacity=".85"/>
+  <path d="M469.0,268.0 L619.0,194.0 A66,62 0 0 1 619.0,318.0 L469.0,392.0 A66,62 0 0 0 469.0,268.0 Z" fill="url(#gright)" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".95"/>
+  <path d="M469.0,268.0 A66,62 0 1 1 469.0,392.0 A66,62 0 1 1 469.0,268.0 Z M469.0,301.5 A30.4,28.5 0 1 0 469.0,358.5 A30.4,28.5 0 1 0 469.0,301.5 Z" fill="url(#gtop)" fill-rule="evenodd" stroke="#827e76" stroke-width="2" opacity=".95"/>
+  <ellipse cx="478.0" cy="325.6" rx="30.4" ry="28.5" fill="#827e76" opacity=".85"/>
+  <path d="M262.0,384.0 L412.0,310.0 A66,62 0 0 1 412.0,434.0 L262.0,508.0 A66,62 0 0 0 262.0,384.0 Z" fill="url(#gright)" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".95"/>
+  <path d="M262.0,384.0 A66,62 0 1 1 262.0,508.0 A66,62 0 1 1 262.0,384.0 Z M262.0,417.5 A30.4,28.5 0 1 0 262.0,474.5 A30.4,28.5 0 1 0 262.0,417.5 Z" fill="url(#gtop)" fill-rule="evenodd" stroke="#827e76" stroke-width="2" opacity=".95"/>
+  <ellipse cx="271.0" cy="441.6" rx="30.4" ry="28.5" fill="#827e76" opacity=".85"/>
+  <path d="M400.0,384.0 L550.0,310.0 A66,62 0 0 1 550.0,434.0 L400.0,508.0 A66,62 0 0 0 400.0,384.0 Z" fill="url(#gright)" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".95"/>
+  <path d="M400.0,384.0 A66,62 0 1 1 400.0,508.0 A66,62 0 1 1 400.0,384.0 Z M400.0,417.5 A30.4,28.5 0 1 0 400.0,474.5 A30.4,28.5 0 1 0 400.0,417.5 Z" fill="url(#gtop)" fill-rule="evenodd" stroke="#827e76" stroke-width="2" opacity=".95"/>
+  <ellipse cx="409.0" cy="441.6" rx="30.4" ry="28.5" fill="#827e76" opacity=".85"/>
+  <path d="M538.0,384.0 L688.0,310.0 A66,62 0 0 1 688.0,434.0 L538.0,508.0 A66,62 0 0 0 538.0,384.0 Z" fill="url(#gright)" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".95"/>
+  <path d="M538.0,384.0 A66,62 0 1 1 538.0,508.0 A66,62 0 1 1 538.0,384.0 Z M538.0,417.5 A30.4,28.5 0 1 0 538.0,474.5 A30.4,28.5 0 1 0 538.0,417.5 Z" fill="url(#gtop)" fill-rule="evenodd" stroke="#827e76" stroke-width="2" opacity=".95"/>
+  <ellipse cx="547.0" cy="441.6" rx="30.4" ry="28.5" fill="#827e76" opacity=".85"/>
+</svg>

@@ -4,12 +4,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-page static demo site for a fictional design/architecture/build company,
-in Thai, English, and Chinese. No build step, no package.json, no test framework,
-no dependencies to install. GitHub Pages serves the repository root of `main`, so
-**a push to `main` is a deploy** (live about 40 seconds later).
+A single-page static site for **SC Singhawat Concrete** — a concrete products
+manufacturer with a construction arm (Singhawat Builders) — in Thai, English,
+and Chinese. No build step, no package.json, no test framework, no dependencies
+to install. GitHub Pages serves the repository root of `main`, so **a push to
+`main` is a deploy** (live about 40 seconds later).
 
 Live: https://tonyponyrin.github.io/demo-company-page/
+
+The current copy and photography are **mock content**, standing in until the
+client supplies real text and photos. The structure, however, is the real
+requirement — it comes from the client's hand-drawn wireframes, kept as
+`design-contact-sheet.jpg` in the repository root and documented in
+[REQUIREMENTS.md](REQUIREMENTS.md). Read that before changing page structure.
+
+> Historical note: this repository previously held an unrelated demo for a
+> fictional design studio ("Tonypony's Company"). That site is gone. If you find
+> a reference to Approach / Services / Process / Studio sections, or to
+> `interior-design.png`, it is a leftover and should be removed.
 
 ## Commands
 
@@ -32,6 +44,32 @@ To redeploy the auth worker (rarely needed), from `d:\Project\sveltia-cms-auth`
 npx wrangler deploy
 ```
 
+## Page structure
+
+One page, five anchors, in this order. The nav has exactly four links plus the
+three language flags; do not add a fifth link without checking REQUIREMENTS.md.
+
+| Anchor | Contents |
+| --- | --- |
+| `#top` | Hero slideshow (3 slides, prev/next) |
+| `#about` | Four bands: intro triple-slideshow, History, Vision & Mission, Policy |
+| `#products` | 6-card product grid, then one detail band per product |
+| `#projects` | Singhawat Builders intro, 3 pitch panels, then `#works` gallery |
+| `#contact` | Phone / LINE / Facebook, office map, footer |
+
+Two elements are **global chrome, present on every screen**: the sticky orange
+Get Quote button (bottom-left) and the sticky social rail (right edge, FB / LINE
+/ phone). Every Get Quote button on the page — the sticky one and the per-product
+ones — opens the same quotation modal.
+
+The six products are fixed and their detail-band ids are referenced from the grid
+cards: `#product-readymix`, `#product-slab`, `#product-pile`, `#product-pipe`,
+`#product-manhole`, `#product-beam`.
+
+The three project pitch panels are Build Your Dream House, Build Your Office, and
+Build Your Way (concrete road construction). All three "See Our Works" links go to
+the single `#works` gallery — they are not three separate galleries.
+
 ## Content architecture
 
 Three layers that must stay in agreement:
@@ -39,10 +77,12 @@ Three layers that must stay in agreement:
 1. **`index.html`** carries English copy inline as a fallback, plus hooks:
    - `data-cms="hero.headline"` — replace the element's text
    - `data-cms-src` / `data-cms-alt` — replace an image's `src` / `alt`
-   - `data-project-grid` — container the project cards are rebuilt into
-2. **`content/site.json`** and **`content/projects.json`** hold every string in
-   all three languages.
-3. **`cms.js`** fetches both files and applies them over the DOM. If either fetch
+   - `data-product-grid` — container the product cards are rebuilt into
+   - `data-product-detail="readymix"` — a product's detail band
+   - `data-works-grid` — container the Our Works cards are rebuilt into
+2. **`content/site.json`**, **`content/products.json`**, and
+   **`content/projects.json`** hold every string in all three languages.
+3. **`cms.js`** fetches all three files and applies them over the DOM. If a fetch
    fails, the inline English copy stays and nothing breaks.
 
 `admin/config.yml` declares the editor fields for the same data.
@@ -68,33 +108,82 @@ top-level key and a lookup is `site[language].<dotted.path>`:
 Image path fields use `i18n: duplicate`, so the same value is written into every
 locale and can be read from whichever one is active.
 
-`projects.json` deliberately does **not** use Decap i18n. Decap ties list length
-to the default locale, which makes adding and reordering list items fragile, so
-each project carries explicit `title_th` / `title_en` / `title_zh` fields
-instead. Do not "unify" these two approaches; they differ on purpose.
+`products.json` and `projects.json` deliberately do **not** use Decap i18n. Decap
+ties list length to the default locale, which makes adding and reordering list
+items fragile, so each entry carries explicit `title_th` / `title_en` / `title_zh`
+fields instead. Do not "unify" these two approaches; they differ on purpose.
+
+### Slideshows use numbered slots, not lists
+
+The hero, the About intro, and the History band are slideshows. Their slides are
+**fixed numbered fields** (`hero.slide1Image`, `hero.slide2Image`, …), not list
+widgets. Same reasoning as above: a Decap list inside an i18n file is fragile,
+and these slideshows have a designed slide count anyway. To change how many
+slides a band has, edit the markup and add the matching numbered fields — do not
+convert it to a list.
 
 ### script.js owns behaviour, not text
 
-`script.js` previously held a 147-entry translation map keyed by English source
-strings, plus a text-node snapshot it restored on every language switch. That is
-gone. It now only tracks the active language, sets `documentElement.lang`, and
-dispatches `tonypony:languagechange`; `cms.js` listens for that event and
-re-applies content. Do not reintroduce translated strings into `script.js` —
-`content/*.json` is the single source of truth.
+`script.js` tracks the active language, sets `documentElement.lang`, and
+dispatches `sc:languagechange`; `cms.js` listens for that event and re-applies
+content. Do not put translated strings into `script.js` — `content/*.json` is the
+single source of truth.
 
-Project cards are re-rendered by `cms.js`, so anything that operates on them must
-query the DOM at call time (as `getProjectCards()` does) rather than capture a
-NodeList at load. The reveal-on-scroll observer only sees the original nodes,
-which is why `cms.js` renders cards with `is-visible` already applied.
+`script.js` also owns the slideshows, the scroll-reveal directions, the quote
+modal, and the works carousel. Product cards and works cards are re-rendered by
+`cms.js`, so anything that operates on them must query the DOM at call time
+rather than capture a NodeList at load. The reveal-on-scroll observer only sees
+the original nodes, which is why `cms.js` renders cards with `is-visible` already
+applied.
 
-### Asset paths
+### Scroll animation directions
 
-Sveltia requires `public_folder` to be an absolute path, so
-`admin/config.yml` hardcodes `/demo-company-page/assets/images` — the repository
-name is baked into that one line. The page itself uses relative URLs so it works
-from any path, and `toRelativeAsset()` in `cms.js` maps absolute managed paths
-back to relative ones. **If the repository is renamed or moved to a custom
-domain, update `public_folder`.**
+The sketches specify direction per element, and the markup encodes it:
+`data-reveal="left"` (slides in from the left), `"right"`, `"up"`, `"down"`.
+Product detail bands are always text-from-left, image-from-right. Respect the
+existing direction attributes; they are a client requirement, not decoration.
+
+## The quotation form
+
+The single highest-value feature on the page, and the reason the site exists.
+
+It is a **custom-built form that posts to a Google Form**, not an embedded
+Google Form iframe. The old embed returned 401 to anonymous visitors and could
+not be styled; this replaces it.
+
+How it works:
+
+1. The modal collects Name, Product, Quantity (+ unit), Construction site, Contact.
+2. The Product dropdown is built from `products.json` at runtime.
+3. Choosing a product **sets the quantity unit automatically** from that product's
+   `unit` field (e.g. Ready-Mixed Concrete → `m³`). This is a client requirement.
+4. Submitting POSTs `application/x-www-form-urlencoded` to
+   `https://docs.google.com/forms/d/e/<formId>/formResponse` with `mode: 'no-cors'`.
+
+Because `no-cors` makes the response opaque, **the page cannot tell whether the
+submission succeeded**. It optimistically shows a success state. That is the
+accepted trade-off for posting to Google Forms from a static site; do not add
+error handling that pretends to know better.
+
+The form id and the `entry.NNNNNN` field ids live in `site.json` under
+`quoteForm`, with `i18n: duplicate`, so an editor can paste them in from the CMS
+without a code change. **They are placeholders until the client creates the real
+Google Form** — see REQUIREMENTS.md for how to find the entry ids.
+
+## Asset paths and die-cut images
+
+Sveltia requires `public_folder` to be an absolute path, so `admin/config.yml`
+hardcodes `/demo-company-page/assets/images` — the repository name is baked into
+that one line. The page itself uses relative URLs so it works from any path, and
+`toRelativeAsset()` in `cms.js` maps absolute managed paths back to relative ones.
+**If the repository is renamed or moved to a custom domain, update
+`public_folder`.**
+
+Product imagery is **die-cut**: the product on a transparent background, no
+backdrop, so it can sit on any section colour. The placeholders in
+`assets/images/diecut/` are SVGs generated for this mock-up. When real
+photography arrives it should be cut out the same way and saved as transparent
+PNG or WebP, and the paths updated in `products.json`.
 
 ## CMS authentication
 
@@ -116,8 +205,25 @@ Pull before editing `content/*.json`, or expect to rebase.
 
 ## Verifying changes
 
-There is no test runner. What has been used, and is worth repeating for anything
-touching content or config:
+There is no test framework, but there are two scripts. Run both after touching
+content, config, or markup:
+
+```bash
+python tools/verify-content.py    # the three-way invariant, statically
+python tools/browser-check.py     # serves the site and drives it in Chromium
+```
+
+`verify-content.py` checks every item in the list below that can be checked
+without a browser, and exits non-zero on failure. `browser-check.py` starts a
+local server on port 8731, exercises the page, and leaves screenshots named
+`_*.png` in the repository root (gitignored). It needs Playwright with Chromium,
+already installed under `~/AppData/Local/ms-playwright`.
+
+A third script, `tools/generate-images.py`, regenerates the placeholder SVGs in
+`assets/images/`. Run it from the repository root, not from `tools/` — it writes
+paths relative to the working directory.
+
+What the two scripts cover:
 
 - Every `data-cms` / `data-cms-src` / `data-cms-alt` path in `index.html`
   resolves in all three locales.
@@ -125,22 +231,26 @@ touching content or config:
   declared-but-missing, no present-but-undeclared.
 - All three locales have identical key shape, and no `th`/`zh` value is
   byte-identical to its `en` counterpart (that means untranslated).
+- Every `#product-*` anchor referenced by a product card exists in the markup.
 - In a browser: content renders per locale, switching language and back does not
-  lose CMS text, category filters still work on re-rendered cards, and the page
-  survives `content/*.json` being unreachable.
+  lose CMS text, the quote modal opens from every Get Quote button, choosing a
+  product updates the unit, and the page survives `content/*.json` being
+  unreachable.
 
 Playwright with a local static server has been used for the browser checks;
 Chromium is installed under `~/AppData/Local/ms-playwright`.
 
 ## Known issues
 
-- The embedded Google Form in the contact section returns **401 to anonymous
-  visitors**, so the public site shows an empty form area. Fix in Google Forms
-  sharing settings, not in this repository.
-- `assets/images/` contains 2-3MB PNGs. The CMS hints ask editors for images
-  under 500KB, but the existing ones exceed that.
-- `assets/images/Screenshot 2026-07-24 110313.png` was uploaded through the CMS
-  and is not referenced by any content.
+- **The Google Form is not connected yet.** `quoteForm.formId` and the entry ids
+  in `site.json` are placeholders, so submissions go nowhere until the client
+  creates the form and the ids are filled in.
+- All copy and imagery is mock content pending the client's real material.
+- Product and project imagery is placeholder SVG, not photographs. The sketches
+  specifically ask for real photos — volume shots and close-ups of the concrete
+  surface — and note that the reinforced pipe shot is undecided between stacked
+  and single.
+- The office map is a placeholder embed. The client asked for a 3D map view.
 
 ## AGENT/ directory
 

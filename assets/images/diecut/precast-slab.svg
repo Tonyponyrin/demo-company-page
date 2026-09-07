@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="sh" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000" stop-opacity=".22"/>
+      <stop offset="70%" stop-color="#000" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gtop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6e3de"/><stop offset="100%" stop-color="#dcd9d3"/>
+    </linearGradient>
+    <linearGradient id="gleft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c6c2ba"/><stop offset="100%" stop-color="#bdb9b1"/>
+    </linearGradient>
+    <linearGradient id="gright" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5a199"/><stop offset="100%" stop-color="#98948c"/>
+    </linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <ellipse cx="400" cy="470" rx="300" ry="40" fill="url(#sh)"/>
+  <g>
+  <polygon points="180.0,210.0 580.0,328.0 450.0,394.0 50.0,276.0" fill="url(#gtop)"/>
+  <polygon points="50.0,276.0 450.0,394.0 450.0,440.0 50.0,322.0" fill="url(#gleft)"/>
+  <polygon points="580.0,328.0 450.0,394.0 450.0,440.0 580.0,374.0" fill="url(#gright)"/>
+  </g>
+  <path d="M180.0,210.0 L580.0,328.0 L450.0,394.0 L50.0,276.0 Z M450.0,394.0 L450.0,440.0 M580.0,328.0 L580.0,374.0 L450.0,440.0 L50.0,322.0 L50.0,276.0" fill="none" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".55"/>
+  <circle cx="208" cy="300" r="0" fill="none"/>
+  <circle cx="284" cy="322" r="0" fill="none"/>
+  <circle cx="360" cy="344" r="0" fill="none"/>
+  <circle cx="436" cy="366" r="0" fill="none"/>
+  <circle cx="512" cy="388" r="0" fill="none"/>
+  <line x1="246.7" y1="229.7" x2="116.7" y2="295.7" stroke="#827e76" stroke-width="2" opacity=".22"/>
+  <line x1="313.3" y1="249.3" x2="183.3" y2="315.3" stroke="#827e76" stroke-width="2" opacity=".22"/>
+  <line x1="380.0" y1="269.0" x2="250.0" y2="335.0" stroke="#827e76" stroke-width="2" opacity=".22"/>
+  <line x1="446.7" y1="288.7" x2="316.7" y2="354.7" stroke="#827e76" stroke-width="2" opacity=".22"/>
+  <line x1="513.3" y1="308.3" x2="383.3" y2="374.3" stroke="#827e76" stroke-width="2" opacity=".22"/>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="sh" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000" stop-opacity=".22"/>
+      <stop offset="70%" stop-color="#000" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gtop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6e3de"/><stop offset="100%" stop-color="#dcd9d3"/>
+    </linearGradient>
+    <linearGradient id="gleft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c6c2ba"/><stop offset="100%" stop-color="#bdb9b1"/>
+    </linearGradient>
+    <linearGradient id="gright" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5a199"/><stop offset="100%" stop-color="#98948c"/>
+    </linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <ellipse cx="400" cy="500" rx="320" ry="34" fill="url(#sh)"/>
+  <polygon points="141.8,133.5 300.0,140.0 208.0,190.0" fill="#dcd9d3"/>
+  <polygon points="141.8,133.5 208.0,190.0 208.0,248.0" fill="#bdb9b1"/>
+  <path d="M141.8,133.5 L300,140 M141.8,133.5 L208,190 M141.8,133.5 L208,248" fill="none" stroke="#827e76" stroke-width="2" opacity=".5"/>
+  <g>
+  <polygon points="300.0,140.0 630.0,318.0 538.0,368.0 208.0,190.0" fill="url(#gtop)"/>
+  <polygon points="208.0,190.0 538.0,368.0 538.0,426.0 208.0,248.0" fill="url(#gleft)"/>
+  <polygon points="630.0,318.0 538.0,368.0 538.0,426.0 630.0,376.0" fill="url(#gright)"/>
+  </g>
+  <path d="M300.0,140.0 L630.0,318.0 L538.0,368.0 L208.0,190.0 Z M538.0,368.0 L538.0,426.0 M630.0,318.0 L630.0,376.0 L538.0,426.0 L208.0,248.0 L208.0,190.0" fill="none" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".55"/>
+  <line x1="313.2" y1="155.1" x2="616.8" y2="318.9" stroke="#827e76" stroke-width="2" opacity=".18"/>
+  <path d="M494,272 a24,20 0 1 1 48,26" fill="none" stroke="#6f7a80" stroke-width="9" stroke-linecap="round"/>
+</svg>

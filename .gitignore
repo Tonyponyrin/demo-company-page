@@ -1,2 +1,6 @@
 .playwright-mcp/
 tonypony-*.png
+
+# scratch screenshots from tools/browser-check.py
+_*.png
+_sheet.html

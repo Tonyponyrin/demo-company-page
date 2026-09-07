@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="sh" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000" stop-opacity=".22"/>
+      <stop offset="70%" stop-color="#000" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gtop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6e3de"/><stop offset="100%" stop-color="#dcd9d3"/>
+    </linearGradient>
+    <linearGradient id="gleft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c6c2ba"/><stop offset="100%" stop-color="#bdb9b1"/>
+    </linearGradient>
+    <linearGradient id="gright" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5a199"/><stop offset="100%" stop-color="#98948c"/>
+    </linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <ellipse cx="400" cy="486" rx="250" ry="34" fill="url(#sh)"/>
+  <g>
+  <polygon points="300.0,140.0 500.0,248.0 314.0,346.0 114.0,238.0" fill="url(#gtop)"/>
+  <polygon points="114.0,238.0 314.0,346.0 314.0,532.0 114.0,424.0" fill="url(#gleft)"/>
+  <polygon points="500.0,248.0 314.0,346.0 314.0,532.0 500.0,434.0" fill="url(#gright)"/>
+  </g>
+  <path d="M300.0,140.0 L500.0,248.0 L314.0,346.0 L114.0,238.0 Z M314.0,346.0 L314.0,532.0 M500.0,248.0 L500.0,434.0 L314.0,532.0 L114.0,424.0 L114.0,238.0" fill="none" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".55"/>
+  <g transform="rotate(-22 307 243)">
+    <ellipse cx="307" cy="243" rx="96" ry="48" fill="#827e76"/>
+    <ellipse cx="307" cy="250" rx="84" ry="39" fill="#5f5c56"/>
+    <ellipse cx="307" cy="243" rx="96" ry="48" fill="none" stroke="#827e76" stroke-width="3" opacity=".8"/>
+  </g>
+  <path d="M291,231 h34" stroke="#9aa3a8" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+  <path d="M291,246 h34" stroke="#9aa3a8" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+  <path d="M291,261 h34" stroke="#9aa3a8" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+  <ellipse cx="407" cy="390" rx="26" ry="44" transform="rotate(-14 407 390)" fill="#827e76" opacity=".55"/>
+</svg>

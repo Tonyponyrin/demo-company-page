@@ -1,332 +1,481 @@
 {
   "th": {
+    "general": {
+      "pageTitle": "SC สิงหวัฒน์คอนกรีต — คอนกรีตผสมเสร็จและคอนกรีตสำเร็จรูป",
+      "metaDescription": "ผู้ผลิตคอนกรีตผสมเสร็จ แผ่นพื้น เสาเข็ม ท่อ บ่อพัก และคานสำเร็จรูป พร้อมบริการรับเหมาก่อสร้างครบวงจร",
+      "brandName": "สิงหวัฒน์ คอนกรีต",
+      "brandTagline": "คอนกรีตผสมเสร็จ · สำเร็จรูป",
+      "quoteCta": "ขอใบเสนอราคา"
+    },
+    "nav": {
+      "about": "เกี่ยวกับเรา",
+      "products": "สินค้าของเรา",
+      "projects": "ผลงานของเรา",
+      "contact": "ติดต่อเรา"
+    },
     "hero": {
-      "eyebrow": "ออกแบบ - สถาปัตยกรรม - ก่อสร้าง",
-      "headline": "Tonypony's Company สร้างพื้นที่ตั้งแต่สเก็ตช์แรกจนถึงส่งมอบงานจริง",
-      "copy": "สตูดิโอสมมติแบบครบวงจรสำหรับบ้าน ที่ทำงาน ร้านค้า และอาคารสาธารณะที่ใส่ใจรายละเอียด อบอุ่น และคงทน",
-      "primaryCta": "ดูผลงาน",
-      "secondaryCta": "ขอคำปรึกษา",
-      "stat1Label": "ปีประสบการณ์รวมสมมติ",
-      "stat2Label": "งานตั้งแต่แนวคิดถึงเสร็จจริง",
-      "stat3Label": "คะแนนความพึงพอใจเฉลี่ย",
-      "image": "./assets/images/hero-building.png",
-      "imageAlt": "อาคารมิกซ์ยูสสมัยใหม่ พร้อมทีมออกแบบกำลังตรวจแบบ"
+      "eyebrow": "ผลิตภัณฑ์คอนกรีต และงานก่อสร้าง",
+      "headline": "คอนกรีตที่คุณวางใจได้ทุกการเท",
+      "copy": "คอนกรีตผสมเสร็จ ชิ้นส่วนสำเร็จรูป และงานก่อสร้างครบวงจรจากโรงงานเดียว ผสมตามสเปกที่กำหนด และส่งถึงหน้างานตรงเวลาที่นัดไว้",
+      "primaryCta": "ขอใบเสนอราคา",
+      "secondaryCta": "ดูสินค้าของเรา",
+      "slide1Image": "./assets/images/placeholder/hero-plant.svg",
+      "slide1Alt": "โรงงานผลิตคอนกรีตของสิงหวัฒน์",
+      "slide2Image": "./assets/images/placeholder/hero-truck.svg",
+      "slide2Alt": "รถโม่กำลังรับคอนกรีตผสมเสร็จ",
+      "slide3Image": "./assets/images/placeholder/hero-pour.svg",
+      "slide3Alt": "การเทคอนกรีตที่หน้างานก่อสร้าง"
     },
-    "approach": {
-      "kicker": "สิ่งที่เราทำ",
-      "title": "ทีมเดียวที่ประสานงานครบ เพื่อความชัดเจนของงานออกแบบ การควบคุมเทคนิค และการส่งมอบงานก่อสร้าง",
-      "body": "Tonypony's Company เป็นบริษัทสมมติสำหรับเดโมนี้ แต่ขั้นตอนทำงานอิงจากงานจริง ตั้งแต่สำรวจพื้นที่ ออกแบบสถาปัตยกรรม วางทิศทางอินทีเรีย ขออนุญาต จัดซื้อ คุมงานก่อสร้าง ไปจนถึงเก็บรายละเอียดสุดท้ายโดยสตูดิโอเดียวที่รับผิดชอบครบ",
-      "point1": "กลยุทธ์พื้นที่",
-      "point2": "แบบประสานงาน",
-      "point3": "ควบคุมงานก่อสร้าง",
-      "cardTitle": "จากแนวคิดถึงส่งมอบ",
-      "cardBody": "สถาปัตยกรรม อินทีเรีย จัดซื้อ และตรวจไซต์ เชื่อมเป็นขั้นตอนเดียวกัน",
-      "image": "./assets/images/interior-design.png",
-      "imageAlt": "งานสถาปัตยกรรมภายในที่ประณีต ด้วยหิน ไม้ และแสงที่ออกแบบมาพร้อมกัน"
+    "gallery": {
+      "kicker": "ผลงานล่าสุด",
+      "title": "ส่งมอบแล้วทั้งงานบ้าน อาคารพาณิชย์ และงานสาธารณูปโภค"
     },
-    "services": {
-      "kicker": "บริการ",
-      "title": "บริการครอบคลุมทั้งวงจรของโปรเจกต์",
-      "architecture": {
-        "title": "สถาปัตยกรรม",
-        "body": "ออกแบบแนวคิด วางผัง ศึกษาฟาซาด จัดทำแบบก่อสร้าง และเอกสารพร้อมยื่นหน่วยงาน"
-      },
-      "interior": {
-        "title": "ออกแบบภายใน",
-        "body": "พาเลตวัสดุ กลยุทธ์แสง วางแผนเฟอร์นิเจอร์ งานบิลต์อิน และทิศทางบรรยากาศโดยรวม"
-      },
-      "delivery": {
-        "title": "ส่งมอบงานก่อสร้าง",
-        "body": "วางแผนงบประมาณ ประสานผู้รับเหมา คุมไซต์ ตรวจคุณภาพ และจัดการปิดงาน"
-      },
-      "sustainability": {
-        "title": "อัปเกรดอย่างยั่งยืน",
-        "body": "กันแดดแบบพาสซีฟ ปรับปรุงเปลือกอาคาร ระบบประหยัดพลังงาน วัสดุผลกระทบต่ำ และแผนการใช้งานระยะยาว"
-      }
+    "about": {
+      "kicker": "เกี่ยวกับเรา",
+      "title": "สามทศวรรษของงานคอนกรีต จากโรงงานถึงหน้างานของคุณ",
+      "slide1Image": "./assets/images/placeholder/about-yard.svg",
+      "slide1Alt": "ลานผลิตของสิงหวัฒน์ คอนกรีต",
+      "slide2Image": "./assets/images/placeholder/about-team.svg",
+      "slide2Alt": "ทีมงานสิงหวัฒน์ คอนกรีต ที่หน้างาน",
+      "experienceValue": "30+",
+      "experienceLabel": "ปีแห่งประสบการณ์",
+      "slogan": "“ผสมได้มาตรฐาน ส่งตรงเวลา เทได้อย่างมั่นใจ”"
     },
-    "projects": {
-      "kicker": "ผลงานที่เลือก",
-      "title": "ตัวอย่างผลงานสมมติสำหรับพอร์ตเดโม"
+    "history": {
+      "kicker": "ประวัติความเป็นมา",
+      "title": "จากรถโม่คันเดียว สู่ผู้ผลิตระดับภูมิภาค",
+      "body1": "สิงหวัฒน์ คอนกรีต เริ่มต้นในปี 2537 ด้วยรถโม่เพียงคันเดียวและลานเล็ก ๆ ชานกรุงเทพฯ รับงานเทคอนกรีตบ้านพักอาศัยให้ผู้รับเหมาที่ต้องการคอนกรีตซึ่งมาถึงตรงตามที่รับปาก",
+      "body2": "ปัจจุบันโรงงานเดินสายการผลิตชิ้นส่วนสำเร็จรูปควบคู่กับคอนกรีตผสมเสร็จ และยังคงเป็นคนในครอบครัวที่ตรวจรับรองสูตรผสมทุกสูตรก่อนออกจากโรงงาน",
+      "slide1Image": "./assets/images/placeholder/history-1.svg",
+      "slide1Alt": "โรงงานแห่งแรกในช่วงปีก่อตั้ง",
+      "slide2Image": "./assets/images/placeholder/history-2.svg",
+      "slide2Alt": "โรงงานในปัจจุบัน"
     },
-    "filters": {
-      "all": "ทั้งหมด",
-      "home": "บ้าน",
-      "commercial": "เชิงพาณิชย์",
-      "interior": "อินทีเรีย"
+    "vision": {
+      "kicker": "วิสัยทัศน์ และ พันธกิจ",
+      "title": "เป้าหมายที่เรามุ่งไป และวิธีที่เราไปให้ถึง",
+      "visionTitle": "วิสัยทัศน์",
+      "visionBody": "เป็นผู้ผลิตคอนกรีตที่ผู้รับเหมาในภูมิภาคนึกถึงเป็นรายแรก ด้วยความสม่ำเสมอของเนื้อคอนกรีต ความตรงไปตรงมาเรื่องระยะเวลาส่งมอบ และมาตรฐานที่ไม่ลดลงแม้ตารางงานจะกดดัน",
+      "missionTitle": "พันธกิจ",
+      "missionBody": "ทดสอบคอนกรีตทุกแบตช์เทียบกับสเปกที่กำหนด เดินรถและแท่นหล่อตามตารางที่ประกาศไว้ และเสนอราคาอย่างโปร่งใส เพื่อให้ผู้รับเหมาวางแผนงานโดยอ้างอิงเราได้อย่างมั่นใจ"
     },
-    "process": {
-      "kicker": "กระบวนการ",
-      "title": "ขั้นตอนชัด ตัดสินใจได้จริง และลดเรื่องไม่คาดคิด",
-      "discover": {
-        "title": "สำรวจ",
-        "body": "เราวิเคราะห์พื้นที่ เป้าหมาย ช่วงงบประมาณ การอนุมัติ และผลลัพธ์สำคัญก่อนเริ่มออกแบบ"
-      },
-      "design": {
-        "title": "ออกแบบ",
-        "body": "แนวคิดถูกพัฒนาเป็นผัง รูปด้าน วัสดุ แสง และชุดแบบก่อสร้างที่ประสานกัน"
-      },
-      "build": {
-        "title": "ก่อสร้าง",
-        "body": "การจัดซื้อ การสื่อสารกับผู้รับเหมา การตรวจไซต์ และการติดตามเปลี่ยนแปลงมองเห็นได้ตลอดงาน"
-      },
-      "handover": {
-        "title": "ส่งมอบ",
-        "body": "ตรวจแก้ข้อบกพร่องสุดท้าย คู่มือการใช้งาน การจัดตกแต่ง และคำแนะนำการดูแล เพื่อปิดงานอย่างเรียบร้อย"
-      }
+    "policy": {
+      "kicker": "นโยบาย",
+      "title": "มาตรฐานที่เราไม่ต่อรอง",
+      "point1": "คอนกรีตทุกแบตช์ผ่านการทดสอบกำลังอัดลูกปูน และเก็บผลไว้ให้ลูกค้าตรวจสอบ",
+      "point2": "สูตรผสมตรงตามชั้นกำลังอัดที่ระบุ ไม่มีการลดสเปกลงโดยไม่แจ้ง",
+      "point3": "แจ้งช่วงเวลาส่งมอบตามจริง และโทรแจ้งล่วงหน้าทุกครั้งที่การเทมีความเสี่ยง",
+      "point4": "โรงงาน รถโม่ และแท่นหล่อ บำรุงรักษาตามตารางที่บันทึกไว้",
+      "image": "./assets/images/placeholder/policy-team.svg",
+      "imageAlt": "การควบคุมคุณภาพในห้องปฏิบัติการของโรงงาน"
     },
-    "studio": {
-      "kicker": "สตูดิโอ",
-      "title": "นำด้วยงานออกแบบ เข้าใจงานก่อสร้าง และโฟกัสลูกค้า",
-      "body": "ทีมสมมติของ Tonypony's รวมสถาปนิก นักออกแบบภายใน ผู้ประสานงานไซต์ และนักวางแผนต้นทุน เพื่อให้โปรเจกต์เดินอย่างนิ่งขึ้น โดยคิดเรื่องความสวยงามและการก่อสร้างไปพร้อมกัน",
-      "stat1Label": "บทบาทหลักในสตูดิโอ",
-      "stat2Label": "พาร์ตเนอร์วัสดุ",
-      "stat3Label": "ระดับโปรเจกต์",
-      "point1": "เอกสารละเอียดก่อนเริ่มงานไซต์",
-      "point2": "จุดตรวจงบประมาณที่โปร่งใส",
-      "point3": "ตรวจคุณภาพในช่วงสำคัญ",
-      "point4": "วางรายละเอียดงานจบตั้งแต่ต้น"
+    "products": {
+      "kicker": "สินค้าของเรา",
+      "title": "หกกลุ่มผลิตภัณฑ์ ผลิตและผสมในโรงงานของเราเอง",
+      "lead": "เลือกดูรายละเอียดและสเปกของแต่ละผลิตภัณฑ์ หรือขอใบเสนอราคาได้ทันที"
+    },
+    "builders": {
+      "kicker": "ผลงานของเรา",
+      "title": "สิงหวัฒน์ บิลเดอร์ส",
+      "body": "หน่วยงานก่อสร้างของเราดูแลโครงการตั้งแต่แบบจนถึงส่งมอบ ทั้งงานฐานราก งานโครงสร้าง และงานตกแต่ง โดยใช้คอนกรีตจากโรงงานของเราเอง ตารางคอนกรีตกับตารางก่อสร้างจึงเป็นตารางเดียวกัน",
+      "image": "./assets/images/placeholder/builders-team.svg",
+      "imageAlt": "ทีมงานหน้างานของสิงหวัฒน์ บิลเดอร์ส"
+    },
+    "pitch": {
+      "houseTitle": "สร้างบ้านในฝันของคุณ",
+      "houseSubtitle": "บ้านเดี่ยวและทาวน์เฮาส์ ตั้งแต่งานเสาเข็มจนถึงวันส่งมอบ",
+      "houseCta": "ดูผลงานของเรา",
+      "houseImage": "./assets/images/placeholder/project-house.svg",
+      "houseImageAlt": "บ้านเดี่ยวที่ก่อสร้างแล้วเสร็จ",
+      "officeTitle": "สร้างสำนักงานของคุณ",
+      "officeSubtitle": "อาคารพาณิชย์ โกดัง และงานปรับปรุงพื้นที่ทำงาน",
+      "officeCta": "ดูผลงานของเรา",
+      "officeImage": "./assets/images/placeholder/project-office.svg",
+      "officeImageAlt": "อาคารสำนักงานที่ก่อสร้างแล้วเสร็จ",
+      "roadTitle": "สร้างเส้นทางของคุณ",
+      "roadSubtitle": "งานถนนคอนกรีต ถนนทางเข้าโครงการ และลานจอดรับน้ำหนัก",
+      "roadCta": "ดูผลงานของเรา",
+      "roadImage": "./assets/images/placeholder/project-road.svg",
+      "roadImageAlt": "ถนนคอนกรีตที่เทเสร็จใหม่"
+    },
+    "works": {
+      "kicker": "ผลงานของเรา",
+      "title": "โครงการที่ส่งมอบโดยสิงหวัฒน์ บิลเดอร์ส",
+      "filterAll": "ทั้งหมด",
+      "filterHouse": "งานบ้าน",
+      "filterOffice": "งานอาคาร",
+      "filterRoad": "งานถนน"
     },
     "contact": {
-      "kicker": "ติดต่อ",
-      "title": "วางแผนโปรเจกกับ Tonypony's Company",
-      "body": "ส่งรายละเอียดโปรเจกต์ผ่าน Google Form ด้านล่างโดยไม่ต้องออกจากหน้านี้",
-      "location": "สตูดิโอเดโม เขตริมแม่น้ำ"
+      "kicker": "ติดต่อเรา",
+      "title": "โทรหาโรงงาน หรือส่งรายละเอียดมา แล้วเราจะเสนอราคาให้",
+      "phoneLabel": "โทรหาเรา",
+      "phone1": "086-6743858",
+      "phoneLabel2": "สายที่สอง",
+      "phone2": "081-6743858",
+      "lineLabel": "แชทผ่านไลน์",
+      "lineId": "@SinghawatConcrete",
+      "lineUrl": "https://line.me/R/ti/p/~@singhawatconcrete",
+      "fbLabel": "ทักผ่านเฟซบุ๊ก",
+      "fbName": "บริษัท สิงหวัฒน์คอนกรีต จำกัด",
+      "fbUrl": "https://facebook.com/",
+      "officeTitle": "ที่ตั้งสำนักงาน",
+      "address": "99/9 หมู่ 4 บางขุนเทียน กรุงเทพฯ 10150",
+      "directions": "จากถนนใหญ่มุ่งหน้าลงใต้ เลี้ยวเข้าซอยตรงเซเว่นอีเลฟเว่น แล้วตรงไปอีกประมาณ 200 เมตร ประตูลานอยู่ทางขวามือ",
+      "mapEmbed": "https://maps.google.com/maps?q=Bang%20Khun%20Thian%20Bangkok&z=15&output=embed",
+      "quoteCta": "ขอใบเสนอราคา"
     },
     "footer": {
-      "copy": "เดโมสตูดิโอสถาปัตยกรรมและออกแบบก่อสร้างสมมติ",
+      "companyName": "บริษัท สิงหวัฒน์คอนกรีต จำกัด",
+      "slogan": "“ผสมได้มาตรฐาน ส่งตรงเวลา”",
+      "contactHeading": "ติดต่อ",
+      "copy": "© 2569 บริษัท สิงหวัฒน์คอนกรีต จำกัด",
       "backTop": "กลับขึ้นด้านบน"
     },
-    "nav": {
-      "approach": "แนวทาง",
-      "services": "บริการ",
-      "projects": "ผลงาน",
-      "process": "กระบวนการ",
-      "studio": "สตูดิโอ",
-      "contactCta": "เริ่มโปรเจกต์"
+    "quote": {
+      "title": "ขอใบเสนอราคา",
+      "subtitle": "99/9 หมู่ 4 บางขุนเทียน กรุงเทพฯ · 086-6743858",
+      "docLabel": "ใบขอเสนอราคา",
+      "refLabel": "เลขที่",
+      "nameLabel": "ชื่อผู้ติดต่อ",
+      "productLabel": "สินค้า",
+      "productPlaceholder": "เลือกสินค้า…",
+      "quantityLabel": "จำนวน",
+      "siteLabel": "สถานที่ก่อสร้าง",
+      "contactLabel": "เบอร์ติดต่อ",
+      "submit": "ส่งคำขอ",
+      "note": "เราจะตอบกลับพร้อมใบเสนอราคา โดยปกติภายในวันทำการเดียวกัน",
+      "successTitle": "ส่งคำขอเรียบร้อย",
+      "successBody": "ขอบคุณครับ เราได้รับข้อมูลของคุณแล้ว และจะติดต่อกลับพร้อมใบเสนอราคาโดยเร็ว",
+      "close": "ปิด"
     },
-    "general": {
-      "pageTitle": "Tonypony's Company | ออกแบบ สถาปัตยกรรม และก่อสร้าง",
-      "brandSuffix": "บริษัท"
+    "quoteForm": {
+      "formId": "PLACEHOLDER_FORM_ID",
+      "entryName": "PLACEHOLDER_ENTRY_NAME",
+      "entryProduct": "PLACEHOLDER_ENTRY_PRODUCT",
+      "entryQuantity": "PLACEHOLDER_ENTRY_QUANTITY",
+      "entrySite": "PLACEHOLDER_ENTRY_SITE",
+      "entryContact": "PLACEHOLDER_ENTRY_CONTACT"
     }
   },
+
   "en": {
+    "general": {
+      "pageTitle": "SC Singhawat Concrete — Ready-Mixed and Precast Concrete",
+      "metaDescription": "Ready-mixed concrete, precast slabs, piles, pipes, manholes and beams, plus full construction services.",
+      "brandName": "Singhawat Concrete",
+      "brandTagline": "Ready-mixed & precast",
+      "quoteCta": "Get Quote"
+    },
+    "nav": {
+      "about": "About Us",
+      "products": "Our Products",
+      "projects": "Our Project",
+      "contact": "Contact Us"
+    },
     "hero": {
-      "eyebrow": "Design - Architecture - Build",
-      "headline": "Tonypony's Company shapes spaces from first sketch to final handover.",
-      "copy": "A fictional full-service studio for thoughtful homes, workplaces, retail interiors, and civic buildings that feel precise, warm, and built to last.",
-      "primaryCta": "View Projects",
-      "secondaryCta": "Request Consultation",
-      "stat1Label": "Fictional years combined experience",
-      "stat2Label": "Concept-to-completion builds",
-      "stat3Label": "Average client satisfaction",
-      "image": "./assets/images/hero-building.png",
-      "imageAlt": "Modern mixed-use building with a design team reviewing plans"
+      "eyebrow": "Concrete products & construction",
+      "headline": "Concrete you can build a reputation on.",
+      "copy": "Ready-mixed concrete, precast components, and full construction delivery from one plant — mixed to specification and on site when we said it would be.",
+      "primaryCta": "Get Quote",
+      "secondaryCta": "See Our Products",
+      "slide1Image": "./assets/images/placeholder/hero-plant.svg",
+      "slide1Alt": "Batch plant at the Singhawat Concrete yard",
+      "slide2Image": "./assets/images/placeholder/hero-truck.svg",
+      "slide2Alt": "Mixer truck fleet loading ready-mixed concrete",
+      "slide3Image": "./assets/images/placeholder/hero-pour.svg",
+      "slide3Alt": "Concrete pour in progress on a construction site"
     },
-    "approach": {
-      "kicker": "What we do",
-      "title": "One coordinated team for design clarity, technical control, and construction delivery.",
-      "body": "Tonypony's Company is made up for this demo, but the workflow is realistic: site study, architecture, interior direction, permits, procurement, construction supervision, and final styling under one accountable studio.",
-      "point1": "Site strategy",
-      "point2": "Coordinated drawings",
-      "point3": "Build oversight",
-      "cardTitle": "Concept to keys",
-      "cardBody": "Architecture, interiors, procurement, and site review handled as one connected workflow.",
-      "image": "./assets/images/interior-design.png",
-      "imageAlt": "Refined interior architecture with stone, wood, and integrated lighting"
+    "gallery": {
+      "kicker": "Recent work",
+      "title": "Delivered across housing, commercial, and public infrastructure."
     },
-    "services": {
-      "kicker": "Services",
-      "title": "Built around the full project lifecycle.",
-      "architecture": {
-        "title": "Architecture",
-        "body": "Concept design, planning layouts, facade studies, construction drawings, and authority-ready documentation."
-      },
-      "interior": {
-        "title": "Interior Design",
-        "body": "Material palettes, lighting strategy, furniture planning, custom joinery, and immersive mood direction."
-      },
-      "delivery": {
-        "title": "Building Delivery",
-        "body": "Cost planning, contractor coordination, site supervision, quality reviews, and closeout management."
-      },
-      "sustainability": {
-        "title": "Sustainable Upgrades",
-        "body": "Passive shading, envelope improvements, efficient systems, low-impact materials, and lifecycle planning."
-      }
+    "about": {
+      "kicker": "About us",
+      "title": "Three decades of concrete, from one plant to your pour.",
+      "slide1Image": "./assets/images/placeholder/about-yard.svg",
+      "slide1Alt": "The Singhawat Concrete production yard",
+      "slide2Image": "./assets/images/placeholder/about-team.svg",
+      "slide2Alt": "Singhawat Concrete team on site",
+      "experienceValue": "30+",
+      "experienceLabel": "years of experience",
+      "slogan": "“Mixed right, delivered on time, poured with confidence.”"
     },
-    "projects": {
-      "kicker": "Selected Projects",
-      "title": "Fictional work samples for the demo portfolio."
+    "history": {
+      "kicker": "Our history",
+      "title": "From one mixer to a regional supplier.",
+      "body1": "Singhawat Concrete began in 1994 with a single mixer truck and a yard outside Bangkok, supplying small residential pours for builders who needed concrete that arrived when it was promised.",
+      "body2": "Today the plant runs a full precast line alongside ready-mixed production, and the same family still signs off on every mix design that leaves the gate.",
+      "slide1Image": "./assets/images/placeholder/history-1.svg",
+      "slide1Alt": "The original plant in the company's early years",
+      "slide2Image": "./assets/images/placeholder/history-2.svg",
+      "slide2Alt": "The plant as it operates today"
     },
-    "filters": {
-      "all": "All",
-      "home": "Homes",
-      "commercial": "Commercial",
-      "interior": "Interiors"
+    "vision": {
+      "kicker": "Vision & mission",
+      "title": "What we are aiming at, and how we get there.",
+      "visionTitle": "Vision",
+      "visionBody": "To be the concrete supplier that contractors in the region name first — trusted for consistency of mix, honesty about lead times, and a standard that does not move when the schedule gets tight.",
+      "missionTitle": "Mission",
+      "missionBody": "To test every batch against its specification, to keep our fleet and precast beds running to a published schedule, and to price openly so a builder can plan a project around us without hedging."
     },
-    "process": {
-      "kicker": "Process",
-      "title": "Clear steps, practical decisions, fewer surprises.",
-      "discover": {
-        "title": "Discover",
-        "body": "We map the site, goals, budget range, approvals, and must-have outcomes before design starts."
-      },
-      "design": {
-        "title": "Design",
-        "body": "Concepts become plans, elevations, materials, lighting, and a coordinated construction package."
-      },
-      "build": {
-        "title": "Build",
-        "body": "Procurement, contractor communication, site checks, and change tracking stay visible throughout."
-      },
-      "handover": {
-        "title": "Handover",
-        "body": "Final defects, manuals, styling, and maintenance guidance close the project cleanly."
-      }
+    "policy": {
+      "kicker": "Our policy",
+      "title": "Standards we do not negotiate.",
+      "point1": "Every batch is cube-tested and the results are kept on file for the customer.",
+      "point2": "Mix designs are matched to the specified strength class, never substituted downward.",
+      "point3": "Delivery windows are quoted honestly, and we call ahead when a pour is at risk.",
+      "point4": "Plant, fleet, and precast beds are maintained on a documented schedule.",
+      "image": "./assets/images/placeholder/policy-team.svg",
+      "imageAlt": "Quality control testing at the plant laboratory"
     },
-    "studio": {
-      "kicker": "Studio",
-      "title": "Design-led, construction-aware, client-focused.",
-      "body": "The fictional Tonypony's team combines architects, interior designers, site coordinators, and cost planners. The result is a calmer project experience where beauty and buildability are considered together.",
-      "stat1Label": "Core studio roles",
-      "stat2Label": "Material partners",
-      "stat3Label": "Project scales",
-      "point1": "Detailed documentation before site work",
-      "point2": "Transparent budget checkpoints",
-      "point3": "Quality reviews at key milestones",
-      "point4": "Finishing details planned early"
+    "products": {
+      "kicker": "Our products",
+      "title": "Six product lines, cast and mixed on site.",
+      "lead": "Choose a product to see the specification, or request a quotation for any of them directly."
+    },
+    "builders": {
+      "kicker": "Our project",
+      "title": "Singhawat Builders",
+      "body": "Our construction arm takes a project from drawing to handover — foundations, structure, and finishes — supplied directly from our own plant, so the concrete schedule and the build schedule are the same schedule.",
+      "image": "./assets/images/placeholder/builders-team.svg",
+      "imageAlt": "The Singhawat Builders site team"
+    },
+    "pitch": {
+      "houseTitle": "Build Your Dream House",
+      "houseSubtitle": "Detached homes and townhouses, from piling to handover.",
+      "houseCta": "See Our Works",
+      "houseImage": "./assets/images/placeholder/project-house.svg",
+      "houseImageAlt": "A completed detached house",
+      "officeTitle": "Build Your Office",
+      "officeSubtitle": "Commercial buildings, warehouses, and workplace fit-outs.",
+      "officeCta": "See Our Works",
+      "officeImage": "./assets/images/placeholder/project-office.svg",
+      "officeImageAlt": "A completed office building",
+      "roadTitle": "Build Your Way",
+      "roadSubtitle": "Concrete road construction, access roads, and hardstanding.",
+      "roadCta": "See Our Works",
+      "roadImage": "./assets/images/placeholder/project-road.svg",
+      "roadImageAlt": "A newly laid concrete road"
+    },
+    "works": {
+      "kicker": "Our works",
+      "title": "Projects delivered by Singhawat Builders.",
+      "filterAll": "All",
+      "filterHouse": "Houses",
+      "filterOffice": "Offices",
+      "filterRoad": "Roads"
     },
     "contact": {
-      "kicker": "Contact",
-      "title": "Plan a fictional project with Tonypony's Company.",
-      "body": "Send project details through the embedded Google Form below without leaving the page.",
-      "location": "Demo Studio, Riverside District"
+      "kicker": "Contact us",
+      "title": "Call the plant, or send the details and we will quote.",
+      "phoneLabel": "Call us",
+      "phone1": "086-6743858",
+      "phoneLabel2": "Second line",
+      "phone2": "081-6743858",
+      "lineLabel": "Chat on LINE",
+      "lineId": "@SinghawatConcrete",
+      "lineUrl": "https://line.me/R/ti/p/~@singhawatconcrete",
+      "fbLabel": "Message on Facebook",
+      "fbName": "Singhawat Concrete Co., Ltd.",
+      "fbUrl": "https://facebook.com/",
+      "officeTitle": "Our Office",
+      "address": "99/9 Moo 4, Bang Khun Thian, Bangkok 10150",
+      "directions": "On the main road heading south, turn in at the 7-Eleven and follow the lane 200 m — the yard gate is on your right.",
+      "mapEmbed": "https://maps.google.com/maps?q=Bang%20Khun%20Thian%20Bangkok&z=15&output=embed",
+      "quoteCta": "Get Quote"
     },
     "footer": {
-      "copy": "Fictional architecture and design-build studio demo.",
+      "companyName": "Singhawat Concrete Co., Ltd.",
+      "slogan": "“Mixed right, delivered on time.”",
+      "contactHeading": "Contact",
+      "copy": "© 2026 Singhawat Concrete Co., Ltd.",
       "backTop": "Back to top"
     },
-    "nav": {
-      "approach": "Approach",
-      "services": "Services",
-      "projects": "Projects",
-      "process": "Process",
-      "studio": "Studio",
-      "contactCta": "Start a Project"
+    "quote": {
+      "title": "Request a quotation",
+      "subtitle": "99/9 Moo 4, Bang Khun Thian, Bangkok · 086-6743858",
+      "docLabel": "Quotation request",
+      "refLabel": "Ref.",
+      "nameLabel": "Name",
+      "productLabel": "Product",
+      "productPlaceholder": "Choose a product…",
+      "quantityLabel": "Quantity",
+      "siteLabel": "Construction site",
+      "contactLabel": "Contact",
+      "submit": "Send request",
+      "note": "We reply with a written quotation, usually the same working day.",
+      "successTitle": "Request sent",
+      "successBody": "Thank you. We have your details and will come back with a quotation shortly.",
+      "close": "Close"
     },
-    "general": {
-      "pageTitle": "Tonypony's Company | Design, Architecture & Build",
-      "brandSuffix": "Company"
+    "quoteForm": {
+      "formId": "PLACEHOLDER_FORM_ID",
+      "entryName": "PLACEHOLDER_ENTRY_NAME",
+      "entryProduct": "PLACEHOLDER_ENTRY_PRODUCT",
+      "entryQuantity": "PLACEHOLDER_ENTRY_QUANTITY",
+      "entrySite": "PLACEHOLDER_ENTRY_SITE",
+      "entryContact": "PLACEHOLDER_ENTRY_CONTACT"
     }
   },
+
   "zh": {
-    "hero": {
-      "eyebrow": "设计 - 建筑 - 施工",
-      "headline": "Tonypony's Company 从第一张草图到最终交付塑造空间",
-      "copy": "一个虚构的全服务工作室，服务于住宅、办公空间、零售室内和公共建筑，注重精准、温度与耐久性",
-      "primaryCta": "查看项目",
-      "secondaryCta": "预约咨询",
-      "stat1Label": "虚构综合经验年限",
-      "stat2Label": "从概念到完工的项目",
-      "stat3Label": "平均客户满意度",
-      "image": "./assets/images/hero-building.png",
-      "imageAlt": "现代综合体建筑，设计团队正在审阅图纸"
-    },
-    "approach": {
-      "kicker": "我们做什么",
-      "title": "一个协同团队，负责清晰设计、技术控制与施工交付",
-      "body": "Tonypony's Company 是本演示中的虚构公司，但流程贴近真实项目：场地研究、建筑设计、室内方向、许可、采购、施工监督和最终陈设都由同一个负责团队统筹",
-      "point1": "场地策略",
-      "point2": "协同图纸",
-      "point3": "施工监督",
-      "cardTitle": "从概念到交钥匙",
-      "cardBody": "建筑、室内、采购和现场审查作为一个连贯流程处理",
-      "image": "./assets/images/interior-design.png",
-      "imageAlt": "精致的室内建筑，运用石材、木材与整合式照明"
-    },
-    "services": {
-      "kicker": "服务",
-      "title": "围绕完整项目生命周期构建",
-      "architecture": {
-        "title": "建筑设计",
-        "body": "概念设计、平面布局、立面研究、施工图以及可提交审批的文件"
-      },
-      "interior": {
-        "title": "室内设计",
-        "body": "材料搭配、照明策略、家具规划、定制木作与整体氛围方向"
-      },
-      "delivery": {
-        "title": "施工交付",
-        "body": "成本规划、承包商协调、现场监督、质量审查与收尾管理"
-      },
-      "sustainability": {
-        "title": "可持续升级",
-        "body": "被动遮阳、围护结构优化、高效系统、低影响材料和生命周期规划"
-      }
-    },
-    "projects": {
-      "kicker": "精选项目",
-      "title": "用于演示作品集的虚构项目样本"
-    },
-    "filters": {
-      "all": "全部",
-      "home": "住宅",
-      "commercial": "商业",
-      "interior": "室内"
-    },
-    "process": {
-      "kicker": "流程",
-      "title": "步骤清晰，决策务实，减少意外",
-      "discover": {
-        "title": "调研",
-        "body": "设计开始前，我们梳理场地、目标、预算范围、审批要求和关键成果"
-      },
-      "design": {
-        "title": "设计",
-        "body": "概念会转化为平面、立面、材料、照明和协同施工文件"
-      },
-      "build": {
-        "title": "施工",
-        "body": "采购、承包商沟通、现场检查和变更跟踪在全过程保持可见"
-      },
-      "handover": {
-        "title": "交付",
-        "body": "最终缺陷修复、手册、陈设和维护指导让项目顺利收尾"
-      }
-    },
-    "studio": {
-      "kicker": "工作室",
-      "title": "以设计为导向，理解施工，关注客户",
-      "body": "虚构的 Tonypony's 团队由建筑师、室内设计师、现场协调员和成本规划师组成，让项目体验更从容，同时兼顾美感与可建造性",
-      "stat1Label": "核心工作室角色",
-      "stat2Label": "材料合作伙伴",
-      "stat3Label": "项目规模",
-      "point1": "现场施工前完成详细文件",
-      "point2": "透明的预算检查点",
-      "point3": "关键节点质量审查",
-      "point4": "提前规划收口细节"
-    },
-    "contact": {
-      "kicker": "联系",
-      "title": "与 Tonypony's Company 规划一个虚构项目",
-      "body": "无需离开页面，即可通过下方嵌入的 Google 表单提交项目详情",
-      "location": "演示工作室，滨河区"
-    },
-    "footer": {
-      "copy": "虚构建筑与设计施工工作室演示",
-      "backTop": "返回顶部"
+    "general": {
+      "pageTitle": "SC 辛哈瓦混凝土 — 预拌混凝土与预制构件",
+      "metaDescription": "生产预拌混凝土、预制楼板、预制方桩、钢筋混凝土管、检查井与混凝土梁，并提供完整的施工承包服务。",
+      "brandName": "辛哈瓦混凝土",
+      "brandTagline": "预拌 · 预制",
+      "quoteCta": "获取报价"
     },
     "nav": {
-      "approach": "方法",
-      "services": "服务",
-      "projects": "项目",
-      "process": "流程",
-      "studio": "工作室",
-      "contactCta": "启动项目"
+      "about": "关于我们",
+      "products": "产品中心",
+      "projects": "工程实绩",
+      "contact": "联系我们"
     },
-    "general": {
-      "pageTitle": "Tonypony's Company | 设计、建筑与施工",
-      "brandSuffix": "公司"
+    "hero": {
+      "eyebrow": "混凝土制品与工程施工",
+      "headline": "值得托付的每一方混凝土",
+      "copy": "预拌混凝土、预制构件与整体施工服务，全部出自同一座工厂：按指定标号配制，并在承诺的时间送达工地。",
+      "primaryCta": "获取报价",
+      "secondaryCta": "查看产品",
+      "slide1Image": "./assets/images/placeholder/hero-plant.svg",
+      "slide1Alt": "辛哈瓦混凝土搅拌站",
+      "slide2Image": "./assets/images/placeholder/hero-truck.svg",
+      "slide2Alt": "搅拌车队正在装载预拌混凝土",
+      "slide3Image": "./assets/images/placeholder/hero-pour.svg",
+      "slide3Alt": "施工现场正在浇筑混凝土"
+    },
+    "gallery": {
+      "kicker": "近期工程",
+      "title": "住宅、商业与市政基础设施均已交付"
+    },
+    "about": {
+      "kicker": "关于我们",
+      "title": "三十年混凝土经验，从工厂直达您的浇筑现场",
+      "slide1Image": "./assets/images/placeholder/about-yard.svg",
+      "slide1Alt": "辛哈瓦混凝土生产场地",
+      "slide2Image": "./assets/images/placeholder/about-team.svg",
+      "slide2Alt": "辛哈瓦混凝土团队在工地",
+      "experienceValue": "30+",
+      "experienceLabel": "年行业经验",
+      "slogan": "“配比精准，准时送达，浇筑安心。”"
+    },
+    "history": {
+      "kicker": "发展历程",
+      "title": "从一辆搅拌车到区域供应商",
+      "body1": "辛哈瓦混凝土创立于 1994 年，最初只有一辆搅拌车和曼谷城郊的一处场地，为需要准时供料的建筑商承接小型住宅浇筑工程。",
+      "body2": "如今工厂在预拌生产之外还运行着完整的预制生产线，而每一份配合比设计，仍由同一个家族亲自签字确认后才出厂。",
+      "slide1Image": "./assets/images/placeholder/history-1.svg",
+      "slide1Alt": "创业初期的第一座工厂",
+      "slide2Image": "./assets/images/placeholder/history-2.svg",
+      "slide2Alt": "今日运行中的工厂"
+    },
+    "vision": {
+      "kicker": "愿景与使命",
+      "title": "我们的目标，以及抵达的方式",
+      "visionTitle": "愿景",
+      "visionBody": "成为区域内建筑商首先想到的混凝土供应商——以稳定的配比品质、对交货周期的诚实告知，以及在工期吃紧时依然不退让的标准赢得信任。",
+      "missionTitle": "使命",
+      "missionBody": "按规格检测每一批混凝土，让车队与预制台座依照公布的排程运转，并公开透明地报价，使建筑商能够放心地围绕我们安排工程计划。"
+    },
+    "policy": {
+      "kicker": "质量方针",
+      "title": "绝不妥协的标准",
+      "point1": "每批混凝土均进行试块抗压检测，检测结果存档供客户查阅。",
+      "point2": "配合比严格对应指定强度等级，绝不擅自降标替换。",
+      "point3": "如实告知交货时间窗口，浇筑存在风险时提前致电通知。",
+      "point4": "工厂、车队与预制台座均按存档排程进行维护保养。",
+      "image": "./assets/images/placeholder/policy-team.svg",
+      "imageAlt": "工厂实验室的质量检测作业"
+    },
+    "products": {
+      "kicker": "产品中心",
+      "title": "六大产品线，均由本厂配制浇筑",
+      "lead": "点击产品可查看详细规格，也可直接就任一产品申请报价。"
+    },
+    "builders": {
+      "kicker": "工程实绩",
+      "title": "辛哈瓦建筑",
+      "body": "我们的施工团队负责从图纸到交付的全过程——基础、结构与装修，材料直接由自有工厂供应，因此混凝土排程与施工排程本就是同一套排程。",
+      "image": "./assets/images/placeholder/builders-team.svg",
+      "imageAlt": "辛哈瓦建筑的现场团队"
+    },
+    "pitch": {
+      "houseTitle": "建造理想家园",
+      "houseSubtitle": "独栋住宅与联排别墅，从打桩到交付一站完成。",
+      "houseCta": "查看工程实绩",
+      "houseImage": "./assets/images/placeholder/project-house.svg",
+      "houseImageAlt": "已竣工的独栋住宅",
+      "officeTitle": "建造您的办公楼",
+      "officeSubtitle": "商业楼宇、仓储厂房与办公空间改造。",
+      "officeCta": "查看工程实绩",
+      "officeImage": "./assets/images/placeholder/project-office.svg",
+      "officeImageAlt": "已竣工的办公楼",
+      "roadTitle": "建造您的道路",
+      "roadSubtitle": "混凝土道路施工、园区进场道路与承重硬化场地。",
+      "roadCta": "查看工程实绩",
+      "roadImage": "./assets/images/placeholder/project-road.svg",
+      "roadImageAlt": "新铺设完成的混凝土道路"
+    },
+    "works": {
+      "kicker": "工程实绩",
+      "title": "由辛哈瓦建筑交付的项目",
+      "filterAll": "全部",
+      "filterHouse": "住宅",
+      "filterOffice": "楼宇",
+      "filterRoad": "道路"
+    },
+    "contact": {
+      "kicker": "联系我们",
+      "title": "致电工厂，或留下工程信息，我们为您报价",
+      "phoneLabel": "致电我们",
+      "phone1": "086-6743858",
+      "phoneLabel2": "第二热线",
+      "phone2": "081-6743858",
+      "lineLabel": "LINE 在线咨询",
+      "lineId": "@SinghawatConcrete",
+      "lineUrl": "https://line.me/R/ti/p/~@singhawatconcrete",
+      "fbLabel": "Facebook 留言",
+      "fbName": "辛哈瓦混凝土有限公司",
+      "fbUrl": "https://facebook.com/",
+      "officeTitle": "公司地址",
+      "address": "曼谷邦坤天区 4 村 99/9 号，邮编 10150",
+      "directions": "沿主干道向南行驶，在 7-Eleven 处拐入巷道，再直行约 200 米，场区大门位于右手边。",
+      "mapEmbed": "https://maps.google.com/maps?q=Bang%20Khun%20Thian%20Bangkok&z=15&output=embed",
+      "quoteCta": "获取报价"
+    },
+    "footer": {
+      "companyName": "辛哈瓦混凝土有限公司",
+      "slogan": "“配比精准，准时送达。”",
+      "contactHeading": "联系方式",
+      "copy": "© 2026 辛哈瓦混凝土有限公司",
+      "backTop": "返回顶部"
+    },
+    "quote": {
+      "title": "申请报价",
+      "subtitle": "曼谷邦坤天区 4 村 99/9 号 · 086-6743858",
+      "docLabel": "报价申请单",
+      "refLabel": "单号",
+      "nameLabel": "联系人姓名",
+      "productLabel": "产品",
+      "productPlaceholder": "请选择产品…",
+      "quantityLabel": "数量",
+      "siteLabel": "施工地点",
+      "contactLabel": "联系电话",
+      "submit": "提交申请",
+      "note": "我们将回复正式报价单，通常在同一个工作日内。",
+      "successTitle": "申请已提交",
+      "successBody": "感谢您的咨询。我们已收到您的信息，将尽快带着报价单与您联系。",
+      "close": "关闭"
+    },
+    "quoteForm": {
+      "formId": "PLACEHOLDER_FORM_ID",
+      "entryName": "PLACEHOLDER_ENTRY_NAME",
+      "entryProduct": "PLACEHOLDER_ENTRY_PRODUCT",
+      "entryQuantity": "PLACEHOLDER_ENTRY_QUANTITY",
+      "entrySite": "PLACEHOLDER_ENTRY_SITE",
+      "entryContact": "PLACEHOLDER_ENTRY_CONTACT"
     }
   }
 }

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="sh" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000" stop-opacity=".22"/>
+      <stop offset="70%" stop-color="#000" stop-opacity=".07"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gtop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6e3de"/><stop offset="100%" stop-color="#dcd9d3"/>
+    </linearGradient>
+    <linearGradient id="gleft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c6c2ba"/><stop offset="100%" stop-color="#bdb9b1"/>
+    </linearGradient>
+    <linearGradient id="gright" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5a199"/><stop offset="100%" stop-color="#98948c"/>
+    </linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <ellipse cx="400" cy="486" rx="320" ry="32" fill="url(#sh)"/>
+  <g>
+  <polygon points="240.0,190.0 640.0,358.0 548.0,408.0 148.0,240.0" fill="url(#gtop)"/>
+  <polygon points="148.0,240.0 548.0,408.0 548.0,484.0 148.0,316.0" fill="url(#gleft)"/>
+  <polygon points="640.0,358.0 548.0,408.0 548.0,484.0 640.0,434.0" fill="url(#gright)"/>
+  </g>
+  <path d="M240.0,190.0 L640.0,358.0 L548.0,408.0 L148.0,240.0 Z M548.0,408.0 L548.0,484.0 M640.0,358.0 L640.0,434.0 L548.0,484.0 L148.0,316.0 L148.0,240.0" fill="none" stroke="#827e76" stroke-width="2" stroke-linejoin="round" opacity=".55"/>
+  <path d="M170,254 l-68,-29" stroke="#9aa3a8" stroke-width="9" stroke-linecap="round"/>
+  <path d="M170,254 l-68,-29" stroke="#6f7a80" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+  <path d="M206,246 l-68,-29" stroke="#9aa3a8" stroke-width="9" stroke-linecap="round"/>
+  <path d="M206,246 l-68,-29" stroke="#6f7a80" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+  <path d="M170,286 l-68,-29" stroke="#9aa3a8" stroke-width="9" stroke-linecap="round"/>
+  <path d="M170,286 l-68,-29" stroke="#6f7a80" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+  <path d="M206,278 l-68,-29" stroke="#9aa3a8" stroke-width="9" stroke-linecap="round"/>
+  <path d="M206,278 l-68,-29" stroke="#6f7a80" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+  <line x1="352.0" y1="237.0" x2="260.0" y2="287.0" stroke="#827e76" stroke-width="2" opacity=".16"/>
+  <line x1="440.0" y1="274.0" x2="348.0" y2="324.0" stroke="#827e76" stroke-width="2" opacity=".16"/>
+  <line x1="528.0" y1="311.0" x2="436.0" y2="361.0" stroke="#827e76" stroke-width="2" opacity=".16"/>
+</svg>

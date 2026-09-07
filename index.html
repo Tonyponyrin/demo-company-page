@@ -1,259 +1,615 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Tonypony's Company is a fictional design, architecture, and building studio demo site.">
-    <title>Tonypony's Company | Design, Architecture & Build</title>
-    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
-  </head>
-  <body>
-    <div class="scroll-progress" data-scroll-progress></div>
-    <header class="site-header" data-header>
-      <a class="brand" href="#top" aria-label="Tonypony's Company home">
-        <span class="brand-mark">T</span>
-        <span>
-          <strong>Tonypony's</strong>
-          <small data-cms="general.brandSuffix">Company</small>
-        </span>
-      </a>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-cms="general.pageTitle">SC Singhawat Concrete — Ready-Mixed and Precast Concrete</title>
+<meta name="description" data-cms-content="general.metaDescription" content="Ready-mixed concrete, precast slabs, piles, pipes, manholes and beams, plus full construction services.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;900&family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
 
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
-        <i data-lucide="menu"></i>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============================================================ HEADER -->
+<header class="site-header" id="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="#top" aria-label="SC Singhawat Concrete home">
+      <span class="brand-mark">SC</span>
+      <span class="brand-words">
+        <span class="brand-name" data-cms="general.brandName">Singhawat Concrete</span>
+        <span class="brand-tagline" data-cms="general.brandTagline">Ready-mixed &amp; precast</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-bar"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="#about" data-cms="nav.about">About Us</a>
+      <a href="#products" data-cms="nav.products">Our Products</a>
+      <a href="#projects" data-cms="nav.projects">Our Project</a>
+      <a href="#contact" data-cms="nav.contact">Contact Us</a>
+    </nav>
+
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" title="English">
+        <svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><g fill="#b22234"><rect width="24" height="2"/><rect y="4" width="24" height="2"/><rect y="8" width="24" height="2"/><rect y="12" width="24" height="2"/></g><rect width="11" height="9" fill="#3c3b6e"/></svg>
+        <span class="sr-only">English</span>
       </button>
+      <button type="button" class="lang-btn" data-lang="th" aria-pressed="true" title="ไทย">
+        <svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#a51931"/><rect y="3" width="24" height="10" fill="#f4f5f8"/><rect y="6" width="24" height="4" fill="#2d2a4a"/></svg>
+        <span class="sr-only">ไทย</span>
+      </button>
+      <button type="button" class="lang-btn" data-lang="zh" aria-pressed="false" title="中文">
+        <svg viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#de2910"/><path fill="#ffde00" d="M4 3l.9 2.7H7.8l-2.3 1.7.9 2.7L4 8.4 1.6 10.1l.9-2.7L.2 5.7h2.9z"/><circle cx="10" cy="2.6" r=".9" fill="#ffde00"/><circle cx="12.2" cy="4.6" r=".9" fill="#ffde00"/><circle cx="12.2" cy="7.4" r=".9" fill="#ffde00"/><circle cx="10" cy="9.4" r=".9" fill="#ffde00"/></svg>
+        <span class="sr-only">中文</span>
+      </button>
+    </div>
+  </div>
+</header>
 
-      <nav class="site-nav" data-nav>
-        <a href="#approach" data-cms="nav.approach">Approach</a>
-        <a href="#services" data-cms="nav.services">Services</a>
-        <a href="#projects" data-cms="nav.projects">Projects</a>
-        <a href="#process" data-cms="nav.process">Process</a>
-        <a href="#studio" data-cms="nav.studio">Studio</a>
-        <a class="nav-cta" href="#contact" data-cms="nav.contactCta">Start a Project</a>
-      </nav>
+<main id="main">
 
-      <div class="language-switch" aria-label="Switch language">
-        <button type="button" data-lang="en">EN</button>
-        <button class="active" type="button" data-lang="th">TH</button>
-        <button type="button" data-lang="zh">CH</button>
+<!-- ============================================================== HERO -->
+<section class="hero" aria-label="Featured">
+  <div class="slideshow" data-slideshow data-autoplay="6000">
+    <div class="slides">
+      <figure class="slide is-active">
+        <img data-cms-src="hero.slide1Image" data-cms-alt="hero.slide1Alt" src="./assets/images/placeholder/hero-plant.svg" alt="Batch plant at the Singhawat Concrete yard">
+      </figure>
+      <figure class="slide">
+        <img data-cms-src="hero.slide2Image" data-cms-alt="hero.slide2Alt" src="./assets/images/placeholder/hero-truck.svg" alt="Mixer truck fleet loading ready-mixed concrete">
+      </figure>
+      <figure class="slide">
+        <img data-cms-src="hero.slide3Image" data-cms-alt="hero.slide3Alt" src="./assets/images/placeholder/hero-pour.svg" alt="Concrete pour in progress on a construction site">
+      </figure>
+    </div>
+
+    <button class="slide-nav slide-prev" type="button" data-slide-prev>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="sr-only">Previous slide</span>
+    </button>
+    <button class="slide-nav slide-next" type="button" data-slide-next>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="sr-only">Next slide</span>
+    </button>
+    <div class="slide-dots" data-slide-dots aria-hidden="true"></div>
+  </div>
+
+  <div class="hero-overlay">
+    <div class="shell">
+      <p class="eyebrow light" data-cms="hero.eyebrow">Concrete products &amp; construction</p>
+      <h1 data-cms="hero.headline">Concrete you can build a reputation on.</h1>
+      <p class="hero-copy" data-cms="hero.copy">Ready-mixed concrete, precast components, and full construction delivery from one plant — mixed to specification and on site when we said it would be.</p>
+      <div class="hero-actions">
+        <button class="btn btn-quote" type="button" data-quote-open data-cms="hero.primaryCta">Get Quote</button>
+        <a class="btn btn-ghost" href="#products" data-cms="hero.secondaryCta">See Our Products</a>
       </div>
-    </header>
+    </div>
+  </div>
+</section>
 
-    <main id="top">
-      <section class="hero" aria-label="Tonypony's Company introduction" data-section>
-        <img src="./assets/images/hero-building.png" alt="Modern mixed-use building with a design team reviewing plans" class="hero-image" data-parallax="0.04" data-cms-src="hero.image" data-cms-alt="hero.imageAlt">
-        <div class="hero-overlay"></div>
-        <div class="hero-content reveal is-visible">
-          <p class="eyebrow" data-cms="hero.eyebrow">Design - Architecture - Build</p>
-          <h1 data-cms="hero.headline">Tonypony's Company shapes spaces from first sketch to final handover.</h1>
-          <p class="hero-copy" data-cms="hero.copy">A fictional full-service studio for thoughtful homes, workplaces, retail interiors, and civic buildings that feel precise, warm, and built to last.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#projects"><i data-lucide="building-2"></i> <span data-cms="hero.primaryCta">View Projects</span></a>
-            <a class="button button-secondary" href="#contact"><i data-lucide="send"></i> <span data-cms="hero.secondaryCta">Request Consultation</span></a>
-          </div>
-        </div>
-        <aside class="hero-panel reveal is-visible" aria-label="Company highlights">
-          <div>
-            <strong data-count="18" data-suffix="+">18+</strong>
-            <span data-cms="hero.stat1Label">Fictional years combined experience</span>
-          </div>
-          <div>
-            <strong data-count="64">64</strong>
-            <span data-cms="hero.stat2Label">Concept-to-completion builds</span>
-          </div>
-          <div>
-            <strong data-count="4.9" data-decimals="1">4.9</strong>
-            <span data-cms="hero.stat3Label">Average client satisfaction</span>
-          </div>
-        </aside>
-      </section>
+<!-- ================================================== HOME PROJECT REEL -->
+<section class="section reel-section" aria-label="Recent work">
+  <div class="shell">
+    <p class="eyebrow" data-cms="gallery.kicker" data-reveal="up">Recent work</p>
+    <h2 class="section-title" data-cms="gallery.title" data-reveal="up">Delivered across housing, commercial, and public infrastructure.</h2>
+  </div>
+  <div class="reel" data-reel data-autoplay="4000">
+    <div class="reel-track" data-reel-track data-works-reel>
+      <!-- rebuilt from projects.json by cms.js; inline copy is the fallback -->
+      <a class="reel-item" href="#works">
+        <img src="./assets/images/placeholder/work-1.svg" alt="Completed housing project">
+        <span class="reel-caption">Baan Suan Residence</span>
+      </a>
+      <a class="reel-item" href="#works">
+        <img src="./assets/images/placeholder/work-2.svg" alt="Completed office project">
+        <span class="reel-caption">Rama IX Office Block</span>
+      </a>
+      <a class="reel-item" href="#works">
+        <img src="./assets/images/placeholder/work-3.svg" alt="Completed road project">
+        <span class="reel-caption">Bang Khun Thian Access Road</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-      <section class="section intro-band reveal" id="approach" aria-label="Company positioning" data-section>
-        <div class="intro-grid">
-          <div class="intro-copy">
-            <p class="section-kicker" data-cms="approach.kicker">What we do</p>
-            <h2 data-cms="approach.title">One coordinated team for design clarity, technical control, and construction delivery.</h2>
-            <p data-cms="approach.body">Tonypony's Company is made up for this demo, but the workflow is realistic: site study, architecture, interior direction, permits, procurement, construction supervision, and final styling under one accountable studio.</p>
-            <div class="intro-points" aria-label="Approach highlights">
-              <span><i data-lucide="map"></i> <span data-cms="approach.point1">Site strategy</span></span>
-              <span><i data-lucide="layers-3"></i> <span data-cms="approach.point2">Coordinated drawings</span></span>
-              <span><i data-lucide="clipboard-check"></i> <span data-cms="approach.point3">Build oversight</span></span>
-            </div>
-          </div>
-          <div class="intro-visual reveal-item">
-            <img src="./assets/images/interior-design.png" alt="Refined interior architecture with stone, wood, and integrated lighting" data-cms-src="approach.image" data-cms-alt="approach.imageAlt">
-            <div class="intro-visual-card">
-              <strong data-cms="approach.cardTitle">Concept to keys</strong>
-              <span data-cms="approach.cardBody">Architecture, interiors, procurement, and site review handled as one connected workflow.</span>
-            </div>
-          </div>
-        </div>
-      </section>
+<!-- ============================================================= ABOUT -->
+<section class="section about-section" id="about">
+  <div class="shell">
+    <p class="eyebrow" data-cms="about.kicker" data-reveal="down">About us</p>
+    <h2 class="section-title" data-cms="about.title" data-reveal="down">Three decades of concrete, from one plant to your pour.</h2>
 
-      <section class="section services reveal" id="services" data-section>
-        <div class="section-heading">
-          <p class="section-kicker" data-cms="services.kicker">Services</p>
-          <h2 data-cms="services.title">Built around the full project lifecycle.</h2>
-        </div>
-        <div class="service-grid">
-          <article class="service-card reveal-item">
-            <i data-lucide="drafting-compass"></i>
-            <h3 data-cms="services.architecture.title">Architecture</h3>
-            <p data-cms="services.architecture.body">Concept design, planning layouts, facade studies, construction drawings, and authority-ready documentation.</p>
-          </article>
-          <article class="service-card reveal-item">
-            <i data-lucide="lamp-desk"></i>
-            <h3 data-cms="services.interior.title">Interior Design</h3>
-            <p data-cms="services.interior.body">Material palettes, lighting strategy, furniture planning, custom joinery, and immersive mood direction.</p>
-          </article>
-          <article class="service-card reveal-item">
-            <i data-lucide="hard-hat"></i>
-            <h3 data-cms="services.delivery.title">Building Delivery</h3>
-            <p data-cms="services.delivery.body">Cost planning, contractor coordination, site supervision, quality reviews, and closeout management.</p>
-          </article>
-          <article class="service-card reveal-item">
-            <i data-lucide="leaf"></i>
-            <h3 data-cms="services.sustainability.title">Sustainable Upgrades</h3>
-            <p data-cms="services.sustainability.body">Passive shading, envelope improvements, efficient systems, low-impact materials, and lifecycle planning.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section projects reveal" id="projects" data-section>
-        <div class="section-heading row-heading">
-          <div>
-            <p class="section-kicker" data-cms="projects.kicker">Selected Projects</p>
-            <h2 data-cms="projects.title">Fictional work samples for the demo portfolio.</h2>
-          </div>
-          <div class="filter-group" aria-label="Filter projects">
-            <button class="filter-button active" type="button" data-filter="all" data-cms="filters.all">All</button>
-            <button class="filter-button" type="button" data-filter="home" data-cms="filters.home">Homes</button>
-            <button class="filter-button" type="button" data-filter="commercial" data-cms="filters.commercial">Commercial</button>
-            <button class="filter-button" type="button" data-filter="interior" data-cms="filters.interior">Interiors</button>
+    <div class="about-triple">
+      <!-- the three panels run their slideshows simultaneously (frame 6) -->
+      <div class="about-panel" data-reveal="left">
+        <div class="slideshow slideshow-inline" data-slideshow data-autoplay="5000">
+          <div class="slides">
+            <figure class="slide is-active">
+              <img data-cms-src="about.slide1Image" data-cms-alt="about.slide1Alt" src="./assets/images/placeholder/about-yard.svg" alt="The Singhawat Concrete production yard">
+            </figure>
+            <figure class="slide">
+              <img data-cms-src="about.slide2Image" data-cms-alt="about.slide2Alt" src="./assets/images/placeholder/about-team.svg" alt="Singhawat Concrete team on site">
+            </figure>
           </div>
         </div>
+      </div>
 
-        <div class="project-grid" data-project-grid>
-          <article class="project-card reveal-item" data-category="home">
-            <img src="./assets/images/residential-project.png" alt="Courtyard residence with warm interior lighting">
-            <div class="project-content">
-              <p>Private Residence - Made Up</p>
-              <h3>Willow Court House</h3>
-              <span>Architecture, interiors, landscape coordination</span>
-            </div>
-          </article>
-          <article class="project-card reveal-item" data-category="commercial">
-            <img src="./assets/images/construction-site.png" alt="Commercial construction site with architects reviewing drawings">
-            <div class="project-content">
-              <p>Commercial Build - Made Up</p>
-              <h3>Northline Works</h3>
-              <span>Design management, build delivery, site quality</span>
-            </div>
-          </article>
-          <article class="project-card reveal-item" data-category="interior">
-            <img src="./assets/images/interior-design.png" alt="Premium office lobby interior with stone and timber finishes">
-            <div class="project-content">
-              <p>Interior Fit-Out - Made Up</p>
-              <h3>Atrium House Lobby</h3>
-              <span>Interior architecture, lighting, custom joinery</span>
-            </div>
-          </article>
-        </div>
-      </section>
+      <div class="about-panel about-stat" data-reveal="up">
+        <span class="stat-value" data-cms="about.experienceValue">30+</span>
+        <span class="stat-label" data-cms="about.experienceLabel">years of experience</span>
+      </div>
 
-      <section class="section process reveal" id="process" data-section>
-        <div class="section-heading">
-          <p class="section-kicker" data-cms="process.kicker">Process</p>
-          <h2 data-cms="process.title">Clear steps, practical decisions, fewer surprises.</h2>
-        </div>
-        <div class="timeline">
-          <article class="reveal-item">
-            <span>01</span>
-            <h3 data-cms="process.discover.title">Discover</h3>
-            <p data-cms="process.discover.body">We map the site, goals, budget range, approvals, and must-have outcomes before design starts.</p>
-          </article>
-          <article class="reveal-item">
-            <span>02</span>
-            <h3 data-cms="process.design.title">Design</h3>
-            <p data-cms="process.design.body">Concepts become plans, elevations, materials, lighting, and a coordinated construction package.</p>
-          </article>
-          <article class="reveal-item">
-            <span>03</span>
-            <h3 data-cms="process.build.title">Build</h3>
-            <p data-cms="process.build.body">Procurement, contractor communication, site checks, and change tracking stay visible throughout.</p>
-          </article>
-          <article class="reveal-item">
-            <span>04</span>
-            <h3 data-cms="process.handover.title">Handover</h3>
-            <p data-cms="process.handover.body">Final defects, manuals, styling, and maintenance guidance close the project cleanly.</p>
-          </article>
-        </div>
-      </section>
+      <div class="about-panel about-slogan" data-reveal="right">
+        <blockquote data-cms="about.slogan">“Mixed right, delivered on time, poured with confidence.”</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <section class="section studio reveal" id="studio" data-section>
-        <div class="studio-copy">
-          <p class="section-kicker" data-cms="studio.kicker">Studio</p>
-          <h2 data-cms="studio.title">Design-led, construction-aware, client-focused.</h2>
-          <p data-cms="studio.body">The fictional Tonypony's team combines architects, interior designers, site coordinators, and cost planners. The result is a calmer project experience where beauty and buildability are considered together.</p>
-          <dl class="studio-stats">
-            <div><dt data-count="12">12</dt><dd data-cms="studio.stat1Label">Core studio roles</dd></div>
-            <div><dt data-count="7">7</dt><dd data-cms="studio.stat2Label">Material partners</dd></div>
-            <div><dt data-count="3">3</dt><dd data-cms="studio.stat3Label">Project scales</dd></div>
-          </dl>
+<!-- =========================================================== HISTORY -->
+<section class="section band-alt" aria-labelledby="history-title">
+  <div class="shell split">
+    <div class="split-media" data-reveal="left">
+      <div class="slideshow slideshow-inline" data-slideshow data-autoplay="5500">
+        <div class="slides">
+          <figure class="slide is-active">
+            <img data-cms-src="history.slide1Image" data-cms-alt="history.slide1Alt" src="./assets/images/placeholder/history-1.svg" alt="The original plant in the company's early years">
+          </figure>
+          <figure class="slide">
+            <img data-cms-src="history.slide2Image" data-cms-alt="history.slide2Alt" src="./assets/images/placeholder/history-2.svg" alt="The plant as it operates today">
+          </figure>
         </div>
-        <div class="studio-list" aria-label="Studio principles">
-          <article class="reveal-item">
-            <i data-lucide="ruler"></i>
-            <span data-cms="studio.point1">Detailed documentation before site work</span>
-          </article>
-          <article class="reveal-item">
-            <i data-lucide="wallet-cards"></i>
-            <span data-cms="studio.point2">Transparent budget checkpoints</span>
-          </article>
-          <article class="reveal-item">
-            <i data-lucide="shield-check"></i>
-            <span data-cms="studio.point3">Quality reviews at key milestones</span>
-          </article>
-          <article class="reveal-item">
-            <i data-lucide="sparkles"></i>
-            <span data-cms="studio.point4">Finishing details planned early</span>
-          </article>
-        </div>
-      </section>
+        <div class="slide-dots" data-slide-dots aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="split-text" data-reveal="right">
+      <p class="eyebrow" data-cms="history.kicker">Our history</p>
+      <h2 class="section-title" id="history-title" data-cms="history.title">From one mixer to a regional supplier.</h2>
+      <p data-cms="history.body1">Singhawat Concrete began in 1994 with a single mixer truck and a yard outside Bangkok, supplying small residential pours for builders who needed concrete that arrived when it was promised.</p>
+      <p data-cms="history.body2">Today the plant runs a full precast line alongside ready-mixed production, and the same family still signs off on every mix design that leaves the gate.</p>
+    </div>
+  </div>
+</section>
 
-      <section class="section contact reveal" id="contact" data-section>
-        <div class="contact-copy">
-          <p class="section-kicker" data-cms="contact.kicker">Contact</p>
-          <h2 data-cms="contact.title">Plan a fictional project with Tonypony's Company.</h2>
-          <p data-cms="contact.body">Send project details through the embedded Google Form below without leaving the page.</p>
-          <div class="contact-detail">
-            <i data-lucide="map-pin"></i>
-            <span data-cms="contact.location">Demo Studio, Riverside District</span>
-          </div>
-          <div class="contact-detail">
-            <i data-lucide="mail"></i>
-            <span>hello@tonyponys.example</span>
-          </div>
-        </div>
-        <div class="form-frame">
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeN759BIDodc4X3n3o9EdAqj9ia15i-ecu7v61oPOIVddl9pw/viewform?embedded=true&hl=en" width="100%" height="959" frameborder="0" marginheight="0" marginwidth="0" title="Tonypony's Company contact form">Loading...</iframe>
-        </div>
-      </section>
-    </main>
+<!-- ================================================== VISION & MISSION -->
+<section class="section" aria-labelledby="vision-title">
+  <div class="shell">
+    <p class="eyebrow" data-cms="vision.kicker" data-reveal="down">Vision &amp; mission</p>
+    <h2 class="section-title" id="vision-title" data-cms="vision.title" data-reveal="down">What we are aiming at, and how we get there.</h2>
+    <div class="duo">
+      <article class="duo-card" data-reveal="left">
+        <h3 data-cms="vision.visionTitle">Vision</h3>
+        <p data-cms="vision.visionBody">To be the concrete supplier that contractors in the region name first — trusted for consistency of mix, honesty about lead times, and a standard that does not move when the schedule gets tight.</p>
+      </article>
+      <article class="duo-card" data-reveal="right">
+        <h3 data-cms="vision.missionTitle">Mission</h3>
+        <p data-cms="vision.missionBody">To test every batch against its specification, to keep our fleet and precast beds running to a published schedule, and to price openly so a builder can plan a project around us without hedging.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-    <footer class="site-footer">
+<!-- ============================================================ POLICY -->
+<section class="section band-alt" aria-labelledby="policy-title">
+  <div class="shell split">
+    <div class="split-media" data-reveal="left">
+      <img class="framed" data-cms-src="policy.image" data-cms-alt="policy.imageAlt" src="./assets/images/placeholder/policy-team.svg" alt="Quality control testing at the plant laboratory">
+    </div>
+    <div class="split-text" data-reveal="right">
+      <p class="eyebrow" data-cms="policy.kicker">Our policy</p>
+      <h2 class="section-title" id="policy-title" data-cms="policy.title">Standards we do not negotiate.</h2>
+      <ul class="ticklist">
+        <li data-cms="policy.point1">Every batch is cube-tested and the results are kept on file for the customer.</li>
+        <li data-cms="policy.point2">Mix designs are matched to the specified strength class, never substituted downward.</li>
+        <li data-cms="policy.point3">Delivery windows are quoted honestly, and we call ahead when a pour is at risk.</li>
+        <li data-cms="policy.point4">Plant, fleet, and precast beds are maintained on a documented schedule.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== PRODUCTS -->
+<section class="section products-section" id="products">
+  <div class="shell">
+    <p class="eyebrow" data-cms="products.kicker" data-reveal="down">Our products</p>
+    <h2 class="section-title" data-cms="products.title" data-reveal="down">Six product lines, cast and mixed on site.</h2>
+    <p class="section-lead" data-cms="products.lead" data-reveal="down">Choose a product to see the specification, or request a quotation for any of them directly.</p>
+
+    <div class="product-grid" data-product-grid>
+      <!-- rebuilt from products.json by cms.js; inline copy is the fallback -->
+      <a class="product-card" href="#product-readymix">
+        <img src="./assets/images/diecut/ready-mixed-concrete.svg" alt="Ready-mixed concrete mixer truck">
+        <h3>Ready-Mixed Concrete</h3>
+      </a>
+      <a class="product-card" href="#product-slab">
+        <img src="./assets/images/diecut/precast-slab.svg" alt="Precast concrete slab">
+        <h3>Precast Concrete Slab</h3>
+      </a>
+      <a class="product-card" href="#product-pile">
+        <img src="./assets/images/diecut/precast-pile.svg" alt="Precast concrete pile">
+        <h3>Precast Concrete Pile</h3>
+      </a>
+      <a class="product-card" href="#product-pipe">
+        <img src="./assets/images/diecut/concrete-pipe.svg" alt="Reinforced concrete pipes">
+        <h3>Reinforced Concrete Pipe</h3>
+      </a>
+      <a class="product-card" href="#product-manhole">
+        <img src="./assets/images/diecut/manhole.svg" alt="Reinforced concrete manhole">
+        <h3>Reinforced Concrete Manhole</h3>
+      </a>
+      <a class="product-card" href="#product-beam">
+        <img src="./assets/images/diecut/concrete-beam.svg" alt="Reinforced concrete beam">
+        <h3>Reinforced Concrete Beam</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Product detail bands. Text enters from the left, product from the right. -->
+<section class="product-detail" id="product-readymix" data-product-detail="readymix">
+  <div class="shell split">
+    <div class="split-text" data-reveal="left">
+      <p class="eyebrow" data-detail-tagline>Poured to specification</p>
+      <h2 class="section-title" data-detail-title>Ready-Mixed Concrete</h2>
+      <p data-detail-body>Batched to the strength class you specify and delivered by our own fleet, so the mix that leaves the plant is the mix that reaches your formwork.</p>
+      <p class="spec" data-detail-spec>Available 180–350 KSC · sold by cubic metre</p>
+      <button class="btn btn-quote" type="button" data-quote-open data-cms="general.quoteCta" data-quote-product="readymix">Get Quote</button>
+    </div>
+    <div class="split-media" data-reveal="right">
+      <img class="diecut" data-detail-image src="./assets/images/diecut/ready-mixed-concrete.svg" alt="Ready-mixed concrete mixer truck">
+    </div>
+  </div>
+</section>
+
+<section class="product-detail band-alt" id="product-slab" data-product-detail="slab">
+  <div class="shell split">
+    <div class="split-text" data-reveal="left">
+      <p class="eyebrow" data-detail-tagline>Cast flat, cured square</p>
+      <h2 class="section-title" data-detail-title>Precast Concrete Slab</h2>
+      <p data-detail-body>Prestressed floor and roof planks cast on long-line beds, delivered ready to seat so a floor can be closed in a single working day.</p>
+      <p class="spec" data-detail-spec>Standard widths 30–35 cm · cut to length</p>
+      <button class="btn btn-quote" type="button" data-quote-open data-cms="general.quoteCta" data-quote-product="slab">Get Quote</button>
+    </div>
+    <div class="split-media" data-reveal="right">
+      <img class="diecut" data-detail-image src="./assets/images/diecut/precast-slab.svg" alt="Precast concrete slab">
+    </div>
+  </div>
+</section>
+
+<section class="product-detail" id="product-pile" data-product-detail="pile">
+  <div class="shell split">
+    <div class="split-text" data-reveal="left">
+      <p class="eyebrow" data-detail-tagline>Driven deep, cast strong</p>
+      <h2 class="section-title" data-detail-title>Precast Concrete Pile</h2>
+      <p data-detail-body>Square-section piles with a formed driving point and lifting eyes cast in, produced in the lengths your soil report calls for.</p>
+      <p class="spec" data-detail-spec>Sections 18–40 cm · lengths to 21 m</p>
+      <button class="btn btn-quote" type="button" data-quote-open data-cms="general.quoteCta" data-quote-product="pile">Get Quote</button>
+    </div>
+    <div class="split-media" data-reveal="right">
+      <img class="diecut" data-detail-image src="./assets/images/diecut/precast-pile.svg" alt="Precast concrete pile with driving point">
+    </div>
+  </div>
+</section>
+
+<section class="product-detail band-alt" id="product-pipe" data-product-detail="pipe">
+  <div class="shell split">
+    <div class="split-text" data-reveal="left">
+      <p class="eyebrow" data-detail-tagline>Drainage that outlasts the road</p>
+      <h2 class="section-title" data-detail-title>Reinforced Concrete Pipe</h2>
+      <p data-detail-body>Spun reinforced pipe for stormwater and culvert work, with a consistent bore and a socket that seats cleanly on the bedding.</p>
+      <p class="spec" data-detail-spec>Diameters 30–120 cm · class 2 and class 3</p>
+      <button class="btn btn-quote" type="button" data-quote-open data-cms="general.quoteCta" data-quote-product="pipe">Get Quote</button>
+    </div>
+    <div class="split-media" data-reveal="right">
+      <img class="diecut" data-detail-image src="./assets/images/diecut/concrete-pipe.svg" alt="Stacked reinforced concrete pipes">
+    </div>
+  </div>
+</section>
+
+<section class="product-detail" id="product-manhole" data-product-detail="manhole">
+  <div class="shell split">
+    <div class="split-text" data-reveal="left">
+      <p class="eyebrow" data-detail-tagline>Access built in</p>
+      <h2 class="section-title" data-detail-title>Reinforced Concrete Manhole</h2>
+      <p data-detail-body>Box and ring manholes with step irons and pipe knockouts cast to your drainage layout, so the chamber arrives ready to set.</p>
+      <p class="spec" data-detail-spec>Standard and custom knockout arrangements</p>
+      <button class="btn btn-quote" type="button" data-quote-open data-cms="general.quoteCta" data-quote-product="manhole">Get Quote</button>
+    </div>
+    <div class="split-media" data-reveal="right">
+      <img class="diecut" data-detail-image src="./assets/images/diecut/manhole.svg" alt="Reinforced concrete manhole chamber">
+    </div>
+  </div>
+</section>
+
+<section class="product-detail band-alt" id="product-beam" data-product-detail="beam">
+  <div class="shell split">
+    <div class="split-text" data-reveal="left">
+      <p class="eyebrow" data-detail-tagline>Spans without the shuttering</p>
+      <h2 class="section-title" data-detail-title>Reinforced Concrete Beam</h2>
+      <p data-detail-body>Precast beams with the reinforcement cage detailed to your span and loading, cast in one pour and cured before they leave the yard.</p>
+      <p class="spec" data-detail-spec>Made to span and loading schedule</p>
+      <button class="btn btn-quote" type="button" data-quote-open data-cms="general.quoteCta" data-quote-product="beam">Get Quote</button>
+    </div>
+    <div class="split-media" data-reveal="right">
+      <img class="diecut" data-detail-image src="./assets/images/diecut/concrete-beam.svg" alt="Reinforced concrete beam with exposed rebar">
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== PROJECTS -->
+<section class="section builders-section" id="projects">
+  <div class="shell split">
+    <div class="split-media" data-reveal="left">
+      <img class="framed" data-cms-src="builders.image" data-cms-alt="builders.imageAlt" src="./assets/images/placeholder/builders-team.svg" alt="The Singhawat Builders site team">
+    </div>
+    <div class="split-text" data-reveal="right">
+      <p class="eyebrow" data-cms="builders.kicker">Our project</p>
+      <h2 class="section-title" data-cms="builders.title">Singhawat Builders</h2>
+      <p data-cms="builders.body">Our construction arm takes a project from drawing to handover — foundations, structure, and finishes — supplied directly from our own plant, so the concrete schedule and the build schedule are the same schedule.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Three pitch panels, all pointing at the one shared works gallery. -->
+<section class="pitch" data-reveal="up">
+  <img class="pitch-bg" data-cms-src="pitch.houseImage" data-cms-alt="pitch.houseImageAlt" src="./assets/images/placeholder/project-house.svg" alt="A completed detached house">
+  <div class="shell pitch-inner">
+    <h2 data-cms="pitch.houseTitle">Build Your Dream House</h2>
+    <p data-cms="pitch.houseSubtitle">Detached homes and townhouses, from piling to handover.</p>
+    <a class="pitch-link" href="#works" data-cms="pitch.houseCta">See Our Works</a>
+  </div>
+</section>
+
+<section class="pitch" data-reveal="up">
+  <img class="pitch-bg" data-cms-src="pitch.officeImage" data-cms-alt="pitch.officeImageAlt" src="./assets/images/placeholder/project-office.svg" alt="A completed office building">
+  <div class="shell pitch-inner">
+    <h2 data-cms="pitch.officeTitle">Build Your Office</h2>
+    <p data-cms="pitch.officeSubtitle">Commercial buildings, warehouses, and workplace fit-outs.</p>
+    <a class="pitch-link" href="#works" data-cms="pitch.officeCta">See Our Works</a>
+  </div>
+</section>
+
+<section class="pitch" data-reveal="up">
+  <img class="pitch-bg" data-cms-src="pitch.roadImage" data-cms-alt="pitch.roadImageAlt" src="./assets/images/placeholder/project-road.svg" alt="A newly laid concrete road">
+  <div class="shell pitch-inner">
+    <h2 data-cms="pitch.roadTitle">Build Your Way</h2>
+    <p data-cms="pitch.roadSubtitle">Concrete road construction, access roads, and hardstanding.</p>
+    <a class="pitch-link" href="#works" data-cms="pitch.roadCta">See Our Works</a>
+  </div>
+</section>
+
+<!-- ============================================================= WORKS -->
+<section class="section works-section" id="works">
+  <div class="shell">
+    <p class="eyebrow" data-cms="works.kicker" data-reveal="down">Our works</p>
+    <h2 class="section-title" data-cms="works.title" data-reveal="down">Projects delivered by Singhawat Builders.</h2>
+
+    <div class="filters" role="group" aria-label="Filter projects" data-reveal="up">
+      <button type="button" class="filter is-active" data-filter="all" data-cms="works.filterAll">All</button>
+      <button type="button" class="filter" data-filter="house" data-cms="works.filterHouse">Houses</button>
+      <button type="button" class="filter" data-filter="office" data-cms="works.filterOffice">Offices</button>
+      <button type="button" class="filter" data-filter="road" data-cms="works.filterRoad">Roads</button>
+    </div>
+
+    <div class="works-grid" data-works-grid>
+      <!-- rebuilt from projects.json by cms.js; inline copy is the fallback -->
+      <article class="work-card" data-category="house">
+        <img src="./assets/images/placeholder/work-1.svg" alt="Completed housing project">
+        <div class="work-body">
+          <p class="work-label">Private residence</p>
+          <h3>Baan Suan Residence</h3>
+          <p class="work-desc">Piling, structure, and finishes for a two-storey family home.</p>
+        </div>
+      </article>
+      <article class="work-card" data-category="office">
+        <img src="./assets/images/placeholder/work-2.svg" alt="Completed office project">
+        <div class="work-body">
+          <p class="work-label">Commercial</p>
+          <h3>Rama IX Office Block</h3>
+          <p class="work-desc">Four-storey office frame in precast beam and slab.</p>
+        </div>
+      </article>
+      <article class="work-card" data-category="road">
+        <img src="./assets/images/placeholder/work-3.svg" alt="Completed road project">
+        <div class="work-body">
+          <p class="work-label">Infrastructure</p>
+          <h3>Bang Khun Thian Access Road</h3>
+          <p class="work-desc">1.8 km of concrete carriageway with box culvert drainage.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================== CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="shell">
+    <p class="eyebrow" data-cms="contact.kicker" data-reveal="down">Contact us</p>
+    <h2 class="section-title" data-cms="contact.title" data-reveal="down">Call the plant, or send the details and we will quote.</h2>
+
+    <div class="contact-grid">
+      <div class="contact-channels" data-reveal="left">
+        <a class="channel" data-contact-phone1 href="tel:0866743858">
+          <span class="channel-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1z" fill="currentColor"/></svg>
+          </span>
+          <span class="channel-text">
+            <span class="channel-label" data-cms="contact.phoneLabel">Call us</span>
+            <span class="channel-value" data-cms="contact.phone1">086-6743858</span>
+          </span>
+        </a>
+        <a class="channel" data-contact-phone2 href="tel:0816743858">
+          <span class="channel-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1z" fill="currentColor"/></svg>
+          </span>
+          <span class="channel-text">
+            <span class="channel-label" data-cms="contact.phoneLabel2">Second line</span>
+            <span class="channel-value" data-cms="contact.phone2">081-6743858</span>
+          </span>
+        </a>
+        <a class="channel" data-contact-line href="https://line.me/R/ti/p/~@singhawatconcrete" target="_blank" rel="noopener">
+          <span class="channel-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3C6.9 3 2.8 6.3 2.8 10.4c0 3.7 3.3 6.8 7.7 7.4.3.06.7.2.8.46.1.24.06.6.03.84l-.13.78c-.04.23-.18.9.8.5s5.3-3.1 7.2-5.3c1.3-1.4 2-2.9 2-4.6C21.2 6.3 17.1 3 12 3z" fill="currentColor"/></svg>
+          </span>
+          <span class="channel-text">
+            <span class="channel-label" data-cms="contact.lineLabel">Chat on LINE</span>
+            <span class="channel-value" data-cms="contact.lineId">@SinghawatConcrete</span>
+          </span>
+        </a>
+        <a class="channel" data-contact-fb href="https://facebook.com/" target="_blank" rel="noopener">
+          <span class="channel-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M14 9V7.2c0-.8.2-1.2 1.4-1.2H17V3h-2.6C11.2 3 10 4.6 10 7.1V9H8v3h2v9h4v-9h2.7l.3-3z" fill="currentColor"/></svg>
+          </span>
+          <span class="channel-text">
+            <span class="channel-label" data-cms="contact.fbLabel">Message on Facebook</span>
+            <span class="channel-value" data-cms="contact.fbName">Singhawat Concrete</span>
+          </span>
+        </a>
+        <button class="btn btn-quote btn-block" type="button" data-quote-open data-cms="contact.quoteCta">Get Quote</button>
+      </div>
+
+      <div class="contact-office" data-reveal="right">
+        <h3 data-cms="contact.officeTitle">Our Office</h3>
+        <p class="office-address" data-cms="contact.address">99/9 Moo 4, Bang Khun Thian, Bangkok 10150</p>
+        <p class="office-directions" data-cms="contact.directions">On the main road heading south, turn in at the 7-Eleven and follow the lane 200 m — the yard gate is on your right.</p>
+        <div class="map-frame">
+          <iframe data-contact-map title="Office location map" src="https://maps.google.com/maps?q=Bang%20Khun%20Thian%20Bangkok&z=15&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================ FOOTER -->
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark">SC</span>
       <div>
-        <strong>Tonypony's Company</strong>
-        <span data-cms="footer.copy">Fictional architecture and design-build studio demo.</span>
+        <p class="footer-company" data-cms="footer.companyName">Singhawat Concrete Co., Ltd.</p>
+        <p class="footer-slogan" data-cms="footer.slogan">“Mixed right, delivered on time.”</p>
       </div>
+    </div>
+    <div class="footer-contact">
+      <p class="footer-heading" data-cms="footer.contactHeading">Contact</p>
+      <a data-footer-phone href="tel:0866743858"><span data-cms="contact.phone1">086-6743858</span></a>
+      <a data-footer-fb href="https://facebook.com/" target="_blank" rel="noopener"><span data-cms="contact.fbName">Singhawat Concrete</span></a>
+      <a data-footer-line href="https://line.me/R/ti/p/~@singhawatconcrete" target="_blank" rel="noopener"><span data-cms="contact.lineId">@SinghawatConcrete</span></a>
+    </div>
+    <div class="footer-end">
+      <p data-cms="footer.copy">© 2026 Singhawat Concrete Co., Ltd.</p>
       <a href="#top" data-cms="footer.backTop">Back to top</a>
-    </footer>
+    </div>
+  </div>
+</footer>
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="./cms.js"></script>
-    <script src="./script.js"></script>
-  </body>
+<!-- ==================================================== STICKY CHROME -->
+<button class="sticky-quote" type="button" data-quote-open>
+  <span data-cms="general.quoteCta">Get Quote</span>
+</button>
+
+<div class="social-rail" aria-label="Contact shortcuts">
+  <a data-rail-fb href="https://facebook.com/" target="_blank" rel="noopener" title="Facebook">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9V7.2c0-.8.2-1.2 1.4-1.2H17V3h-2.6C11.2 3 10 4.6 10 7.1V9H8v3h2v9h4v-9h2.7l.3-3z" fill="currentColor"/></svg>
+    <span class="sr-only">Facebook</span>
+  </a>
+  <a data-rail-line href="https://line.me/R/ti/p/~@singhawatconcrete" target="_blank" rel="noopener" title="LINE">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.9 3 2.8 6.3 2.8 10.4c0 3.7 3.3 6.8 7.7 7.4.3.06.7.2.8.46.1.24.06.6.03.84l-.13.78c-.04.23-.18.9.8.5s5.3-3.1 7.2-5.3c1.3-1.4 2-2.9 2-4.6C21.2 6.3 17.1 3 12 3z" fill="currentColor"/></svg>
+    <span class="sr-only">LINE</span>
+  </a>
+  <a data-rail-phone href="tel:0866743858" title="Call">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.24 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1z" fill="currentColor"/></svg>
+    <span class="sr-only">Call</span>
+  </a>
+</div>
+
+<!-- ====================================================== QUOTE MODAL -->
+<!-- Styled as a quotation document, per the client's note on frame 4. -->
+<div class="modal" id="quote-modal" hidden>
+  <div class="modal-backdrop" data-quote-close></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="quote-title">
+    <button class="modal-close" type="button" data-quote-close>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span class="sr-only" data-cms="quote.close">Close</span>
+    </button>
+
+    <form class="quote-doc" id="quote-form" novalidate>
+      <header class="quote-head">
+        <div class="quote-issuer">
+          <span class="brand-mark">SC</span>
+          <div>
+            <p class="quote-company" data-cms="footer.companyName">Singhawat Concrete Co., Ltd.</p>
+            <p class="quote-sub" data-cms="quote.subtitle">99/9 Moo 4, Bang Khun Thian, Bangkok · 086-6743858</p>
+          </div>
+        </div>
+        <div class="quote-meta">
+          <p class="quote-doclabel" data-cms="quote.docLabel">Quotation request</p>
+          <p class="quote-ref"><span data-cms="quote.refLabel">Ref.</span> <span data-quote-ref>—</span></p>
+        </div>
+      </header>
+
+      <h2 class="quote-title" id="quote-title" data-cms="quote.title">Request a quotation</h2>
+
+      <div class="quote-rows">
+        <label class="quote-row">
+          <span class="quote-key" data-cms="quote.nameLabel">Name</span>
+          <input class="quote-val" type="text" name="name" autocomplete="name" required>
+        </label>
+
+        <label class="quote-row">
+          <span class="quote-key" data-cms="quote.productLabel">Product</span>
+          <select class="quote-val" name="product" data-quote-product-select required>
+            <option value="" data-cms="quote.productPlaceholder">Choose a product…</option>
+          </select>
+        </label>
+
+        <label class="quote-row">
+          <span class="quote-key" data-cms="quote.quantityLabel">Quantity</span>
+          <span class="quote-qty">
+            <input class="quote-val" type="number" name="quantity" min="1" step="any" inputmode="decimal">
+            <!-- unit is driven by the chosen product; see CLAUDE.md -->
+            <span class="quote-unit" data-quote-unit>—</span>
+          </span>
+        </label>
+
+        <label class="quote-row">
+          <span class="quote-key" data-cms="quote.siteLabel">Construction site</span>
+          <input class="quote-val" type="text" name="site">
+        </label>
+
+        <label class="quote-row">
+          <span class="quote-key" data-cms="quote.contactLabel">Contact</span>
+          <input class="quote-val" type="text" name="contact" autocomplete="tel" required>
+        </label>
+      </div>
+
+      <footer class="quote-foot">
+        <p class="quote-note" data-cms="quote.note">We reply with a written quotation, usually the same working day.</p>
+        <button class="btn btn-quote" type="submit" data-cms="quote.submit">Send request</button>
+      </footer>
+    </form>
+
+    <div class="quote-success" data-quote-success hidden>
+      <div class="quote-tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 data-cms="quote.successTitle">Request sent</h2>
+      <p data-cms="quote.successBody">Thank you. We have your details and will come back with a quotation shortly.</p>
+      <button class="btn btn-ghost-dark" type="button" data-quote-close data-cms="quote.close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script src="cms.js"></script>
+</body>
 </html>
